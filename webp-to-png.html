@@ -4,34 +4,39 @@
 
 <title>WEBP to PNG Converter - FastTools</title>
 
-<meta name="description" content="Convert WEBP images to PNG online for free using FastTools.">
-
 </head>
 
 <body>
 
 <h1>WEBP to PNG Converter</h1>
 
-<p>Upload a WEBP image and convert it to PNG instantly.</p>
+<p>Upload WEBP images and convert them to PNG.</p>
 
+<!-- UPLOAD INPUT -->
 <input type="file" id="upload" multiple>
-  
-<br><br>
-
-<button onclick="convert()">Convert to PNG</button>
 
 <br><br>
 
-<a id="download" style="display:none;">Download PNG</a>
+<!-- CONVERT BUTTON -->
+<button onclick="convert()">Convert</button>
+
+<br><br>
+
+<!-- DOWNLOAD LINKS WILL APPEAR HERE -->
+<div id="downloads"></div>
 
 <script>
 
 function convert(){
 
-let file=document.getElementById("upload").files[0];
+let files = document.getElementById("upload").files;
 
-let img=new Image();
-let reader=new FileReader();
+for(let i=0;i<files.length;i++){
+
+let file = files[i];
+
+let img = new Image();
+let reader = new FileReader();
 
 reader.onload=function(e){
 
@@ -49,17 +54,22 @@ ctx.drawImage(img,0,0);
 
 let png=canvas.toDataURL("image/png");
 
-let link=document.getElementById("download");
+let link=document.createElement("a");
+
 link.href=png;
-link.download="converted.png";
-link.innerHTML="Download PNG";
-link.style.display="block";
+link.download="converted_"+i+".png";
+link.innerHTML="Download Image "+(i+1);
+
+document.getElementById("downloads").appendChild(link);
+document.getElementById("downloads").appendChild(document.createElement("br"));
 
 }
 
 }
 
 reader.readAsDataURL(file);
+
+}
 
 }
 
