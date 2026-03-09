@@ -2,41 +2,111 @@
 <html>
 <head>
 
-<title>WEBP to PNG Converter - FastTools</title>
+<title>PNG to JPG Converter - FastTools</title>
+
+<meta name="description" content="Convert PNG images to JPG online for free using FastTools.">
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f6f9;
+text-align:center;
+}
+
+#drop-area{
+border:2px dashed #2c3e50;
+padding:40px;
+width:60%;
+margin:auto;
+background:white;
+cursor:pointer;
+}
+
+#preview img{
+width:100px;
+margin:10px;
+}
+
+button{
+padding:10px 20px;
+margin-top:20px;
+}
+
+</style>
 
 </head>
 
 <body>
 
-<h1>WEBP to PNG Converter</h1>
+<h1>PNG to JPG Converter</h1>
 
-<p>Upload WEBP images and convert them to PNG.</p>
+<p>Upload PNG images and convert them to JPG instantly.</p>
 
-<!-- UPLOAD INPUT -->
-<input type="file" id="upload" multiple>
+<div id="drop-area">
+<p>Drag & Drop PNG images here or click to upload</p>
+<input type="file" id="upload" multiple hidden>
+</div>
+
+<div id="preview"></div>
+
+<br>
+
+<button onclick="convert()">Convert to JPG</button>
 
 <br><br>
 
-<!-- CONVERT BUTTON -->
-<button onclick="convert()">Convert</button>
-
-<br><br>
-
-<!-- DOWNLOAD LINKS WILL APPEAR HERE -->
 <div id="downloads"></div>
 
 <script>
 
-function convert(){
+let dropArea=document.getElementById("drop-area");
+let fileInput=document.getElementById("upload");
+let preview=document.getElementById("preview");
 
-let files = document.getElementById("upload").files;
+dropArea.onclick=()=>fileInput.click();
+
+dropArea.addEventListener("dragover",e=>{
+e.preventDefault();
+});
+
+dropArea.addEventListener("drop",e=>{
+e.preventDefault();
+fileInput.files=e.dataTransfer.files;
+showPreview();
+});
+
+fileInput.addEventListener("change",showPreview);
+
+function showPreview(){
+
+preview.innerHTML="";
+
+let files=fileInput.files;
 
 for(let i=0;i<files.length;i++){
 
-let file = files[i];
+let img=document.createElement("img");
+img.src=URL.createObjectURL(files[i]);
+preview.appendChild(img);
 
-let img = new Image();
-let reader = new FileReader();
+}
+
+}
+
+function convert(){
+
+let files=fileInput.files;
+
+let downloads=document.getElementById("downloads");
+downloads.innerHTML="";
+
+for(let i=0;i<files.length;i++){
+
+let file=files[i];
+
+let img=new Image();
+let reader=new FileReader();
 
 reader.onload=function(e){
 
@@ -45,23 +115,22 @@ img.src=e.target.result;
 img.onload=function(){
 
 let canvas=document.createElement("canvas");
-
 canvas.width=img.width;
 canvas.height=img.height;
 
 let ctx=canvas.getContext("2d");
 ctx.drawImage(img,0,0);
 
-let png=canvas.toDataURL("image/png");
+let jpg=canvas.toDataURL("image/png");
 
 let link=document.createElement("a");
 
-link.href=png;
-link.download="converted_"+i+".png";
+link.href=jpg;
+link.download="converted_"+(i+1)+".jpg";
 link.innerHTML="Download Image "+(i+1);
 
-document.getElementById("downloads").appendChild(link);
-document.getElementById("downloads").appendChild(document.createElement("br"));
+downloads.appendChild(link);
+downloads.appendChild(document.createElement("br"));
 
 }
 
