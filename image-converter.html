@@ -1,23 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <title>Image Converter - FastTools</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f6f9;
+text-align:center;
+}
+
+#drop-area{
+border:2px dashed #2c3e50;
+padding:40px;
+width:60%;
+margin:auto;
+background:white;
+cursor:pointer;
+}
+
+#preview img{
+width:100px;
+margin:10px;
+}
+
+button{
+padding:10px 20px;
+margin-top:20px;
+}
+
+</style>
+
 </head>
 
 <body>
 
 <h1>Image Converter</h1>
 
-<input type="file" id="upload" multiple>
+<div id="drop-area">
+<p>Drag & Drop Images Here or Click to Upload</p>
+<input type="file" id="upload" multiple hidden>
+</div>
 
-<br><br>
+<br>
 
 <select id="format">
 <option value="image/jpeg">Convert to JPG</option>
 <option value="image/png">Convert to PNG</option>
 </select>
 
-<br><br>
+<br>
+
+<div id="preview"></div>
 
 <button onclick="convertImage()">Convert</button>
 
@@ -27,42 +63,76 @@
 
 <script>
 
-function convertImage(){
+let dropArea = document.getElementById("drop-area");
+let fileInput = document.getElementById("upload");
+let preview = document.getElementById("preview");
 
-let files = document.getElementById("upload").files;
-let format = document.getElementById("format").value;
+dropArea.onclick = () => fileInput.click();
 
-let downloads = document.getElementById("downloads");
-downloads.innerHTML = "";
+dropArea.addEventListener("dragover", e=>{
+e.preventDefault();
+});
+
+dropArea.addEventListener("drop", e=>{
+e.preventDefault();
+fileInput.files = e.dataTransfer.files;
+showPreview();
+});
+
+fileInput.addEventListener("change", showPreview);
+
+function showPreview(){
+
+preview.innerHTML="";
+
+let files=fileInput.files;
 
 for(let i=0;i<files.length;i++){
 
-let file = files[i];
+let img=document.createElement("img");
+img.src=URL.createObjectURL(files[i]);
+preview.appendChild(img);
 
-let img = new Image();
-let reader = new FileReader();
+}
 
-reader.onload = function(e){
+}
 
-img.src = e.target.result;
+function convertImage(){
 
-img.onload = function(){
+let files=fileInput.files;
+let format=document.getElementById("format").value;
 
-let canvas = document.createElement("canvas");
-canvas.width = img.width;
-canvas.height = img.height;
+let downloads=document.getElementById("downloads");
+downloads.innerHTML="";
 
-let ctx = canvas.getContext("2d");
+for(let i=0;i<files.length;i++){
+
+let file=files[i];
+let img=new Image();
+let reader=new FileReader();
+
+reader.onload=function(e){
+
+img.src=e.target.result;
+
+img.onload=function(){
+
+let canvas=document.createElement("canvas");
+canvas.width=img.width;
+canvas.height=img.height;
+
+let ctx=canvas.getContext("2d");
 ctx.drawImage(img,0,0);
 
-let converted = canvas.toDataURL(format);
+let converted=canvas.toDataURL(format);
 
-let extension = format === "image/jpeg" ? ".jpg" : ".png";
+let extension=format==="image/jpeg"?".jpg":".png";
 
-let link = document.createElement("a");
-link.href = converted;
-link.download = "converted_"+(i+1)+extension;
-link.innerHTML = "Download Image "+(i+1);
+let link=document.createElement("a");
+
+link.href=converted;
+link.download="converted_"+(i+1)+extension;
+link.innerHTML="Download Image "+(i+1);
 
 downloads.appendChild(link);
 downloads.appendChild(document.createElement("br"));
