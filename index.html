@@ -6,84 +6,117 @@
 
 <meta name="description" content="FastTools provides free online tools including QR generator, password generator, word counter, image converter and more.">
 
+<style>
+
+body{
+font-family:Arial;
+background:#f4f6f9;
+margin:0;
+padding:0;
+}
+
+header{
+background:#2c3e50;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.container{
+width:90%;
+margin:auto;
+margin-top:30px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.tool-card{
+background:white;
+padding:20px;
+border-radius:8px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+text-align:center;
+}
+
+.tool-card a{
+text-decoration:none;
+font-weight:bold;
+color:#2c3e50;
+font-size:18px;
+}
+
+.tool-card p{
+font-size:14px;
+color:#555;
+}
+
+footer{
+margin-top:40px;
+text-align:center;
+padding:20px;
+background:#2c3e50;
+color:white;
+}
+
+</style>
+
 </head>
 
 <body>
 
+<header>
 <h1>FastTools</h1>
+<p>Free Online Converters & Tools</p>
+</header>
 
-<p>Free online tools to make your work easier. No signup required.</p>
+<div class="container">
 
-<hr>
-
-<h2>Generators</h2>
-
-<ul>
-
-<li>
+<div class="tool-card">
 <a href="qr-generator.html">QR Code Generator</a>
-<p>Create QR codes instantly for links, text, and more.</p>
-</li>
+<p>Create QR codes instantly.</p>
+</div>
 
-<li>
+<div class="tool-card">
 <a href="password-generator.html">Password Generator</a>
-<p>Generate strong and secure passwords instantly.</p>
-</li>
+<p>Generate strong passwords.</p>
+</div>
 
-</ul>
-
-<hr>
-
-<h2>Text Tools</h2>
-
-<ul>
-
-<li>
+<div class="tool-card">
 <a href="word-counter.html">Word Counter</a>
-<p>Count words and characters in your text instantly.</p>
-</li>
+<p>Count words and characters.</p>
+</div>
 
-<li>
+<div class="tool-card">
 <a href="text-formatter.html">Text Formatter</a>
-<p>Convert text to uppercase, lowercase, and more.</p>
-</li>
+<p>Uppercase, lowercase and more.</p>
+</div>
 
-</ul>
-
-<hr>
-
-<h2>Converters</h2>
-
-<ul>
-
-<li>
+<div class="tool-card">
 <a href="unit-converter.html">Unit Converter</a>
-<p>Convert units like kilograms to pounds and meters to feet.</p>
-</li>
+<p>Convert units instantly.</p>
+</div>
 
-<li>
+<div class="tool-card">
 <a href="image-converter.html">Image Converter</a>
-<p>Convert images between PNG and JPG formats.</p>
-</li>
+<p>Convert PNG and JPG images.</p>
+</div>
 
-</ul>
-
-<hr>
-
-<h2>Links</h2>
-
-<ul>
-
-<li>
+<div class="tool-card">
 <a href="link-shortener.html">Link Shortener</a>
-<p>Shorten long URLs instantly.</p>
-</li>
+<p>Shorten long URLs easily.</p>
+</div>
 
-</ul>
+<div class="tool-card">
+<a href="png-to-jpg.html">PNG to JPG</a>
+<p>Convert PNG images to JPG.</p>
+</div>
 
-<hr>
+</div>
 
+<footer>
 <p>© 2026 FastTools</p>
+</footer>
 
 </body>
 </html>
