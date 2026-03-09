@@ -5,7 +5,35 @@
 <title>Image Converter - FastTools</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <style>
+#toast{
+visibility:hidden;
+min-width:250px;
+background:#333;
+color:#fff;
+text-align:center;
+border-radius:6px;
+padding:12px;
+position:fixed;
+bottom:30px;
+left:50%;
+transform:translateX(-50%);
+z-index:999;
+}
 
+#toast.show{
+visibility:visible;
+animation:fadein 0.3s, fadeout 0.3s 2.5s;
+}
+
+@keyframes fadein{
+from{bottom:10px;opacity:0;}
+to{bottom:30px;opacity:1;}
+}
+
+@keyframes fadeout{
+from{bottom:30px;opacity:1;}
+to{bottom:10px;opacity:0;}
+}
 body{
 font-family:Arial;
 background:#f4f6f9;
@@ -227,6 +255,6 @@ link.click();
 }
 
 </script>
-
+<div id="toast">Please upload an image first</div>
 </body>
 </html>
