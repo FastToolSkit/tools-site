@@ -12,9 +12,9 @@
 
 <h1>JPG to PNG Converter</h1>
 
-<p>Upload a JPG image and convert it to PNG instantly.</p>
+<p>Upload JPG images and convert them to PNG instantly.</p>
 
-<input type="file" id="upload">
+<input type="file" id="upload" multiple>
 
 <br><br>
 
@@ -22,44 +22,56 @@
 
 <br><br>
 
-<a id="download" style="display:none;">Download PNG</a>
+<div id="downloads"></div>
 
 <script>
 
 function convert(){
 
-let file=document.getElementById("upload").files[0];
+let files = document.getElementById("upload").files;
 
-let img=new Image();
-let reader=new FileReader();
+let downloads = document.getElementById("downloads");
+downloads.innerHTML = "";
 
-reader.onload=function(e){
+for(let i=0;i<files.length;i++){
 
-img.src=e.target.result;
+let file = files[i];
 
-img.onload=function(){
+let img = new Image();
+let reader = new FileReader();
 
-let canvas=document.createElement("canvas");
+reader.onload = function(e){
 
-canvas.width=img.width;
-canvas.height=img.height;
+img.src = e.target.result;
 
-let ctx=canvas.getContext("2d");
+img.onload = function(){
+
+let canvas = document.createElement("canvas");
+
+canvas.width = img.width;
+canvas.height = img.height;
+
+let ctx = canvas.getContext("2d");
 ctx.drawImage(img,0,0);
 
-let png=canvas.toDataURL("image/png");
+let png = canvas.toDataURL("image/png");
 
-let link=document.getElementById("download");
-link.href=png;
-link.download="converted.png";
-link.innerHTML="Download PNG";
-link.style.display="block";
+let link = document.createElement("a");
+
+link.href = png;
+link.download = "converted_"+(i+1)+".png";
+link.innerHTML = "Download Image "+(i+1);
+
+downloads.appendChild(link);
+downloads.appendChild(document.createElement("br"));
 
 }
 
 }
 
 reader.readAsDataURL(file);
+
+}
 
 }
 
