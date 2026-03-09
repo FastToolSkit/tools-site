@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Link Shortener</title>
+</head>
+
+<body>
+
+<h1>Link Shortener</h1>
+
+<input type="text" id="url" placeholder="Paste your long URL here" style="width:300px;">
+
+<br><br>
+
+<button onclick="shorten()">Shorten Link</button>
+
+<br><br>
+
+<input type="text" id="result" readonly style="width:300px;">
+
+<script>
+
+async function shorten(){
+
+let url=document.getElementById("url").value;
+
+let response=await fetch("https://tinyurl.com/api-create.php?url="+encodeURIComponent(url));
+
+let shortUrl=await response.text();
+
+document.getElementById("result").value=shortUrl;
+
+}
+
+</script>
+
+</body>
+</html>
