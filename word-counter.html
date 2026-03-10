@@ -46,18 +46,26 @@ Reset
 
 <script>
 
-function resetCounter(){
+function countWords(){
 
-document.getElementById("text").value="";
+let text = document.getElementById("text").value;
 
-document.getElementById("result").innerHTML="Words: 0 | Characters: 0";
+let characters = text.length;
 
-document.getElementById("text").focus();
-
-}
+let words = text.trim().split(/\s+/).filter(Boolean).length;
 
 document.getElementById("result").innerHTML =
 "Words: " + words + " | Characters: " + characters;
+
+}
+
+function resetCounter(){
+
+document.getElementById("text").value = "";
+
+document.getElementById("result").innerHTML = "Words: 0 | Characters: 0";
+
+document.getElementById("text").focus();
 
 }
 
