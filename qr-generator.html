@@ -23,12 +23,17 @@
 <div class="tool-container">
 
 <h1>QR Code Generator</h1>
-
 <input id="text" type="text" placeholder="Enter text or URL">
 
 <button onclick="generateQR()">Generate QR Code</button>
 
+<div id="qrcode-container">
 <div id="qrcode"></div>
+</div>
+
+<button id="downloadBtn" onclick="downloadQR()" style="display:none;">
+Download QR Code
+</button>
 
 </div>
 
@@ -44,13 +49,31 @@ function generateQR(){
 
 document.getElementById("qrcode").innerHTML="";
 
-var text = document.getElementById("text").value;
+var text=document.getElementById("text").value;
 
 new QRCode(document.getElementById("qrcode"),{
 text:text,
 width:200,
 height:200
 });
+
+document.getElementById("downloadBtn").style.display="inline-block";
+
+}
+
+function downloadQR(){
+
+var qrCanvas=document.querySelector("#qrcode canvas");
+
+var link=document.createElement("a");
+
+link.download="fasttools-qr.png";
+
+link.href=qrCanvas.toDataURL();
+
+link.click();
+
+}
 
 }
 
