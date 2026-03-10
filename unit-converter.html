@@ -1,53 +1,65 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <link rel="stylesheet" href="style.css">
-<title>Unit Converter</title>
+
+<title>Unit Converter - FastTools</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
-  <header class="site-header">
 
-<a href="index.html" class="logo">
-FastTools
-</a>
-<a href="index.html" class="back-home">
-← Back to Home
-</a>
-<nav class="header-nav">
-<a href="index.html">Home</a>
-</nav>
-
+<header class="site-header">
+<a href="index.html" class="logo">FastTools</a>
 </header>
-<a href="index.html">← Back to FastTools</a>
+
+<a href="index.html" class="back-home">← Back to FastTools</a>
+
+
+<div class="tool-container">
+
 <h1>Unit Converter</h1>
 
 <input type="number" id="value" placeholder="Enter value">
 
-<br><br>
-
 <select id="conversion">
+
 <option value="kg-lb">Kilograms → Pounds</option>
 <option value="lb-kg">Pounds → Kilograms</option>
 <option value="m-ft">Meters → Feet</option>
 <option value="ft-m">Feet → Meters</option>
 <option value="c-f">Celsius → Fahrenheit</option>
 <option value="f-c">Fahrenheit → Celsius</option>
-</select>
 
-<br><br>
+</select>
 
 <button onclick="convert()">Convert</button>
 
-<h3 id="result"></h3>
+<h3 id="result">Result: —</h3>
+
+</div>
+
+
+<footer class="site-footer">
+<p>© 2026 FastTools • Free Online Tools</p>
+</footer>
+
 
 <script>
 
 function convert(){
 
-let value=parseFloat(document.getElementById("value").value);
-let type=document.getElementById("conversion").value;
-let result=0;
+let value = parseFloat(document.getElementById("value").value);
+let type = document.getElementById("conversion").value;
+
+if(isNaN(value)){
+document.getElementById("result").innerHTML = "Result: Enter a value";
+return;
+}
+
+let result = 0;
 
 if(type=="kg-lb") result=value*2.20462;
 if(type=="lb-kg") result=value/2.20462;
@@ -56,11 +68,13 @@ if(type=="ft-m") result=value/3.28084;
 if(type=="c-f") result=(value*9/5)+32;
 if(type=="f-c") result=(value-32)*5/9;
 
-document.getElementById("result").innerHTML="Result: "+result;
+document.getElementById("result").innerHTML =
+"Result: " + result.toFixed(3);
 
 }
 
 </script>
 
 </body>
+
 </html>
