@@ -1,40 +1,50 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <link rel="stylesheet" href="style.css">
-<title>QR Code Generator</title>
+
+<title>QR Code Generator - FastTools</title>
+
+<link rel="stylesheet" href="style.css">
+
 <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+
 </head>
 
 <body>
-  <header class="site-header">
 
-<a href="index.html" class="logo">
-FastTools
-</a>
-<a href="index.html" class="back-home">
-← Back to Home
-</a>
-<nav class="header-nav">
-<a href="index.html">Home</a>
-</nav>
-
+<header class="site-header">
+<a href="index.html" class="logo">FastTools</a>
 </header>
-<a href="index.html">← Back to FastTools</a>
+
+<a href="index.html" class="back-home">← Back to FastTools</a>
+
+
+<div class="tool-container">
+
 <h1>QR Code Generator</h1>
 
 <input id="text" type="text" placeholder="Enter text or URL">
-<button onclick="generateQR()">Generate QR</button>
+
+<button onclick="generateQR()">Generate QR Code</button>
 
 <div id="qrcode"></div>
 
+</div>
+
+
+<footer class="site-footer">
+<p>© 2026 FastTools • Free Online Tools</p>
+</footer>
+
+
 <script>
 
-function generateQR() {
+function generateQR(){
 
 document.getElementById("qrcode").innerHTML="";
 
-var text=document.getElementById("text").value;
+var text = document.getElementById("text").value;
 
 new QRCode(document.getElementById("qrcode"),{
 text:text,
@@ -46,5 +56,7 @@ height:200
 
 </script>
 
+
 </body>
+
 </html>
