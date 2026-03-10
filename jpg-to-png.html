@@ -3,11 +3,11 @@
 
 <head>
 
-<title>PNG to JPG Converter - FastTools</title>
+<title>JPG to PNG Converter - FastTools</title>
 
 <link rel="stylesheet" href="style.css">
 
-<meta name="description" content="Convert PNG images to JPG online for free using FastTools.">
+<meta name="description" content="Convert JPG images to PNG online for free using FastTools.">
 
 <style>
 
@@ -51,18 +51,18 @@ margin:10px;
 
 <div class="tool-container">
 
-<h1>PNG to JPG Converter</h1>
+<h1>JPG to PNG Converter</h1>
 
-<p>Upload PNG images and convert them to JPG instantly.</p>
+<p>Upload JPG images and convert them to PNG instantly.</p>
 
 <div id="drop-area">
 <p>Drag & Drop Images Here or Click to Upload</p>
-<input type="file" id="upload" multiple accept="image/png" hidden>
+<input type="file" id="upload" multiple accept="image/jpeg,image/jpg" hidden>
 </div>
 
 <div id="preview"></div>
 
-<button onclick="convert()">Convert to JPG</button>
+<button onclick="convert()">Convert to PNG</button>
 
 <div id="downloads"></div>
 
@@ -137,12 +137,12 @@ canvas.height=img.height;
 let ctx=canvas.getContext("2d");
 ctx.drawImage(img,0,0);
 
-let jpg=canvas.toDataURL("image/jpeg");
+let png=canvas.toDataURL("image/png");
 
 let link=document.createElement("a");
 
-link.href=jpg;
-link.download="converted_"+(i+1)+".jpg";
+link.href=png;
+link.download="converted_"+(i+1)+".png";
 link.innerHTML="Download Image "+(i+1);
 
 downloads.appendChild(link);
