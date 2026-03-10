@@ -70,3 +70,27 @@ background:#34495e;
 button:hover{
 background:#34495e;
 }
+
+.tools-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+max-width:1200px;
+margin:auto;
+margin-top:40px;
+}
+
+.tool-card{
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 4px 12px rgba(0,0,0,0.08);
+text-decoration:none;
+color:#2c3e50;
+transition:all 0.25s ease;
+}
+
+.tool-card:hover{
+transform:translateY(-6px);
+box-shadow:0 10px 20px rgba(0,0,0,0.15);
+}
