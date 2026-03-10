@@ -188,7 +188,7 @@ input:"convert"
 }
 })
 });
-
+document.getElementById("status").innerText = "Uploading PDF...";
 const jobData=await job.json();
 
 const uploadTask=jobData.data.tasks.find(t=>t.name==="upload");
@@ -207,6 +207,7 @@ body:form
 });
 
 const jobId=jobData.data.id;
+  document.getElementById("status").innerText = "Converting PDF...";
 
 let downloadUrl=null;
 
@@ -224,7 +225,9 @@ const data=await check.json();
 
 const exportTask=data.data.tasks.find(t=>t.operation==="export/url");
 
-if(exportTask && exportTask.result){
+  if(exportTask && exportTask.result){
+
+document.getElementById("status").innerText="Preparing download...";
 
 downloadUrl=exportTask.result.files[0].url;
 
