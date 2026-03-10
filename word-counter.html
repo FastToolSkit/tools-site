@@ -46,13 +46,15 @@ Reset
 
 <script>
 
-function countWords(){
+function resetCounter(){
 
-let text = document.getElementById("text").value;
+document.getElementById("text").value="";
 
-let characters = text.length;
+document.getElementById("result").innerHTML="Words: 0 | Characters: 0";
 
-let words = text.trim().split(/\s+/).filter(Boolean).length;
+document.getElementById("text").focus();
+
+}
 
 document.getElementById("result").innerHTML =
 "Words: " + words + " | Characters: " + characters;
