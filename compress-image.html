@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Compress Image Online - FastTools</title>
 
@@ -13,6 +16,8 @@
 
 <body>
 
+<!-- TOP BAR (site footer style header) -->
+
 <div class="top-bar">
 <p>
 © 2026 FastTools • Free Online Tools
@@ -23,11 +28,15 @@
 </p>
 </div>
 
+<!-- BACK BUTTON -->
+
 <div class="back-bar">
 <a href="index.html" class="back-link">← Back to FastTools</a>
 </div>
 
-<div class="tool-container">
+<!-- MAIN TOOL -->
+
+<main class="tool-container">
 
 <h1>Image Compressor</h1>
 
@@ -39,7 +48,7 @@
 
 <div class="quality-control">
 
-<label>Compression Quality</label>
+<label for="quality">Compression Quality</label>
 
 <input type="range" id="quality" min="0.1" max="1" step="0.1" value="0.8">
 
@@ -51,13 +60,17 @@
 Compress Image
 </button>
 
-<img id="preview">
+<img id="preview" alt="Preview">
 
 <a id="downloadLink" class="main-button" style="display:none"></a>
 
-</div>
+</main>
 
 <script>
+
+/* ============================
+IMAGE COMPRESSOR SCRIPT
+============================ */
 
 const upload = document.getElementById("upload");
 const preview = document.getElementById("preview");
@@ -74,6 +87,8 @@ qualityValue.innerText = qualitySlider.value;
 upload.onchange = function(e){
 
 imageFile = e.target.files[0];
+
+if(!imageFile) return;
 
 const reader = new FileReader();
 
