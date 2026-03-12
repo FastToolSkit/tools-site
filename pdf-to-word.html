@@ -89,7 +89,7 @@ background:#2c3e50;
 
 <script>
 
-const API_KEY="eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZDEyZTNjNTQzOGJlYThhNjVjOGZkMzkxYWJjZTY4ZWIwNTM3Mjk3YmE1Mzg1NDE2NjExZjQyZjJlODhlMDMzMzZlMTY5YjAwNjUwNDFkOGUiLCJpYXQiOjE3NzMxMTY5NzIuNDU3MDk0LCJuYmYiOjE3NzMxMTY5NzIuNDU3MDk1LCJleHAiOjQ5Mjg3OTA1NzIuNDUxMjgsInN1YiI6Ijc0NjM4MTYxIiwic2NvcGVzIjpbInRhc2sud3JpdGUiXX0.ppLMoMKo6PC1ONwH23zunCsk3QCR6Ej6v4pPpC8lbud0tFoUXyEl2jllK7KGeERwRUe_85AurtcJ1BzW6xSjiO8hmRdqeLvYSK7CJvEUHkH89u75FBHQFBiYRUsdXZ4ePnH0yoJVZ6gX1ZQm-QNb_hnocubK03d-PBeft4DpeLOn8YSKODM8hIwWGs3kynrc9H027mNkUiPerL9JLEWiKKMJJX7IqMX3ruM7mQbZLD76PoCtr6VBUQfqffoDRmRjPed6MQDU5rRDNiCynSqLKSi5PyS7LPtDIG8GJwRMhfQcd4JuPZFIzccLEhNBOsK97t5ZZa-vBEbU_VlRq9-Solr0gBqmUcoQ-xn_IxFITJw1jNY320gjhBUViAF2HtpwQEM_bc3tC_XRHYLvvM0-fcNxYHTBAD7x057dgj-as5us8jCYAjob20a0xL7XVcytbTJvDorMBiRl-zLPOORdfsAtvUIpHyUFoG3DPgV4WrwzP4Jgyk7d2mvbBKhoNAcWwAZnn564fFFSWyDvxUhOHfq3h8vGVTSV_LTa549VnSajM-CmA6Y9oZy8AQt4kc26ElX7FH1ifLKBi6ysmnE4XdXvIepIHoFX8qDfd6-lkq4qSauxHqVqM6wGrdSUai9M-fV7BXDbhrErgoBlfrCAnoQxI0pII4eW6KjLgfUb5wU";
+const API_KEY="YOUR_API_KEY_HERE";
 
 let files=[];
 
@@ -164,6 +164,10 @@ document.getElementById("status").innerText="Finished!";
 
 async function convertSingle(file,index){
 
+try{
+
+document.getElementById("status").innerText="Uploading PDF...";
+
 const job=await fetch("https://api.cloudconvert.com/v2/jobs",{
 method:"POST",
 headers:{
@@ -172,9 +176,7 @@ headers:{
 },
 body:JSON.stringify({
 tasks:{
-upload:{
-operation:"import/upload"
-},
+upload:{operation:"import/upload"},
 convert:{
 operation:"convert",
 input:"upload",
@@ -188,8 +190,21 @@ input:"convert"
 }
 })
 });
-document.getElementById("status").innerText = "Uploading PDF...";
+
+if(job.status===402 || job.status===403){
+
+document.getElementById("status").innerText=
+"Daily conversion limit reached. Please try again tomorrow.";
+
+return;
+}
+
 const jobData=await job.json();
+
+if(!jobData.data){
+document.getElementById("status").innerText="Conversion failed.";
+return;
+}
 
 const uploadTask=jobData.data.tasks.find(t=>t.name==="upload");
 
@@ -207,15 +222,20 @@ body:form
 });
 
 const jobId=jobData.data.id;
-  document.getElementById("status").innerText = "Converting PDF...";
+
+document.getElementById("status").innerText="Converting PDF...";
 
 let downloadUrl=null;
 
-while(!downloadUrl){
+let attempts=0;
+let maxAttempts=20;
+
+while(!downloadUrl && attempts<maxAttempts){
 
 await new Promise(r=>setTimeout(r,2000));
 
-const check=await fetch("https://api.cloudconvert.com/v2/jobs/"+jobId,{
+const check=await fetch(
+"https://api.cloudconvert.com/v2/jobs/"+jobId,{
 headers:{
 "Authorization":"Bearer "+API_KEY
 }
@@ -223,9 +243,13 @@ headers:{
 
 const data=await check.json();
 
-const exportTask=data.data.tasks.find(t=>t.operation==="export/url");
+if(data.data){
 
-  if(exportTask && exportTask.result){
+const exportTask=data.data.tasks.find(
+t=>t.operation==="export/url"
+);
+
+if(exportTask && exportTask.result){
 
 document.getElementById("status").innerText="Preparing download...";
 
@@ -235,7 +259,29 @@ downloadUrl=exportTask.result.files[0].url;
 
 }
 
+attempts++;
+
+}
+
+if(!downloadUrl){
+
+document.getElementById("status").innerText=
+"Conversion failed or API limit reached.";
+
+return;
+
+}
+
 addDownload(downloadUrl,file.name,index);
+
+}catch(err){
+
+console.error(err);
+
+document.getElementById("status").innerText=
+"Unexpected error occurred.";
+
+}
 
 }
 
@@ -247,6 +293,7 @@ const link=document.createElement("a");
 
 link.href=url;
 link.download=name.replace(".pdf",".docx");
+
 link.innerText="Download "+name.replace(".pdf",".docx");
 
 downloads.appendChild(link);
