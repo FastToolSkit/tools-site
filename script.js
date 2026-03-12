@@ -41,7 +41,8 @@ canvas.height = img.height
 ctx.drawImage(img,0,0)
 
 canvas.toBlob(function(blob){
-
+}, imageFile.type, qualitySlider.value)
+  
 const url = URL.createObjectURL(blob)
 
 downloadLink.href = url
