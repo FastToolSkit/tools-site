@@ -5,7 +5,7 @@
 
 <title>PDF to Word Converter - FastTools</title>
 
-<meta name="description" content="Convert PDF to Word online for free. FastTools allows you to upload multiple PDFs and convert them to DOCX instantly.">
+<meta name="description" content="Convert PDF to Word online for free using FastTools.">
 
 <link rel="stylesheet" href="style.css">
 
@@ -42,6 +42,16 @@ margin-top:20px;
 height:100%;
 width:0%;
 background:#2c3e50;
+}
+
+.download-btn{
+display:inline-block;
+margin-top:15px;
+padding:12px 18px;
+background:#2c3e50;
+color:white;
+text-decoration:none;
+border-radius:6px;
 }
 
 </style>
@@ -120,11 +130,6 @@ preview.innerHTML="";
 
 files.forEach(file=>{
 
-if(file.size>20*1024*1024){
-alert("File too large (max 20MB)");
-return;
-}
-
 let div=document.createElement("div");
 
 div.innerHTML=`
@@ -142,33 +147,24 @@ preview.appendChild(div);
 async function convertPDF(){
 
 if(files.length===0){
-alert("Upload at least one PDF");
+alert("Upload a PDF first");
 return;
 }
 
-document.getElementById("status").innerText="Starting conversion...";
+document.getElementById("downloads").innerHTML="";
+document.getElementById("status").innerText="Creating conversion job...";
 
-for(let i=0;i<files.length;i++){
+updateProgress(5);
 
-updateProgress((i/files.length)*100);
-
-await convertSingle(files[i],i);
-
-}
-
-updateProgress(100);
-
-document.getElementById("status").innerText="Finished!";
+await convertSingle(files[0]);
 
 }
 
-async function convertSingle(file,index){
+async function convertSingle(file){
 
 try{
 
-document.getElementById("status").innerText="Uploading PDF...";
-
-const job=await fetch("https://api.cloudconvert.com/v2/jobs",{
+const jobResponse = await fetch("https://api.cloudconvert.com/v2/jobs",{
 method:"POST",
 headers:{
 "Authorization":"Bearer "+API_KEY,
@@ -183,32 +179,29 @@ input:"upload",
 input_format:"pdf",
 output_format:"docx"
 },
-export:{
-operation:"export/url",
-input:"convert"
-}
+export:{operation:"export/url",input:"convert"}
 }
 })
 });
 
-if(job.status===402 || job.status===403){
+if(jobResponse.status===402 || jobResponse.status===403){
 
 document.getElementById("status").innerText=
-"Daily conversion limit reached. Please try again tomorrow.";
+"Daily conversion limit reached. Try again tomorrow.";
 
 return;
+
 }
 
-const jobData=await job.json();
+const jobData = await jobResponse.json();
 
-if(!jobData.data){
-document.getElementById("status").innerText="Conversion failed.";
-return;
-}
+const uploadTask = jobData.data.tasks.find(t=>t.name==="upload");
 
-const uploadTask=jobData.data.tasks.find(t=>t.name==="upload");
+document.getElementById("status").innerText="Uploading PDF...";
 
-const form=new FormData();
+updateProgress(20);
+
+const form = new FormData();
 
 Object.entries(uploadTask.result.form.parameters).forEach(([k,v])=>{
 form.append(k,v);
@@ -221,45 +214,42 @@ method:"POST",
 body:form
 });
 
-const jobId=jobData.data.id;
-
 document.getElementById("status").innerText="Converting PDF...";
+
+updateProgress(40);
+
+const jobId = jobData.data.id;
 
 let downloadUrl=null;
 
-let attempts=0;
-let maxAttempts=20;
+for(let i=0;i<15;i++){
 
-while(!downloadUrl && attempts<maxAttempts){
+await new Promise(r=>setTimeout(r,1500));
 
-await new Promise(r=>setTimeout(r,2000));
-
-const check=await fetch(
+const check = await fetch(
 "https://api.cloudconvert.com/v2/jobs/"+jobId,{
 headers:{
 "Authorization":"Bearer "+API_KEY
 }
 });
 
-const data=await check.json();
+const data = await check.json();
 
 if(data.data){
 
-const exportTask=data.data.tasks.find(
+const exportTask = data.data.tasks.find(
 t=>t.operation==="export/url"
 );
 
-if(exportTask && exportTask.result){
+if(exportTask && exportTask.result && exportTask.result.files){
 
-document.getElementById("status").innerText="Preparing download...";
+downloadUrl = exportTask.result.files[0].url;
 
-downloadUrl=exportTask.result.files[0].url;
-
-}
+break;
 
 }
 
-attempts++;
+}
 
 }
 
@@ -272,32 +262,35 @@ return;
 
 }
 
-addDownload(downloadUrl,file.name,index);
+updateProgress(90);
+
+document.getElementById("status").innerText="Preparing download...";
+
+showDownload(downloadUrl,file.name);
+
+updateProgress(100);
+
+document.getElementById("status").innerText="Finished!";
 
 }catch(err){
 
 console.error(err);
 
-document.getElementById("status").innerText=
-"Unexpected error occurred.";
+document.getElementById("status").innerText="Unexpected error occurred.";
 
 }
 
 }
 
-function addDownload(url,name,i){
+function showDownload(url,name){
 
 const downloads=document.getElementById("downloads");
 
-const link=document.createElement("a");
-
-link.href=url;
-link.download=name.replace(".pdf",".docx");
-
-link.innerText="Download "+name.replace(".pdf",".docx");
-
-downloads.appendChild(link);
-downloads.appendChild(document.createElement("br"));
+downloads.innerHTML=`
+<a href="${url}" class="download-btn" download="${name.replace(".pdf",".docx")}">
+Download ${name.replace(".pdf",".docx")}
+</a>
+`;
 
 }
 
