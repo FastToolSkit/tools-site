@@ -323,8 +323,22 @@ margin:25px auto;
 }
 
 .back-container{
-max-width:1000px;
-margin:20px auto;
+width:100%;
+padding:15px 40px;
+box-sizing:border-box;
+}
+
+.back-link{
+display:inline-block;
+color:#334155;
+text-decoration:none;
+font-weight:500;
+font-size:14px;
+}
+
+.back-link:hover{
+text-decoration:underline;
+};
 }
 
 .back-link{
