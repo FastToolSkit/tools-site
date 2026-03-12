@@ -4,59 +4,47 @@ const qualitySlider = document.getElementById("quality");
 const qualityValue = document.getElementById("qualityValue");
 const downloadLink = document.getElementById("downloadLink");
 
-let imageFile;
+let imageFile = null;
 
-qualitySlider.oninput = () => {
-    qualityValue.innerText = qualitySlider.value;
-};
+qualitySlider.addEventListener("input", function() {
+    qualityValue.textContent = qualitySlider.value;
+});
 
-upload.onchange = (e) => {
-
+upload.addEventListener("change", function(e) {
     imageFile = e.target.files[0];
+
+    if (!imageFile) return;
 
     const reader = new FileReader();
 
-    reader.onload = function(event){
+    reader.onload = function(event) {
         preview.src = event.target.result;
     };
 
     reader.readAsDataURL(imageFile);
-};
+});
 
-function compressImage(){
+function compressImage() {
 
-    if(!imageFile){
+    if (!imageFile) {
         alert("Please upload an image first.");
         return;
     }
 
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-
     const img = new Image();
     img.src = preview.src;
 
-    img.onload = function(){
+    img.onload = function () {
 
-        const maxWidth = 1920;
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
 
-        if(img.width > maxWidth){
-            canvas.width = maxWidth;
-            canvas.height = img.height * (maxWidth / img.width);
-        } else {
-            canvas.width = img.width;
-            canvas.height = img.height;
-        }
+        canvas.width = img.width;
+        canvas.height = img.height;
 
-        ctx.drawImage(img,0,0,canvas.width,canvas.height);
+        ctx.drawImage(img, 0, 0);
 
-        let outputType = imageFile.type;
-
-        if(imageFile.type === "image/png"){
-            outputType = "image/jpeg";
-        }
-
-        canvas.toBlob(function(blob){
+        canvas.toBlob(function(blob) {
 
             const url = URL.createObjectURL(blob);
 
@@ -65,7 +53,7 @@ function compressImage(){
             downloadLink.innerText = "Download Image";
             downloadLink.style.display = "block";
 
-        }, outputType, qualitySlider.value);
+        }, "image/jpeg", qualitySlider.value);
 
     };
 }
