@@ -1,52 +1,83 @@
-/* GLOBAL */
+/* =========================
+   GLOBAL
+========================= */
 
 body{
 font-family:Arial, sans-serif;
 background:#f4f6f9;
 margin:0;
 text-align:center;
-
 display:flex;
 flex-direction:column;
 min-height:100vh;
+color:#2c3e50;
 }
 
-/* HEADER */
+/* =========================
+   TOP BAR
+========================= */
 
-.site-header{
-background:#2c3e50;
+.top-bar{
+background:#334155;
+color:white;
+text-align:center;
 padding:20px 0;
+font-size:14px;
+}
+
+.top-bar a{
+color:white;
+text-decoration:underline;
+}
+
+/* =========================
+   BACK BUTTON
+========================= */
+
+.back-bar{
+width:100%;
+padding:20px 40px;
+box-sizing:border-box;
+text-align:left;
+}
+
+.back-link{
+font-weight:700;
+font-size:15px;
+color:#2c3e50;
+text-decoration:none;
+}
+
+.back-link:hover{
+text-decoration:underline;
+}
+
+/* =========================
+   MAIN TITLE
+========================= */
+
+h1{
+margin-top:20px;
+margin-bottom:20px;
+}
+
+/* =========================
+   TOOL CONTAINER
+========================= */
+
+.tool-container{
+max-width:600px;
+margin:60px auto;
+background:white;
+padding:40px;
+border-radius:10px;
+box-shadow:0 5px 20px rgba(0,0,0,0.08);
 text-align:center;
 }
 
-.logo{
-color:white;
-font-size:40px;
-font-weight:bold;
-text-decoration:none;
-display:inline-block;
-}
-
-/* BACK BUTTON */
-
-.back-home{
-position:absolute;
-left:30px;
-top:90px;
-font-size:14px;
-text-decoration:none;
-color:#2c3e50;
-font-weight:bold;
-}
-
-/* MAIN TITLE */
-
-h1{
-margin-top:90px;
-margin-bottom:30px;
-}
-
-/* HOMEPAGE GRID */
+/* =========================
+   HOMEPAGE GRID
+========================= */
 
 .tools-grid{
 display:grid;
@@ -57,7 +88,9 @@ margin:40px auto;
 padding:0 20px;
 }
 
-/* TOOL CARD */
+/* =========================
+   TOOL CARD
+========================= */
 
 .tool-card{
 background:white;
@@ -84,112 +117,9 @@ font-size:14px;
 color:#555;
 }
 
-/* TEXTAREA */
-
-textarea{
-width:80%;
-max-width:700px;
-padding:12px;
-font-size:16px;
-border-radius:6px;
-border:1px solid #ccc;
-margin-top:20px;
-}
-
-/* INPUTS */
-
-input{
-width:100%;
-max-width:500px;
-padding:12px;
-font-size:16px;
-border-radius:6px;
-border:1px solid #ccc;
-margin-top:15px;
-}
-
-/* BUTTON */
-
-button{
-padding:10px 20px;
-margin-top:20px;
-background:#2c3e50;
-color:white;
-border:none;
-border-radius:6px;
-font-size:15px;
-cursor:pointer;
-}
-.tool-container{
-background:white;
-max-width:700px;
-margin:60px auto;
-padding:40px;
-border-radius:10px;
-box-shadow:0 6px 20px rgba(0,0,0,0.08);
-}
-button:hover{
-background:#34495e;
-}
-
-/* IMAGE PREVIEW */
-
-#preview img{
-width:100px;
-margin:10px;
-}
-
-/* DROP AREA */
-
-#drop-area{
-border:2px dashed #2c3e50;
-padding:40px;
-width:60%;
-margin:auto;
-background:white;
-cursor:pointer;
-}
-
-/* DESCRIPTION */
-
-.description{
-max-width:800px;
-margin:50px auto;
-font-size:16px;
-color:#444;
-line-height:1.6;
-}
-
-/* FOOTER */
-
-.site-footer{
-margin-top:auto;
-padding:20px;
-background:#2c3e50;
-color:white;
-text-align:center;
-font-size:14px;
-}
-
-/* LINKS */
-
-a{
-color:inherit;
-}
-
-/* Tool layout */
-
-.tool-container{
-max-width:700px;
-margin:60px auto;
-background:white;
-padding:40px;
-border-radius:10px;
-box-shadow:0 6px 20px rgba(0,0,0,0.08);
-text-align:center;
-}
-
-/* Inputs */
+/* =========================
+   INPUTS
+========================= */
 
 input, textarea, select{
 width:100%;
@@ -202,10 +132,12 @@ margin:15px auto;
 display:block;
 }
 
-/* Buttons */
+/* =========================
+   BUTTONS
+========================= */
 
 button{
-background:#2c3e50;
+background:#334155;
 color:white;
 border:none;
 padding:12px 25px;
@@ -213,66 +145,11 @@ font-size:16px;
 border-radius:6px;
 cursor:pointer;
 margin-top:15px;
-width:auto;
 min-width:200px;
 }
 
 button:hover{
-background:#1f2e3d;
-}
-
-/* QR TOOL */
-
-/* QR CODE FIX */
-
-#qrcode-container{
-margin-top:25px;
-display:flex;
-justify-content:center;
-align-items:center;
-}
-
-#qrcode canvas{
-display:block;
-margin:auto;
-}
-
-#qrcode img{
-display:block;
-margin:auto;
-}
-
-.button-group{
-display:flex;
-justify-content:center;
-gap:15px;
-margin-top:15px;
-}
-
-.reset-btn{
-background:#9aa4ad;
-}
-
-.reset-btn:hover{
-background:#7f8a93;
-}
-
-.tool-container{
-max-width:600px;
-margin:60px auto;
-background:white;
-padding:40px;
-border-radius:10px;
-box-shadow:0 5px 20px rgba(0,0,0,0.08);
-text-align:center;
-}
-
-.upload-box{
-border:2px dashed #cbd5e1;
-padding:40px;
-margin:25px 0;
-border-radius:8px;
-background:#f8fafc;
+background:#1e293b;
 }
 
 .main-button{
@@ -290,17 +167,29 @@ margin-top:20px;
 background:#1e293b;
 }
 
+/* =========================
+   UPLOAD BOX
+========================= */
+
+.upload-box{
+border:2px dashed #cbd5e1;
+padding:40px;
+margin:25px 0;
+border-radius:8px;
+background:#f8fafc;
+}
+
+/* =========================
+   SLIDER
+========================= */
+
 .quality-control{
 margin:20px 0;
 }
 
-.back-link{
-display:block;
-margin:20px;
-color:#334155;
-text-decoration:none;
-font-weight:500;
-}
+/* =========================
+   IMAGE PREVIEW
+========================= */
 
 #preview{
 display:block;
@@ -311,75 +200,64 @@ border-radius:8px;
 box-shadow:0 4px 15px rgba(0,0,0,0.1);
 }
 
+.tool-container img{
+display:block;
+margin:25px auto;
+}
+
+/* =========================
+   DOWNLOAD BUTTON
+========================= */
+
 #downloadLink{
 display:block;
 margin-top:20px;
 font-weight:bold;
 }
 
-.tool-container img{
-display:block;
-margin:25px auto;
+/* =========================
+   DROP AREA
+========================= */
+
+#drop-area{
+border:2px dashed #2c3e50;
+padding:40px;
+width:60%;
+margin:auto;
+background:white;
+cursor:pointer;
 }
 
-.back-container{
-width:100%;
-padding:15px 40px;
-box-sizing:border-box;
+/* =========================
+   DESCRIPTION
+========================= */
+
+.description{
+max-width:800px;
+margin:50px auto;
+font-size:16px;
+color:#444;
+line-height:1.6;
 }
 
-.back-link{
-display:inline-block;
-color:#334155;
-text-decoration:none;
-font-weight:500;
-font-size:14px;
-}
-
-.back-link:hover{
-text-decoration:underline;
-};
-}
-
-.back-link{
-display:inline-block;
-color:#334155;
-text-decoration:none;
-font-weight:500;
-font-size:14px;
-}
-
-.back-link:hover{
-text-decoration:underline;
-}
-
-.back-bar{
-width:100%;
-padding:15px 30px;
-box-sizing:border-box;
-text-align:left;
-}
-
-.back-bar a{
-color:#334155;
-text-decoration:none;
-font-weight:500;
-font-size:14px;
-}
-
-.back-bar a:hover{
-text-decoration:underline;
-}
+/* =========================
+   FOOTER
+========================= */
 
 .site-footer{
+margin-top:auto;
+padding:25px;
 background:#334155;
 color:white;
 text-align:center;
-padding:25px 0;
-margin-top:80px;
 font-size:14px;
 }
 
 .site-footer p{
 margin:0;
+}
+
+.site-footer a{
+color:white;
+text-decoration:underline;
 }
