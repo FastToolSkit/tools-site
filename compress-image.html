@@ -1,65 +1,55 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
 <title>Compress Image Online - FastTools</title>
+
 <meta name="description" content="Compress JPG, PNG and WEBP images online for free. Reduce image file size instantly.">
 
-<style>
-
-body{
-font-family:Arial;
-text-align:center;
-padding:40px;
-background:#f4f4f4;
-}
-
-#upload{
-margin:20px;
-}
-
-button{
-padding:10px 20px;
-margin-top:20px;
-cursor:pointer;
-}
-
-img{
-max-width:300px;
-margin-top:20px;
-}
-
-</style>
+<link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
+<header class="site-header">
+<a href="index.html" class="logo">FastTools</a>
+</header>
+
+<a href="index.html" class="back-link">← Back to FastTools</a>
+
+<div class="tool-container">
+
 <h1>Image Compressor</h1>
 
-<p>Compress JPG, PNG or WEBP images instantly.</p>
+<p>Upload an image and reduce its file size instantly.</p>
+
+<div class="upload-box">
 
 <input type="file" id="upload" accept="image/*">
 
-<br>
+</div>
 
-<label>Compression Quality:</label>
+<div class="quality-control">
+
+<label>Compression Quality</label>
 
 <input type="range" id="quality" min="0.1" max="1" step="0.1" value="0.8">
 
 <span id="qualityValue">0.8</span>
 
-<br>
+</div>
 
-<button onclick="compressImage()">Compress Image</button>
-
-<br>
+<button class="main-button" onclick="compressImage()">
+Compress Image
+</button>
 
 <img id="preview">
 
-<br>
+<a id="downloadLink" style="display:none"></a>
 
-<a id="downloadLink" style="display:none">Download Compressed Image</a>
+</div>
 
 <script>
 
@@ -107,20 +97,14 @@ const ctx = canvas.getContext("2d");
 const maxWidth = 1200;
 
 if(img.width > maxWidth){
-
 canvas.width = maxWidth;
 canvas.height = img.height * (maxWidth / img.width);
-
 }else{
-
 canvas.width = img.width;
 canvas.height = img.height;
-
 }
 
 ctx.drawImage(img,0,0,canvas.width,canvas.height);
-
-ctx.drawImage(img,0,0);
 
 canvas.toBlob(function(blob){
 
@@ -140,4 +124,5 @@ downloadLink.style.display = "block";
 </script>
 
 </body>
+
 </html>
