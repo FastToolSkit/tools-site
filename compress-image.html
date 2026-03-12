@@ -1,10 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Compress Image Online - FastTools</title>
 
@@ -16,17 +13,11 @@
 
 <body>
 
-<!-- TOP BAR (site footer style header) -->
+<!-- HEADER -->
 
-<div class="top-bar">
-<p>
-© 2026 FastTools • Free Online Tools
-<br>
-<a href="privacy.html">Privacy</a> •
-<a href="terms.html">Terms</a> •
-<a href="contact.html">Contact</a>
-</p>
-</div>
+<header class="site-header">
+<a href="index.html" class="logo">FastTools</a>
+</header>
 
 <!-- BACK BUTTON -->
 
@@ -34,9 +25,9 @@
 <a href="index.html" class="back-link">← Back to FastTools</a>
 </div>
 
-<!-- MAIN TOOL -->
+<!-- TOOL -->
 
-<main class="tool-container">
+<div class="tool-container">
 
 <h1>Image Compressor</h1>
 
@@ -48,7 +39,7 @@
 
 <div class="quality-control">
 
-<label for="quality">Compression Quality</label>
+<label>Compression Quality</label>
 
 <input type="range" id="quality" min="0.1" max="1" step="0.1" value="0.8">
 
@@ -60,17 +51,25 @@
 Compress Image
 </button>
 
-<img id="preview" alt="Preview">
+<img id="preview">
 
 <a id="downloadLink" class="main-button" style="display:none"></a>
 
-</main>
+</div>
+
+<!-- FOOTER -->
+
+<footer class="site-footer">
+<p>
+© 2026 FastTools • Free Online Tools
+<br>
+<a href="privacy.html">Privacy</a> •
+<a href="terms.html">Terms</a> •
+<a href="contact.html">Contact</a>
+</p>
+</footer>
 
 <script>
-
-/* ============================
-IMAGE COMPRESSOR SCRIPT
-============================ */
 
 const upload = document.getElementById("upload");
 const preview = document.getElementById("preview");
@@ -87,8 +86,6 @@ qualityValue.innerText = qualitySlider.value;
 upload.onchange = function(e){
 
 imageFile = e.target.files[0];
-
-if(!imageFile) return;
 
 const reader = new FileReader();
 
