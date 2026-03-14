@@ -4,18 +4,20 @@
 <head>
 
 <title>MP3 Cutter - FastTools</title>
-
 <meta name="description" content="Trim MP3 audio files online with FastTools">
 
 <link rel="stylesheet" href="style.css">
 
-<script src="https://unpkg.com/wavesurfer.js"></script>
-<script src="https://unpkg.com/wavesurfer.js/dist/plugins/regions.min.js"></script>
+<script src="https://unpkg.com/wavesurfer.js@7"></script>
+<script src="https://unpkg.com/wavesurfer.js@7/dist/plugins/regions.min.js"></script>
 
 <style>
 
 #waveform{
 margin-top:30px;
+background:#0f172a;
+border-radius:8px;
+padding:10px;
 }
 
 .trim-controls{
@@ -51,7 +53,7 @@ margin-top:25px;
 
 <h1>MP3 Cutter</h1>
 
-<p>Upload an MP3 and drag the selection to trim.</p>
+<p>Upload an MP3 and drag the yellow handles to trim.</p>
 
 <input type="file" id="audioFile" accept="audio/*">
 
@@ -59,7 +61,7 @@ margin-top:25px;
 
 <div class="trim-controls">
 
-<button class="main-button" onclick="playPause()">Play / Pause</button>
+<button class="main-button" onclick="wavesurfer.playPause()">Play / Pause</button>
 
 <button class="main-button" onclick="trimAudio()">Trim Audio</button>
 
@@ -87,21 +89,24 @@ margin-top:25px;
 let wavesurfer
 let region
 let audioBuffer
-let audioContext = new AudioContext()
+let audioContext = new (window.AudioContext || window.webkitAudioContext)()
 
-const regionsPlugin = WaveSurfer.regions.create()
+const regionsPlugin = WaveSurfer.Regions.create()
 
 wavesurfer = WaveSurfer.create({
 container:"#waveform",
-waveColor:"#94a3b8",
-progressColor:"#2563eb",
+waveColor:"#64748b",
+progressColor:"#0ea5e9",
 height:120,
+cursorColor:"#facc15",
 plugins:[regionsPlugin]
 })
 
 document.getElementById("audioFile").addEventListener("change", async function(e){
 
 const file = e.target.files[0]
+
+if(!file) return
 
 const arrayBuffer = await file.arrayBuffer()
 
@@ -114,22 +119,18 @@ wavesurfer.once("ready", () => {
 region = wavesurfer.addRegion({
 start:0,
 end:Math.min(10, wavesurfer.getDuration()),
+color:"rgba(250,204,21,0.35)",
 drag:true,
-resize:true,
-color:"rgba(37,99,235,0.3)"
+resize:true
 })
 
 })
 
 })
-
-function playPause(){
-wavesurfer.playPause()
-}
 
 function trimAudio(){
 
-if(!region || !audioBuffer){
+if(!audioBuffer){
 alert("Upload audio first")
 return
 }
@@ -138,7 +139,6 @@ const start = region.start
 const end = region.end
 
 const sampleRate = audioBuffer.sampleRate
-
 const startOffset = Math.floor(start * sampleRate)
 const endOffset = Math.floor(end * sampleRate)
 
@@ -162,11 +162,9 @@ newData[i] = oldData[i + startOffset]
 }
 
 const blob = bufferToWave(newBuffer)
-
 const url = URL.createObjectURL(blob)
 
 const link = document.getElementById("downloadLink")
-
 link.href = url
 link.download = "trimmed-audio.wav"
 link.innerText = "Download Trimmed Audio"
