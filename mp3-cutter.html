@@ -5,8 +5,6 @@
 
 <title>MP3 Cutter - FastTools</title>
 
-<meta name="description" content="Trim MP3 audio files online">
-
 <link rel="stylesheet" href="style.css">
 
 <script src="https://unpkg.com/wavesurfer.js@7"></script>
@@ -15,15 +13,49 @@
 
 <style>
 
+.editor{
+background:#0b1220;
+border-radius:12px;
+padding:30px;
+color:white;
+}
+
 #waveform{
-margin-top:25px;
-background:#0f172a;
-border-radius:10px;
-padding:10px;
+height:150px;
 }
 
 #timeline{
-margin-top:5px;
+margin-top:10px;
+}
+
+.controls{
+display:flex;
+align-items:center;
+gap:20px;
+margin-top:20px;
+}
+
+.time-box{
+background:#1e293b;
+border:none;
+color:white;
+padding:8px 12px;
+border-radius:6px;
+width:90px;
+}
+
+.export-btn{
+background:#2563eb;
+border:none;
+color:white;
+padding:12px 20px;
+border-radius:8px;
+cursor:pointer;
+}
+
+.play-btn{
+font-size:30px;
+cursor:pointer;
 }
 
 </style>
@@ -35,7 +67,7 @@ margin-top:5px;
 <header class="site-header">
 
 <a href="index.html" class="logo">
-<img src="fasttools-logo.png.png" alt="FastTools">
+<img src="fasttools-logo.png.png">
 </a>
 
 <nav class="nav-menu">
@@ -47,113 +79,111 @@ margin-top:5px;
 
 </header>
 
-<div class="back-bar">
-<a href="index.html">← Back to FastTools</a>
-</div>
+<div class="tool-container editor">
 
-<div class="tool-container">
-
-<h1>MP3 Cutter</h1>
-
-<p>Upload an MP3 and drag the region to trim.</p>
+<h2>MP3 Cutter</h2>
 
 <input type="file" id="audioFile" accept="audio/*">
 
 <div id="waveform"></div>
 <div id="timeline"></div>
 
-<br>
+<div class="controls">
 
-<button class="main-button" onclick="wavesurfer.playPause()">Play / Pause</button>
+<div class="play-btn" onclick="wavesurfer.playPause()">▶</div>
 
-<button class="main-button" onclick="trimAudio()">Trim Audio</button>
+<label>Cut from:</label>
 
-<br><br>
+<input id="startTime" class="time-box">
 
-<a id="downloadLink"></a>
+<label>to</label>
+
+<input id="endTime" class="time-box">
+
+<button class="export-btn" onclick="exportAudio()">Export</button>
 
 </div>
 
-<footer class="site-footer">
-
-<p>
-© FastTools |
-<a href="privacy.html">Privacy</a> |
-<a href="terms.html">Terms</a> |
-<a href="contact.html">Contact</a>
-</p>
-
-</footer>
+</div>
 
 <script>
 
 let wavesurfer
 let region
 let audioBuffer
-const audioContext = new AudioContext()
+let audioContext = new AudioContext()
 
-const regionsPlugin = WaveSurfer.Regions.create()
-const timelinePlugin = WaveSurfer.Timeline.create({
-container:"#timeline"
-})
+const regions = WaveSurfer.Regions.create()
+const timeline = WaveSurfer.Timeline.create({ container:"#timeline" })
 
 wavesurfer = WaveSurfer.create({
 
 container:"#waveform",
-waveColor:"#475569",
-progressColor:"#0ea5e9",
+waveColor:"#64748b",
+progressColor:"#3b82f6",
 cursorColor:"#facc15",
-height:120,
-plugins:[regionsPlugin, timelinePlugin]
+height:140,
+plugins:[regions,timeline]
 
 })
 
-document.getElementById("audioFile").addEventListener("change", async function(e){
+document.getElementById("audioFile").addEventListener("change", async (e)=>{
 
 const file = e.target.files[0]
-if(!file) return
 
-const arrayBuffer = await file.arrayBuffer()
+const buffer = await file.arrayBuffer()
 
-audioBuffer = await audioContext.decodeAudioData(arrayBuffer)
+audioBuffer = await audioContext.decodeAudioData(buffer)
 
 wavesurfer.loadBlob(file)
 
-wavesurfer.once("ready", () => {
+wavesurfer.once("ready",()=>{
 
 region = wavesurfer.addRegion({
+
 start:0,
-end:Math.min(10, wavesurfer.getDuration()),
-color:"rgba(250,204,21,0.3)",
+end:10,
+color:"rgba(250,204,21,0.35)",
 drag:true,
 resize:true
+
+})
+
+updateInputs()
+
 })
 
 })
 
-})
+function updateInputs(){
 
-function trimAudio(){
+document.getElementById("startTime").value = region.start.toFixed(2)
+document.getElementById("endTime").value = region.end.toFixed(2)
 
-if(!audioBuffer){
-alert("Upload audio first")
-return
 }
+
+wavesurfer.on("region-updated", updateInputs)
+
+function exportAudio(){
+
+if(!audioBuffer) return
 
 const start = region.start
 const end = region.end
 
 const sampleRate = audioBuffer.sampleRate
 
-const startOffset = Math.floor(start * sampleRate)
-const endOffset = Math.floor(end * sampleRate)
+const startOffset = start * sampleRate
+const endOffset = end * sampleRate
 
 const frameCount = endOffset - startOffset
 
 const newBuffer = audioContext.createBuffer(
+
 audioBuffer.numberOfChannels,
 frameCount,
 sampleRate
+
 )
 
 for(let channel=0; channel<audioBuffer.numberOfChannels; channel++){
@@ -162,69 +192,22 @@ const oldData = audioBuffer.getChannelData(channel)
 const newData = newBuffer.getChannelData(channel)
 
 for(let i=0;i<frameCount;i++){
-newData[i] = oldData[i + startOffset]
-}
+
+newData[i] = oldData[i+startOffset]
 
 }
 
-const blob = bufferToWave(newBuffer)
+}
+
+const blob = new Blob([newBuffer.getChannelData(0)], {type:"audio/wav"})
 
 const url = URL.createObjectURL(blob)
 
-const link = document.getElementById("downloadLink")
+const a = document.createElement("a")
 
-link.href = url
-link.download = "trimmed-audio.wav"
-link.innerText = "Download Trimmed Audio"
-
-}
-
-function bufferToWave(buffer){
-
-const numOfChan = buffer.numberOfChannels
-const length = buffer.length * numOfChan * 2 + 44
-const bufferArray = new ArrayBuffer(length)
-const view = new DataView(bufferArray)
-
-let offset = 0
-
-function writeString(str){
-for(let i=0;i<str.length;i++){
-view.setUint8(offset++,str.charCodeAt(i))
-}
-}
-
-writeString("RIFF")
-view.setUint32(offset,36 + buffer.length * 2,true); offset+=4
-writeString("WAVE")
-writeString("fmt ")
-view.setUint32(offset,16,true); offset+=4
-view.setUint16(offset,1,true); offset+=2
-view.setUint16(offset,numOfChan,true); offset+=2
-view.setUint32(offset,buffer.sampleRate,true); offset+=4
-view.setUint32(offset,buffer.sampleRate * 2,true); offset+=4
-view.setUint16(offset,numOfChan * 2,true); offset+=2
-view.setUint16(offset,16,true); offset+=2
-writeString("data")
-view.setUint32(offset,buffer.length * 2,true); offset+=4
-
-for(let i=0;i<buffer.length;i++){
-for(let channel=0;channel<numOfChan;channel++){
-
-let sample = buffer.getChannelData(channel)[i]
-sample = Math.max(-1,Math.min(1,sample))
-
-view.setInt16(offset,
-sample<0 ? sample*0x8000 : sample*0x7FFF,
-true)
-
-offset+=2
-
-}
-
-}
-
-return new Blob([view],{type:"audio/wav"})
+a.href = url
+a.download = "trimmed.wav"
+a.click()
 
 }
 
