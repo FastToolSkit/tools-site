@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>MP3 Cutter - FastTools</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://unpkg.com/wavesurfer.js"></script>
+<script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.regions.min.js"></script>
+
+<style>
+
+body{
+background:#e6e7ea;
+font-family:Arial;
+}
+
+.tool-box{
+width:600px;
+margin:80px auto;
+background:#071428;
+padding:40px;
+border-radius:12px;
+color:white;
+}
+
+#waveform{
+margin-top:30px;
+background:#0a1c34;
+border-radius:6px;
+}
+
+.controls{
+margin-top:30px;
+display:flex;
+align-items:center;
+gap:15px;
+}
+
+button{
+background:#3a78ff;
+border:none;
+color:white;
+padding:10px 18px;
+border-radius:6px;
+cursor:pointer;
+}
+
+input{
+width:80px;
+padding:6px;
+border-radius:4px;
+border:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="site-header">
+
+<a href="/tools-site/index.html" class="logo">
+<img src="/tools-site/fasttools-logo.png" alt="FastTools">
+</a>
+
+<nav class="nav-menu">
+<a href="/tools-site/index.html">Home</a>
+<a href="/tools-site/tools.html">Tools</a>
+<a href="/tools-site/about.html">About</a>
+<a href="/tools-site/contact.html">Contact</a>
+</nav>
+
+</header>
+
+
+<div class="tool-box">
+
+<h2>MP3 Cutter</h2>
+
+<input type="file" id="audioFile">
+
+<div id="waveform"></div>
+
+<div class="controls">
+
+Start <input id="startTime" type="number" value="0">
+
+End <input id="endTime" type="number">
+
+<button onclick="exportTrim()">Export</button>
+
+</div>
+
+</div>
+
+<script>
+
+let wavesurfer
+
+wavesurfer = WaveSurfer.create({
+container: '#waveform',
+waveColor: '#6c8fff',
+progressColor: '#3a78ff',
+height:120,
+plugins: [
+WaveSurfer.regions.create({})
+]
+})
+
+document.getElementById("audioFile").addEventListener("change", function(e){
+
+const file = e.target.files[0]
+
+if(!file) return
+
+const url = URL.createObjectURL(file)
+
+wavesurfer.load(url)
+
+wavesurfer.on('ready', function(){
+
+document.getElementById("endTime").value = wavesurfer.getDuration()
+
+})
+
+})
+
+function exportTrim(){
+
+let start = parseFloat(document.getElementById("startTime").value)
+let end = parseFloat(document.getElementById("endTime").value)
+
+const audioBuffer = wavesurfer.backend.buffer
+const sampleRate = audioBuffer.sampleRate
+
+const newBuffer = wavesurfer.backend.ac.createBuffer(
+audioBuffer.numberOfChannels,
+(end-start)*sampleRate,
+sampleRate
+)
+
+for(let channel=0; channel<audioBuffer.numberOfChannels; channel++){
+
+const oldData = audioBuffer.getChannelData(channel)
+const newData = newBuffer.getChannelData(channel)
+
+for(let i=0; i<newData.length; i++){
+newData[i] = oldData[i + start*sampleRate]
+}
+
+}
+
+const offlineContext = new OfflineAudioContext(
+newBuffer.numberOfChannels,
+newBuffer.length,
+sampleRate
+)
+
+const source = offlineContext.createBufferSource()
+source.buffer = newBuffer
+source.connect(offlineContext.destination)
+source.start()
+
+offlineContext.startRendering().then(function(renderedBuffer){
+
+let wav = bufferToWave(renderedBuffer, renderedBuffer.length)
+let blob = new Blob([wav], {type:'audio/wav'})
+
+let url = URL.createObjectURL(blob)
+
+let a = document.createElement("a")
+a.href = url
+a.download = "trimmed_audio.wav"
+a.click()
+
+})
+
+}
+
+function bufferToWave(abuffer, len){
+
+let numOfChan = abuffer.numberOfChannels
+let length = len * numOfChan * 2 + 44
+let buffer = new ArrayBuffer(length)
+let view = new DataView(buffer)
+let channels = [], i, sample
+let offset = 0
+let pos = 0
+
+function setUint16(data){ view.setUint16(pos,data,true); pos+=2 }
+function setUint32(data){ view.setUint32(pos,data,true); pos+=4 }
+
+setUint32(0x46464952)
+setUint32(length-8)
+setUint32(0x45564157)
+
+setUint32(0x20746d66)
+setUint32(16)
+setUint16(1)
+setUint16(numOfChan)
+setUint32(abuffer.sampleRate)
+setUint32(abuffer.sampleRate * 2 * numOfChan)
+setUint16(numOfChan * 2)
+setUint16(16)
+
+setUint32(0x61746164)
+setUint32(length - pos - 4)
+
+for(i=0;i<abuffer.numberOfChannels;i++)
+channels.push(abuffer.getChannelData(i))
+
+while(pos < length){
+for(i=0;i<numOfChan;i++){
+sample = Math.max(-1,Math.min(1,channels[i][offset]))
+sample = (0.5 + sample<0 ? sample*32768 : sample*32767)|0
+view.setInt16(pos,sample,true)
+pos+=2
+}
+offset++
+}
+
+return buffer
+
+}
+
+</script>
+
+</body>
+
+</html>
