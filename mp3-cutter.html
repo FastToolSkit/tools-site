@@ -110,7 +110,18 @@ cursorColor:'#2a84ff',
 height:120,
 plugins:[RegionsPlugin]
 })
+function formatTime(sec){
 
+sec = Math.floor(sec)
+
+let minutes = Math.floor(sec / 60)
+let seconds = sec % 60
+
+if(seconds < 10) seconds = "0" + seconds
+
+return minutes + ":" + seconds
+
+}
 let region
 
 document.getElementById("audio").addEventListener("change",function(e){
