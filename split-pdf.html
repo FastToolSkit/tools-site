@@ -123,8 +123,8 @@ const dropArea = document.getElementById("drop-area");
 const fileInput = document.getElementById("file-input");
 const preview = document.getElementById("preview");
 
-let pdfBytes;
-
+let pdfFile;
+  
 dropArea.onclick = () => fileInput.click();
 
 dropArea.addEventListener("dragover", e=>{
@@ -140,11 +140,11 @@ fileInput.addEventListener("change", ()=>{
 loadPDF(fileInput.files[0]);
 });
 
-
 async function loadPDF(file){
 
-pdfBytes = await file.arrayBuffer();
+pdfFile = file;
 
+const pdfBytes = await file.arrayBuffer();
 preview.innerHTML="";
 
 const pdf = await pdfjsLib.getDocument({data:pdfBytes}).promise;
@@ -196,8 +196,8 @@ async function splitPDF(){
 
 const { PDFDocument } = PDFLib;
 
-const originalPDF = await PDFDocument.load(pdfBytes.slice(0));
-
+const bytes = await pdfFile.arrayBuffer();
+const originalPDF = await PDFDocument.load(bytes);
 const newPDF = await PDFDocument.create();
 
 const items = document.querySelectorAll(".preview-item");
