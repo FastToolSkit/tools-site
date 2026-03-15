@@ -28,7 +28,7 @@ margin:40px auto;
 }
 
 .controls{
-margin-top:40px;
+margin-top:30px;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -47,7 +47,7 @@ width:90px;
 button{
 background:#2a84ff;
 border:none;
-padding:10px 20px;
+padding:10px 18px;
 color:white;
 border-radius:6px;
 cursor:pointer;
@@ -58,6 +58,14 @@ button:hover{
 background:#1d6be0;
 }
 
+.file-input{
+margin-bottom:20px;
+}
+
+.file-input input{
+color:white;
+}
+
 </style>
 
 </head>
@@ -66,11 +74,15 @@ background:#1d6be0;
 
 <h2>MP3 Cutter</h2>
 
-<input type="file" id="audio">
+<div class="file-input">
+<input type="file" id="audio" accept="audio/*">
+</div>
 
 <div id="waveform"></div>
 
 <div class="controls">
+
+<button id="play">Play</button>
 
 Cut from
 <input id="start" readonly>
@@ -88,7 +100,7 @@ const RegionsPlugin = WaveSurfer.Regions.create()
 
 const wavesurfer = WaveSurfer.create({
 container:'#waveform',
-waveColor:'#666',
+waveColor:'#6c8fff',
 progressColor:'#2a84ff',
 cursorColor:'#2a84ff',
 height:120,
@@ -134,7 +146,15 @@ document.getElementById("end").value = region.end.toFixed(2)
 
 }
 
-document.getElementById("export").onclick = async function(){
+document.getElementById("play").onclick = function(){
+
+wavesurfer.playPause()
+
+this.innerText = wavesurfer.isPlaying() ? "Pause" : "Play"
+
+}
+
+document.getElementById("export").onclick = function(){
 
 const start = region.start
 const end = region.end
@@ -142,9 +162,14 @@ const end = region.end
 const buffer = wavesurfer.getDecodedData()
 
 const sampleRate = buffer.sampleRate
-const length = (end-start) * sampleRate
+const startOffset = Math.floor(start * sampleRate)
+const endOffset = Math.floor(end * sampleRate)
 
-const newBuffer = new AudioContext().createBuffer(
+const length = endOffset - startOffset
+
+const context = new AudioContext()
+
+const newBuffer = context.createBuffer(
 buffer.numberOfChannels,
 length,
 sampleRate
@@ -156,25 +181,14 @@ const oldData = buffer.getChannelData(channel)
 const newData = newBuffer.getChannelData(channel)
 
 for(let i=0;i<length;i++){
-newData[i] = oldData[(start*sampleRate)+i]
-}
+
+newData[i] = oldData[startOffset + i]
 
 }
 
-const offline = new OfflineAudioContext(
-newBuffer.numberOfChannels,
-newBuffer.length,
-sampleRate
-)
+}
 
-const source = offline.createBufferSource()
-source.buffer = newBuffer
-source.connect(offline.destination)
-source.start()
-
-const rendered = await offline.startRendering()
-
-const wav = encodeWAV(rendered)
+const wav = encodeWAV(newBuffer)
 
 const blob = new Blob([wav],{type:"audio/wav"})
 const url = URL.createObjectURL(blob)
