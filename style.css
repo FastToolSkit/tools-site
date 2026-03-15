@@ -357,3 +357,6 @@ font-weight:bold;
 .nav-links a:hover{
 opacity:0.8;
 }
+position:sticky;
+top:0;
+z-index:1000;
