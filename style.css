@@ -347,3 +347,23 @@ color:white;
 text-decoration:underline;
 margin:0 6px;
 }
+
+
+.more-tools{
+text-align:center;
+margin-top:60px;
+}
+
+.more-tools a{
+display:inline-block;
+margin:10px;
+padding:10px 14px;
+background:#f1f5f9;
+border-radius:6px;
+text-decoration:none;
+color:#334155;
+}
+
+.more-tools a:hover{
+background:#e2e8f0;
+}
