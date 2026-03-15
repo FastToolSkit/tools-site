@@ -22,7 +22,9 @@ display:flex;
 align-items:center;
 padding:0 40px;
 height:90px;
-position:relative;
+position:sticky;
+top:0;
+z-index:1000;
 }
 
 /* ===============================
@@ -34,6 +36,7 @@ display:flex;
 align-items:center;
 text-decoration:none;
 }
+
 .logo img{
 height:85px;
 width:auto;
@@ -170,6 +173,29 @@ background:#1d4ed8;
 }
 
 /* ===============================
+UPLOAD BUTTON
+================================*/
+
+.upload-btn{
+background:#2a84ff;
+padding:10px 20px;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
+display:inline-block;
+color:white;
+}
+
+.upload-btn input{
+display:none;
+}
+
+#file-name{
+margin-left:10px;
+color:#64748b;
+}
+
+/* ===============================
 IMAGE PREVIEW
 ================================*/
 
@@ -302,61 +328,3 @@ color:white;
 text-decoration:underline;
 margin:0 6px;
 }
-
-.upload-btn{
-background:#2a84ff;
-padding:10px 20px;
-border-radius:6px;
-cursor:pointer;
-font-weight:bold;
-display:inline-block;
-}
-
-.upload-btn input{
-display:none;
-}
-
-#file-name{
-margin-left:10px;
-color:#ccc;
-}
-
-.site-header{
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:15px 40px;
-background:#3b4e61;
-}
-
-.logo{
-display:flex;
-align-items:center;
-gap:10px;
-text-decoration:none;
-color:white;
-font-weight:bold;
-font-size:22px;
-}
-
-.logo img{
-height:40px;
-}
-
-.nav-links{
-display:flex;
-gap:30px;
-}
-
-.nav-links a{
-color:white;
-text-decoration:none;
-font-weight:bold;
-}
-
-.nav-links a:hover{
-opacity:0.8;
-}
-position:sticky;
-top:0;
-z-index:1000;
