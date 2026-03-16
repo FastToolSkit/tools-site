@@ -5,12 +5,55 @@
 
 <meta charset="UTF-8">
 
-<title>Image Resizer - FastTools</title>
+<title>Image Resizer & Crop - FastTools</title>
 
-<meta name="description" content="Resize images online instantly. Change width and height and download the resized image.">
+<meta name="description" content="Resize and crop images online with drag controls.">
 
 <link rel="stylesheet" href="style.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css"
+/>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+
+<style>
+
+.editor-container{
+max-width:800px;
+margin:auto;
+margin-top:20px;
+}
+
+#image{
+max-width:100%;
+}
+
+.controls{
+margin-top:20px;
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.controls button{
+padding:10px 16px;
+border:none;
+background:#2563eb;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+
+.upload-box{
+margin-top:20px;
+text-align:center;
+}
+
+</style>
 
 </head>
 
@@ -34,48 +77,33 @@
 
 <div class="tool-container">
 
-<h1>Image Resizer</h1>
+<h1>Image Resizer & Crop</h1>
 
-<p>Upload an image and resize it instantly.</p>
+<p>Resize, crop, zoom and rotate images easily.</p>
 
 <div class="upload-box">
 
-<label class="upload-btn">
-Upload Image
 <input type="file" id="upload" accept="image/*">
-</label>
-
-<span id="file-name"></span>
 
 </div>
 
-<img id="preview">
+<div class="editor-container">
 
-<div style="margin-top:20px">
-
-<input type="number" id="width" placeholder="Width">
-
-<input type="number" id="height" placeholder="Height">
+<img id="image">
 
 </div>
 
-<button class="main-button" onclick="resizeImage()">
-Resize Image
-</button>
+<div class="controls">
 
-<a id="downloadLink"></a>
+<button onclick="cropper.rotate(-90)">Rotate Left</button>
+<button onclick="cropper.rotate(90)">Rotate Right</button>
+
+<button onclick="cropper.zoom(0.1)">Zoom In</button>
+<button onclick="cropper.zoom(-0.1)">Zoom Out</button>
+
+<button onclick="downloadImage()">Download</button>
 
 </div>
-
-
-<div class="more-tools">
-
-<h3>More Tools</h3>
-
-<a href="image-converter.html">Image Converter</a>
-<a href="compress-image.html">Image Compressor</a>
-<a href="png-to-jpg.html">PNG to JPG</a>
-<a href="jpg-to-png.html">JPG to PNG</a>
 
 </div>
 
@@ -95,23 +123,31 @@ Resize Image
 
 <script>
 
-let img = new Image();
+let cropper;
 
-document.getElementById("upload").addEventListener("change", function(){
+document.getElementById("upload").addEventListener("change",function(){
 
 const file = this.files[0];
 
 if(!file) return;
 
-document.getElementById("file-name").innerText = file.name;
-
 const reader = new FileReader();
 
 reader.onload = function(e){
 
-img.src = e.target.result;
+const image = document.getElementById("image");
 
-document.getElementById("preview").src = e.target.result;
+image.src = e.target.result;
+
+if(cropper){
+cropper.destroy();
+}
+
+cropper = new Cropper(image,{
+viewMode:1,
+autoCropArea:1,
+responsive:true
+});
 
 };
 
@@ -120,37 +156,17 @@ reader.readAsDataURL(file);
 });
 
 
-function resizeImage(){
+function downloadImage(){
 
-const width = parseInt(document.getElementById("width").value);
+const canvas = cropper.getCroppedCanvas();
 
-const height = parseInt(document.getElementById("height").value);
+const link = document.createElement("a");
 
-if(!width || !height){
-alert("Enter width and height");
-return;
-}
+link.download = "edited-image.png";
 
-const canvas = document.createElement("canvas");
+link.href = canvas.toDataURL();
 
-canvas.width = width;
-canvas.height = height;
-
-const ctx = canvas.getContext("2d");
-
-ctx.drawImage(img,0,0,width,height);
-
-const resized = canvas.toDataURL("image/jpeg",0.95);
-
-const link = document.getElementById("downloadLink");
-
-link.href = resized;
-
-link.download = "resized-image.jpg";
-
-link.innerText = "Download Image";
-
-link.className = "main-button";
+link.click();
 
 }
 
