@@ -4,10 +4,11 @@
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Rotate PDF - FastTools</title>
+<title>Rotate PDF Online Free | FastTools</title>
 
-<meta name="description" content="Rotate PDF pages online and preview changes before downloading.">
+<meta name="description" content="Rotate PDF pages online for free. Preview and adjust page orientation before downloading.">
 
 <link rel="stylesheet" href="style.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -22,6 +23,24 @@ pdfjsLib.GlobalWorkerOptions.workerSrc =
 
 <style>
 
+body{
+background:#e6e7ea;
+font-family:'Segoe UI', Tahoma, sans-serif;
+margin:0;
+}
+
+/* TOOL */
+.tool-container{
+max-width:900px;
+margin:80px auto 40px;
+background:white;
+padding:35px;
+border-radius:14px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,0.05);
+}
+
+/* DROP AREA */
 .drop-area{
 border:2px dashed #cbd5e1;
 padding:40px;
@@ -31,6 +50,7 @@ margin-top:20px;
 cursor:pointer;
 }
 
+/* PREVIEW */
 .preview-grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
@@ -52,10 +72,11 @@ border-radius:6px;
 transition:0.2s;
 }
 
+/* BUTTONS */
 .rotate-btn{
 margin-top:10px;
 padding:6px 10px;
-background:#2563eb;
+background:#3a78ff;
 color:white;
 border:none;
 border-radius:6px;
@@ -63,11 +84,26 @@ cursor:pointer;
 font-size:13px;
 }
 
+.main-button{
+margin-top:20px;
+padding:12px 20px;
+background:#1e293b;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+.main-button:hover{
+background:#0f172a;
+}
+
+/* LOADER */
 .spinner{
 width:40px;
 height:40px;
 border:4px solid #cbd5e1;
-border-top:4px solid #2563eb;
+border-top:4px solid #3a78ff;
 border-radius:50%;
 animation:spin 1s linear infinite;
 margin:15px auto;
@@ -76,6 +112,30 @@ margin:15px auto;
 @keyframes spin{
 0%{transform:rotate(0deg);}
 100%{transform:rotate(360deg);}
+}
+
+/* SEO */
+.seo-content{
+max-width:900px;
+margin:40px auto;
+background:white;
+padding:35px;
+border-radius:14px;
+box-shadow:0 8px 25px rgba(0,0,0,0.05);
+}
+
+.seo-content p:last-child{
+direction:rtl;
+text-align:right;
+}
+
+/* FOOTER */
+.site-footer{
+background:#3f5368;
+color:white;
+text-align:center;
+padding:25px;
+margin-top:60px;
 }
 
 </style>
@@ -99,7 +159,6 @@ margin:15px auto;
 
 </header>
 
-
 <div class="tool-container">
 
 <h1>Rotate PDF</h1>
@@ -107,11 +166,8 @@ margin:15px auto;
 <p>Upload a PDF and rotate pages before downloading.</p>
 
 <div id="drop-area" class="drop-area">
-
 <p>Drag PDF here or click to upload</p>
-
 <input type="file" id="file-input" accept=".pdf" hidden>
-
 </div>
 
 <div id="preview" class="preview-grid"></div>
@@ -121,17 +177,30 @@ Download Rotated PDF
 </button>
 
 <div id="loader" style="display:none">
-
 <p>Preparing PDF...</p>
-
 <div class="spinner"></div>
-
 </div>
 
 </div>
 
+<!-- SEO CONTENT -->
+<div class="seo-content">
+
+<h2>How to rotate PDF pages</h2>
+
+<p>
+Upload your PDF, rotate any page, and download the updated document instantly. 
+Perfect for fixing scanned documents and orientation issues.
+</p>
+
+<p>
+يمكنك تدوير صفحات PDF بسهولة وتحميل الملف بعد التعديل مباشرة.
+</p>
+
+</div>
 
 <footer class="site-footer">
+
 <p>
 © 2026 FastTools • Free Online Tools
 <br>
@@ -139,8 +208,8 @@ Download Rotated PDF
 <a href="terms.html">Terms</a> •
 <a href="contact.html">Contact</a>
 </p>
-</footer>
 
+</footer>
 
 <script>
 
@@ -168,16 +237,13 @@ fileInput.addEventListener("change", ()=>{
 loadPDF(fileInput.files[0]);
 });
 
-
 async function loadPDF(file){
 
 pdfFile = file;
-
 preview.innerHTML="";
 rotations=[];
 
 const buffer = await file.arrayBuffer();
-
 const pdf = await pdfjsLib.getDocument({data:buffer}).promise;
 
 for(let i=1;i<=pdf.numPages;i++){
@@ -185,11 +251,9 @@ for(let i=1;i<=pdf.numPages;i++){
 rotations.push(0);
 
 const page = await pdf.getPage(i);
-
-const viewport = page.getViewport({scale:0.5});
+const viewport = page.getViewport({scale:0.6});
 
 const canvas = document.createElement("canvas");
-
 const ctx = canvas.getContext("2d");
 
 canvas.width = viewport.width;
@@ -210,11 +274,8 @@ rotateBtn.className="rotate-btn";
 rotateBtn.innerText="Rotate";
 
 rotateBtn.onclick=()=>{
-
 rotations[i-1]+=90;
-
 canvas.style.transform="rotate("+rotations[i-1]+"deg)";
-
 };
 
 box.appendChild(rotateBtn);
@@ -224,7 +285,6 @@ preview.appendChild(box);
 }
 
 }
-
 
 downloadBtn.addEventListener("click", async ()=>{
 
@@ -236,32 +296,25 @@ return;
 loader.style.display="block";
 
 const bytes = await pdfFile.arrayBuffer();
-
 const pdfDoc = await PDFLib.PDFDocument.load(bytes);
 
 const pages = pdfDoc.getPages();
 
 pages.forEach((page,i)=>{
-
 page.setRotation(PDFLib.degrees(rotations[i]));
-
 });
 
 const newBytes = await pdfDoc.save();
 
 const blob = new Blob([newBytes],{type:"application/pdf"});
-
 const url = URL.createObjectURL(blob);
 
 const link = document.createElement("a");
-
 link.href = url;
 link.download = "rotated.pdf";
 
 document.body.appendChild(link);
-
 link.click();
-
 document.body.removeChild(link);
 
 loader.style.display="none";
