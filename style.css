@@ -111,10 +111,14 @@ MAIN TOOL CARD
 ================================*/
 
 .tool-container{
-width:100%;
-max-width:none;
-margin:0;
-border-radius:0;
+width:95%;
+max-width:1400px;
+margin:40px auto;
+background:white;
+padding:40px;
+border-radius:12px;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+text-align:center;
 }
 #waveform{
 width:100%;
