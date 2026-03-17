@@ -120,14 +120,17 @@ text-align:center;
 }
 
 #waveform{
-margin-top:30px;
 width:100%;
+height:220px;
+margin-top:25px;
+background:#f1f5f9;
+border-radius:8px;
 }
 
-#timeline{
-width:100%;
+#waveform canvas{
+width:100% !important;
+height:220px !important;
 }
-
 #loader{
 width:100%;
 height:6px;
