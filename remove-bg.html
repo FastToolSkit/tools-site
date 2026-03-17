@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
+<meta charset="UTF-8">
 <title>Remove Background - FastTools</title>
 
 <link rel="stylesheet" href="/tools-site/style.css">
 
 <style>
 
+/* ===== CONTAINER ===== */
 .tool-container{
-max-width:800px;
+max-width:1000px;
 margin:40px auto;
 background:white;
 padding:30px;
@@ -18,23 +20,89 @@ border-radius:12px;
 text-align:center;
 }
 
-.preview{
+/* ===== INPUT ===== */
+input[type="file"]{
 margin-top:20px;
 }
 
-.preview img{
-max-width:100%;
-border-radius:10px;
+/* ===== COMPARE TOOL ===== */
+.compare-container{
+position:relative;
+width:100%;
+margin-top:30px;
+overflow:hidden;
+border-radius:12px;
+display:none;
 }
 
+.compare-container img{
+width:100%;
+display:block;
+}
+
+/* overlay (after image) */
+.overlay{
+position:absolute;
+top:0;
+left:0;
+height:100%;
+width:50%;
+overflow:hidden;
+}
+
+.overlay img{
+width:100%;
+}
+
+/* slider */
+#slider{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%, -50%);
+width:100%;
+appearance:none;
+background:none;
+cursor:pointer;
+}
+
+#slider::-webkit-slider-thumb{
+appearance:none;
+width:18px;
+height:18px;
+background:#2563eb;
+border-radius:50%;
+cursor:pointer;
+}
+
+/* labels */
+.label{
+position:absolute;
+top:10px;
+background:rgba(0,0,0,0.6);
+color:white;
+padding:5px 10px;
+border-radius:6px;
+font-size:12px;
+}
+
+.before{ left:10px; }
+.after{ right:10px; }
+
+/* ===== BUTTON ===== */
 button{
-margin-top:15px;
+margin-top:20px;
 padding:10px 20px;
 background:#2563eb;
 color:white;
 border:none;
 border-radius:6px;
 cursor:pointer;
+font-weight:bold;
+}
+
+button:hover{
+background:#1d4ed8;
 }
 
 </style>
@@ -45,7 +113,7 @@ cursor:pointer;
 
 <header class="site-header">
 <a href="/tools-site/index.html" class="logo">
-<img src="/tools-site/fasttools-logo.png.png">
+<img src="/tools-site/fasttools-logo.png.png" alt="FastTools">
 </a>
 </header>
 
@@ -53,64 +121,88 @@ cursor:pointer;
 
 <h1>Remove Background</h1>
 
-<input type="file" id="image">
+<input type="file" id="image" accept="image/*">
 
-<div class="preview">
-<img id="result">
+<!-- COMPARE VIEW -->
+<div class="compare-container" id="compare">
+
+<span class="label before">Before</span>
+<span class="label after">After</span>
+
+<img id="original">
+
+<div class="overlay">
+  <img id="result">
+</div>
+
+<input type="range" id="slider" min="0" max="100" value="50">
+
 </div>
 
 <button id="download" style="display:none;">Download</button>
 
 </div>
-<div class="compare-container">
 
-  <img id="original">
-  
-  <div class="overlay">
-    <img id="result">
-  </div>
-
-  <input type="range" id="slider" min="0" max="100" value="50">
-
-</div>
 <script>
 
 const input = document.getElementById("image")
+const originalImg = document.getElementById("original")
 const resultImg = document.getElementById("result")
 const downloadBtn = document.getElementById("download")
+const compare = document.getElementById("compare")
+const slider = document.getElementById("slider")
+const overlay = document.querySelector(".overlay")
 
 input.addEventListener("change", async function(){
 
 const file = input.files[0]
-
 if(!file) return
 
+// show original image
+const originalURL = URL.createObjectURL(file)
+originalImg.src = originalURL
+
+// call API
 const formData = new FormData()
 formData.append("image_file", file)
 
 const res = await fetch("https://api.remove.bg/v1.0/removebg", {
 method: "POST",
 headers: {
-"X-Api-Key": "vDgGS8XuaxTBuUC2pgzUbe8x"
+"X-Api-Key": "PUT_YOUR_API_KEY_HERE"
 },
 body: formData
 })
 
+if(!res.ok){
+alert("Error removing background")
+return
+}
+
 const blob = await res.blob()
+const resultURL = URL.createObjectURL(blob)
 
-const url = URL.createObjectURL(blob)
+// show result
+resultImg.src = resultURL
 
-resultImg.src = url
+// show compare UI
+compare.style.display = "block"
 
+// show download
 downloadBtn.style.display = "inline-block"
 
 downloadBtn.onclick = () => {
 const a = document.createElement("a")
-a.href = url
+a.href = resultURL
 a.download = "no-bg.png"
 a.click()
 }
 
+})
+
+// slider logic
+slider.addEventListener("input", () => {
+overlay.style.width = slider.value + "%"
 })
 
 </script>
