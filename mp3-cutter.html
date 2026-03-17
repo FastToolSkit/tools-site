@@ -179,8 +179,8 @@ to
 
 <script>
 
-const RegionsPlugin = WaveSurfer.Regions.create()
-const TimelinePlugin = WaveSurfer.Timeline.create({ container:"#timeline" })
+const regions = WaveSurfer.Regions.create()
+const timeline = WaveSurfer.Timeline.create({ container:"#timeline" })
 
 const wavesurfer = WaveSurfer.create({
 container:"#waveform",
@@ -188,7 +188,7 @@ waveColor:"#94a3b8",
 progressColor:"#2563eb",
 cursorColor:"#2563eb",
 height:120,
-plugins:[RegionsPlugin,TimelinePlugin]
+plugins:[regions,timeline]
 })
 
 let region
@@ -211,8 +211,7 @@ document.getElementById("progress").innerText="Loading audio..."
 const reader=new FileReader()
 
 reader.onload=function(event){
-wavesurfer.loadBlob(new Blob([event.target.result]))
-}
+wavesurfer.loadBlob(file)}
 
 reader.readAsArrayBuffer(file)
 
@@ -222,7 +221,7 @@ wavesurfer.on("ready",()=>{
 
 const duration=wavesurfer.getDuration()
 
-region=RegionsPlugin.addRegion({
+region = RegionsPlugin.addRegion({
 start:duration*0.2,
 end:duration*0.6,
 color:'rgba(37,99,235,0.3)',
