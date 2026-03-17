@@ -4,37 +4,42 @@
 <head>
 
 <meta charset="UTF-8">
-<title>MP3 Cutter - FastTools</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MP3 Cutter Online Free - Trim Audio Easily | FastTools</title>
+
+<meta name="description" content="Cut MP3 files online for free. Trim audio easily with waveform editor, select start and end points, and download instantly.">
 
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="/tools-site/style.css">
+<link rel="stylesheet" href="style.css">
 
+<!-- Libraries -->
 <script src="https://unpkg.com/wavesurfer.js@6"></script>
 <script src="https://unpkg.com/wavesurfer.js@6/dist/plugin/wavesurfer.regions.min.js"></script>
 <script src="https://unpkg.com/wavesurfer.js@6/dist/plugin/wavesurfer.timeline.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.0/lame.min.js"></script>
 
 <style>
 
+body{
+background:#e6e7ea;
+font-family:'Segoe UI', Tahoma, sans-serif;
+margin:0;
+}
+
+/* TOOL */
 .tool-container{
 max-width:900px;
-margin:40px auto;
+margin:80px auto 40px;
 background:white;
-padding:40px;
-border-radius:12px;
-box-shadow:0 10px 25px rgba(0,0,0,0.08);
+padding:35px;
+border-radius:14px;
 text-align:center;
-}
-
-#waveform{
-margin-top:30px;
-}
-
-#timeline{
-margin-top:10px;
+box-shadow:0 10px 30px rgba(0,0,0,0.05);
 }
 
 .upload-btn{
-background:#2563eb;
+background:#3a78ff;
 padding:12px 24px;
 border-radius:8px;
 cursor:pointer;
@@ -47,13 +52,17 @@ display:inline-block;
 display:none;
 }
 
-#progress{
-margin-top:10px;
-color:#64748b;
+#waveform{
+margin-top:30px;
 }
 
-.controls{
-margin-top:30px;
+#timeline{
+margin-top:10px;
+}
+
+/* CONTROLS */
+.control-bar{
+margin-top:25px;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -61,30 +70,51 @@ gap:20px;
 flex-wrap:wrap;
 }
 
-button{
-background:#2563eb;
+.control-bar button{
+background:#3a78ff;
 border:none;
 padding:10px 18px;
 color:white;
 border-radius:6px;
 cursor:pointer;
-font-weight:bold;
 }
 
-button:hover{
-background:#1d4ed8;
+.control-bar button:hover{
+background:#2a66e6;
 }
 
-.timebox{
+.time-group{
 background:#f1f5f9;
-padding:8px;
-border-radius:4px;
-width:80px;
-text-align:center;
+padding:8px 12px;
+border-radius:6px;
 }
 
-.zoom{
-margin-top:25px;
+.zoom-bar input{
+cursor:pointer;
+}
+
+/* SEO */
+.seo-content{
+max-width:900px;
+margin:40px auto;
+background:white;
+padding:35px;
+border-radius:14px;
+box-shadow:0 8px 25px rgba(0,0,0,0.05);
+}
+
+.seo-content p:last-child{
+direction:rtl;
+text-align:right;
+}
+
+/* FOOTER */
+.site-footer{
+background:#3f5368;
+color:white;
+text-align:center;
+padding:25px;
+margin-top:60px;
 }
 
 </style>
@@ -112,60 +142,60 @@ margin-top:25px;
 
 <h1>MP3 Cutter</h1>
 
+<p>Upload audio, select part, and export trimmed MP3 instantly.</p>
+
 <label class="upload-btn">
 Upload MP3
 <input type="file" id="audio" accept="audio/*">
 </label>
 
-<div id="progress"></div>
-
 <div id="waveform"></div>
-
 <div id="timeline"></div>
-
 
 <div class="control-bar">
 
-  <button id="play">Play</button>
+<button id="play">Play</button>
 
-  <div class="time-group">
-    <span id="start">0:00</span>
-    <span>→</span>
-    <span id="end">0:00</span>
-  </div>
+<div class="time-group">
+<span id="start">0:00</span>
+<span>→</span>
+<span id="end">0:00</span>
+</div>
 
-  <div class="zoom-bar">
-    <input type="range" id="zoom" min="10" max="200" value="50">
-  </div>
+<div class="zoom-bar">
+<input type="range" id="zoom" min="10" max="200" value="50">
+</div>
 
-  <button id="export">Export MP3</button>
+<button id="export">Export MP3</button>
 
 </div>
 
 </div>
 
-<div class="more-tools">
+<!-- SEO CONTENT -->
+<div class="seo-content">
 
-<h3>More Tools</h3>
+<h2>How to cut MP3 files</h2>
 
-<a href="audio-speed-changer.html">Audio Speed Changer</a>
-<a href="audio-converter.html">Audio Converter</a>
-<a href="password-generator.html">Password Generator</a>
-<a href="compress-image.html">Image Compressor</a>
+<p>
+Upload your audio file, adjust the selection using the waveform, and export the trimmed part instantly.
+</p>
+
+<p>
+يمكنك قص الملفات الصوتية بسهولة من خلال تحديد الجزء المطلوب وتحميله مباشرة بدون برامج.
+</p>
 
 </div>
 
 <footer class="site-footer">
 
-<p>© 2026 FastTools • Free Online Tools</p>
-
-<div class="footer-links">
-<a href="privacy.html">Privacy</a>
-<span>•</span>
-<a href="terms.html">Terms</a>
-<span>•</span>
+<p>
+© 2026 FastTools • Free Online Tools
+<br>
+<a href="privacy.html">Privacy</a> •
+<a href="terms.html">Terms</a> •
 <a href="contact.html">Contact</a>
-</div>
+</p>
 
 </footer>
 
@@ -174,9 +204,9 @@ Upload MP3
 const wavesurfer = WaveSurfer.create({
 container:"#waveform",
 waveColor:"#94a3b8",
-progressColor:"#2563eb",
-cursorColor:"#2563eb",
-height:200,
+progressColor:"#3a78ff",
+cursorColor:"#3a78ff",
+height:180,
 plugins:[
 WaveSurfer.regions.create(),
 WaveSurfer.timeline.create({
@@ -198,33 +228,20 @@ return m+":"+s
 document.getElementById("audio").addEventListener("change",function(e){
 
 const file=e.target.files[0]
-
 if(!file) return
 
-document.getElementById("progress").innerText="Loading audio..."
-
-const reader=new FileReader()
-
-reader.onload=function(event){
-
-wavesurfer.loadBlob(new Blob([event.target.result]))
-
-}
-
-reader.readAsArrayBuffer(file)
+wavesurfer.loadBlob(file)
 
 })
 
 wavesurfer.on("ready",function(){
 
-document.getElementById("progress").innerText=""
-
 const duration = wavesurfer.getDuration()
 
 region = wavesurfer.addRegion({
-start:duration*0.3,
-end:duration*0.6,
-color:'rgba(255,212,59,0.15)',
+start:duration*0.2,
+end:duration*0.5,
+color:'rgba(255,212,59,0.2)',
 drag:true,
 resize:true
 })
@@ -232,38 +249,33 @@ resize:true
 updateInputs()
 
 region.on('update', updateInputs)
-})
-wavesurfer.on('finish', () => {
-  wavesurfer.play(region.start, region.end)
-})
-function updateInputs(){
 
+})
+
+function updateInputs(){
 document.getElementById("start").innerText=formatTime(region.start)
 document.getElementById("end").innerText=formatTime(region.end)
-
 }
 
 document.getElementById("play").onclick=function(){
 
 wavesurfer.playPause()
-
 this.innerText = wavesurfer.isPlaying() ? "Pause" : "Play"
 
 }
 
 document.getElementById("zoom").oninput=function(){
-
 wavesurfer.zoom(Number(this.value))
-
 }
 
 document.getElementById("export").onclick=function(){
+
+if(!region) return
 
 const start=region.start
 const end=region.end
 
 const buffer=wavesurfer.backend.buffer
-
 const sampleRate=buffer.sampleRate
 
 const startOffset=Math.floor(start*sampleRate)
@@ -274,7 +286,6 @@ const samples=buffer.getChannelData(0).slice(startOffset,endOffset)
 const mp3encoder=new lamejs.Mp3Encoder(1,sampleRate,192)
 
 const sampleBlockSize=1152
-
 let mp3Data=[]
 
 for(let i=0;i<samples.length;i+=sampleBlockSize){
@@ -298,18 +309,16 @@ let mp3buf=mp3encoder.flush()
 if(mp3buf.length>0) mp3Data.push(mp3buf)
 
 const blob=new Blob(mp3Data,{type:'audio/mp3'})
-
 const url=URL.createObjectURL(blob)
 
 const a=document.createElement("a")
-
 a.href=url
 a.download="trimmed.mp3"
-
 a.click()
 
 }
 
 </script>
+
 </body>
 </html>
