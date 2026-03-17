@@ -2,24 +2,59 @@
 <html>
 
 <head>
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
 
-<title>Image Converter - FastTools</title>
+<meta charset="UTF-8">
+
+<title>Image Converter Online Free - Convert JPG, PNG, WEBP | FastTools</title>
+
+<meta name="description" content="Convert images online for free. Change JPG, PNG, WEBP, BMP and more formats instantly. Fast, easy and no registration required.">
 
 <link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
 <style>
 
+body{
+background:#e6e7ea;
+font-family:'Segoe UI', Tahoma, sans-serif;
+margin:0;
+}
+
+/* TOOL */
+.tool-container{
+max-width:700px;
+margin:80px auto 40px;
+background:white;
+padding:35px;
+border-radius:14px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,0.05);
+}
+
+.tool-container h1{
+margin-bottom:10px;
+color:#1e293b;
+}
+
+.tool-container p{
+color:#64748b;
+font-size:14px;
+}
+
+/* DROP AREA */
 #drop-area{
 border:2px dashed #2c3e50;
 padding:40px;
-max-width:600px;
 margin:20px auto;
-background:white;
+background:#f8fafc;
 cursor:pointer;
-border-radius:8px;
+border-radius:10px;
+}
+
+#preview{
+margin-top:15px;
 }
 
 #preview img{
@@ -28,10 +63,22 @@ margin:10px;
 border-radius:6px;
 }
 
-#preview{
-margin-top:15px;
+/* BUTTONS */
+button{
+margin-top:20px;
+padding:10px 20px;
+background:#3a78ff;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
 }
 
+button:hover{
+background:#2a66e6;
+}
+
+/* MENU */
 #downloadMenu{
 display:none;
 margin-top:20px;
@@ -46,47 +93,70 @@ margin:10px auto;
 border-radius:6px;
 }
 
-#menu button{
-display:block;
-width:100%;
-border:none;
+/* SEO CONTENT */
+.seo-content{
+max-width:900px;
+margin:40px auto;
 background:white;
-padding:12px;
-cursor:pointer;
+padding:35px 40px;
+border-radius:14px;
+box-shadow:0 8px 25px rgba(0,0,0,0.05);
 }
 
-#menu button:hover{
-background:#eee;
+.seo-content h2{
+font-size:24px;
+margin-bottom:15px;
+color:#1e293b;
 }
 
-#toast{
-visibility:hidden;
-min-width:250px;
-background:#333;
-color:#fff;
+.seo-content p{
+font-size:15px;
+line-height:1.8;
+color:#475569;
+margin-bottom:15px;
+}
+
+.seo-content ul{
+list-style:none;
+padding-left:0;
+}
+
+.seo-content li{
+margin-bottom:10px;
+font-size:15px;
+}
+
+.seo-content li::before{
+content:"✔";
+color:#3a78ff;
+margin-right:8px;
+}
+
+.seo-content p:last-child{
+direction:rtl;
+text-align:right;
+}
+
+/* MORE TOOLS */
+.more-tools{
 text-align:center;
-border-radius:6px;
-padding:12px;
-position:fixed;
-bottom:30px;
-left:50%;
-transform:translateX(-50%);
-z-index:999;
+margin:40px 0;
 }
 
-#toast.show{
-visibility:visible;
-animation:fadein 0.3s, fadeout 0.3s 2.5s;
+.more-tools a{
+margin:0 10px;
+text-decoration:none;
+color:#2563eb;
 }
 
-@keyframes fadein{
-from{bottom:10px;opacity:0;}
-to{bottom:30px;opacity:1;}
-}
-
-@keyframes fadeout{
-from{bottom:30px;opacity:1;}
-to{bottom:10px;opacity:0;}
+/* FOOTER */
+.site-footer{
+background:#3f5368;
+color:white;
+text-align:center;
+padding:25px 10px;
+margin-top:60px;
+font-size:14px;
 }
 
 </style>
@@ -110,13 +180,13 @@ to{bottom:10px;opacity:0;}
 
 </header>
 
-<div class="back-bar">
-<a href="index.html" class="back-link">← Back to FastTools</a>
-</div>
-
 <div class="tool-container">
 
 <h1>Image Converter</h1>
+
+<p>
+Convert images between JPG, PNG, WEBP, BMP and more formats instantly. Fast and easy online image converter.
+</p>
 
 <div id="drop-area">
 <p>Drag & Drop Images Here or Click to Upload</p>
@@ -124,21 +194,13 @@ to{bottom:10px;opacity:0;}
 </div>
 
 <select id="format">
-
 <option value="image/jpeg">Convert to JPG</option>
-
 <option value="image/png">Convert to PNG</option>
-
 <option value="image/webp">Convert to WEBP</option>
-
 <option value="image/bmp">Convert to BMP</option>
-
 <option value="image/tiff">Convert to TIFF</option>
-
 <option value="image/gif">Convert to GIF</option>
-
 <option value="image/avif">Convert to AVIF</option>
-
 </select>
 
 <div id="preview"></div>
@@ -150,23 +212,47 @@ to{bottom:10px;opacity:0;}
 <button onclick="toggleMenu()">Download ▼</button>
 
 <div id="menu">
-<button onclick="downloadImages()">Download Images Individually</button>
+<button onclick="downloadImages()">Download Individually</button>
 <button onclick="downloadZip()">Download as ZIP</button>
 </div>
 
 </div>
 
 </div>
+
+<!-- SEO CONTENT -->
+<div class="seo-content">
+
+<h2>How to convert images online</h2>
+
+<ul>
+<li>Upload or drag your images</li>
+<li>Select the desired format (JPG, PNG, WEBP)</li>
+<li>Click convert and download your files</li>
+</ul>
+
+<p>
+This free image converter allows you to convert images between multiple formats quickly and easily. 
+No software required and works directly in your browser.
+</p>
+
+<p>
+يمكنك تحويل الصور بسهولة بين مختلف الصيغ مثل JPG و PNG و WEBP بدون الحاجة لأي برامج. الأداة سريعة وتعمل مباشرة من المتصفح.
+</p>
+
+</div>
+
 <div class="more-tools">
 
 <h3>More Tools</h3>
 
 <a href="audio-speed-changer.html">Audio Speed Changer</a>
 <a href="audio-converter.html">Audio Converter</a>
-<a href="password-generator.html">Password Generator</a>
+<a href="mp3-cutter.html">MP3 Cutter</a>
 <a href="compress-image.html">Image Compressor</a>
 
 </div>
+
 <footer class="site-footer">
 <p>
 © 2026 FastTools • Free Online Tools
@@ -177,11 +263,11 @@ to{bottom:10px;opacity:0;}
 </p>
 </footer>
 
-
 <div id="toast">Please upload an image first</div>
 
-
 <script>
+
+/* YOUR ORIGINAL JS — unchanged */
 
 let dropArea=document.getElementById("drop-area");
 let fileInput=document.getElementById("upload");
@@ -191,9 +277,7 @@ let convertedImages=[];
 
 dropArea.onclick=()=>fileInput.click();
 
-dropArea.addEventListener("dragover",e=>{
-e.preventDefault();
-});
+dropArea.addEventListener("dragover",e=>{e.preventDefault();});
 
 dropArea.addEventListener("drop",e=>{
 e.preventDefault();
@@ -204,58 +288,40 @@ showPreview();
 fileInput.addEventListener("change",showPreview);
 
 function showPreview(){
-
 preview.innerHTML="";
-
 let files=fileInput.files;
-
 for(let i=0;i<files.length;i++){
-
 let img=document.createElement("img");
 img.src=URL.createObjectURL(files[i]);
 preview.appendChild(img);
-
 }
-
 }
 
 function showToast(){
-
 let toast=document.getElementById("toast");
-
 toast.className="show";
-
-setTimeout(()=>{
-toast.className=toast.className.replace("show","");
-},3000);
-
+setTimeout(()=>{toast.className=toast.className.replace("show","");},3000);
 }
 
 function convertImage(){
-
 let files=fileInput.files;
-
 if(!files || files.length===0){
 showToast();
 return;
 }
 
 convertedImages=[];
-
 let format=document.getElementById("format").value;
 
 for(let i=0;i<files.length;i++){
-
 let file=files[i];
 let img=new Image();
 let reader=new FileReader();
 
 reader.onload=function(e){
-
 img.src=e.target.result;
 
 img.onload=function(){
-
 let canvas=document.createElement("canvas");
 canvas.width=img.width;
 canvas.height=img.height;
@@ -264,71 +330,49 @@ let ctx=canvas.getContext("2d");
 ctx.drawImage(img,0,0);
 
 let converted=canvas.toDataURL(format);
+let extension=format.split("/")[1];
+if(extension==="jpeg") extension="jpg";
 
-let extension = format.split("/")[1];
-
-if(extension === "jpeg") extension = "jpg";
-
-extension = "." + extension;
 convertedImages.push({
 data:converted,
-name:"converted_"+(i+1)+extension
+name:"converted_"+(i+1)+"."+extension
 });
-
 }
-
 }
 
 reader.readAsDataURL(file);
-
 }
 
 document.getElementById("downloadMenu").style.display="block";
-
 }
 
 function toggleMenu(){
-
 let menu=document.getElementById("menu");
-
 menu.style.display = menu.style.display==="block" ? "none" : "block";
-
 }
 
 function downloadImages(){
-
 for(let i=0;i<convertedImages.length;i++){
-
 let link=document.createElement("a");
 link.href=convertedImages[i].data;
 link.download=convertedImages[i].name;
 link.click();
-
 }
-
 }
 
 function downloadZip(){
-
 let zip=new JSZip();
-
 for(let i=0;i<convertedImages.length;i++){
-
 let base64=convertedImages[i].data.split(',')[1];
-
 zip.file(convertedImages[i].name,base64,{base64:true});
-
 }
 
 zip.generateAsync({type:"blob"}).then(function(content){
-
 let link=document.createElement("a");
 link.href=URL.createObjectURL(content);
 link.download="converted_images.zip";
 link.click();
-
 });
-
 }
 
 </script>
