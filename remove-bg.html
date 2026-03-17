@@ -3,19 +3,37 @@
 
 <head>
 
-<title>Remove Background - FastTools</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="/tools-site/style.css">
+<title>Remove Background Online Free | FastTools</title>
+
+<meta name="description" content="Remove image background online instantly. Upload your photo and get a transparent background in seconds.">
+
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 
 <style>
 
+body{
+background:#e6e7ea;
+font-family:'Segoe UI', Tahoma, sans-serif;
+margin:0;
+}
+
+/* TOOL */
 .tool-container{
-max-width:800px;
-margin:40px auto;
+max-width:600px;
+margin:80px auto 40px;
 background:white;
-padding:30px;
-border-radius:12px;
+padding:35px;
+border-radius:14px;
 text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,0.05);
+}
+
+input{
+margin-top:15px;
 }
 
 .preview{
@@ -27,17 +45,64 @@ max-width:100%;
 border-radius:10px;
 }
 
-button{
+/* BUTTON */
+.main-button{
 margin-top:15px;
-padding:10px 20px;
-background:#2563eb;
+padding:12px 20px;
+background:#3a78ff;
 color:white;
 border:none;
 border-radius:6px;
 cursor:pointer;
 }
 
+.main-button:hover{
+background:#2a66e6;
+}
+
+#download{
+display:none;
+background:#1e293b;
+}
+
+#download:hover{
+background:#0f172a;
+}
+
+.status{
+margin-top:10px;
+color:#475569;
+}
+
+/* SEO */
+.seo-content{
+max-width:700px;
+margin:40px auto;
+background:white;
+padding:30px;
+border-radius:14px;
+box-shadow:0 8px 25px rgba(0,0,0,0.05);
+}
+
+.seo-content p:last-child{
+direction:rtl;
+text-align:right;
+}
+
+/* FOOTER */
+.site-footer{
+background:#3f5368;
+color:white;
+text-align:center;
+padding:25px;
+margin-top:60px;
+}
+
 </style>
+
+</head>
+
+<body>
 
 <header class="site-header">
 
@@ -51,62 +116,110 @@ cursor:pointer;
 <a href="about.html">About</a>
 <a href="contact.html">Contact</a>
 </nav>
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
 
 </header>
+
 <div class="tool-container">
 
 <h1>Remove Background</h1>
 
-<input type="file" id="image">
+<p>Upload an image and remove its background instantly.</p>
+
+<input type="file" id="image" accept="image/*">
+
+<div class="status" id="status"></div>
 
 <div class="preview">
 <img id="result">
 </div>
 
-<button id="download" style="display:none;">Download</button>
+<button class="main-button" id="download">Download Image</button>
 
 </div>
 
+<!-- SEO CONTENT -->
+<div class="seo-content">
+
+<h2>How to remove image background</h2>
+
+<p>
+Upload your image and automatically remove the background in seconds. 
+Perfect for product photos, profile pictures, and design work.
+</p>
+
+<p>
+يمكنك إزالة خلفية الصور بسهولة وتحميل الصورة بخلفية شفافة مباشرة.
+</p>
+
+</div>
+
+<footer class="site-footer">
+
+<p>
+© 2026 FastTools • Free Online Tools
+<br>
+<a href="privacy.html">Privacy</a> •
+<a href="terms.html">Terms</a> •
+<a href="contact.html">Contact</a>
+</p>
+
+</footer>
+
 <script>
 
-const input = document.getElementById("image")
-const resultImg = document.getElementById("result")
-const downloadBtn = document.getElementById("download")
+const input = document.getElementById("image");
+const resultImg = document.getElementById("result");
+const downloadBtn = document.getElementById("download");
+const status = document.getElementById("status");
 
 input.addEventListener("change", async function(){
 
-const file = input.files[0]
+const file = input.files[0];
+if(!file) return;
 
-if(!file) return
+status.innerText = "Removing background...";
 
-const formData = new FormData()
-formData.append("image_file", file)
+const formData = new FormData();
+formData.append("image_file", file);
+
+try{
 
 const res = await fetch("https://api.remove.bg/v1.0/removebg", {
 method: "POST",
 headers: {
-"X-Api-Key": "TTSe7hjXhGk86bP9AUBEJw21"
+"X-Api-Key": "YOUR_API_KEY"
 },
 body: formData
-})
+});
 
-const blob = await res.blob()
-
-const url = URL.createObjectURL(blob)
-
-resultImg.src = url
-
-downloadBtn.style.display = "inline-block"
-
-downloadBtn.onclick = () => {
-const a = document.createElement("a")
-a.href = url
-a.download = "no-bg.png"
-a.click()
+if(!res.ok){
+status.innerText = "Error removing background.";
+return;
 }
 
-})
+const blob = await res.blob();
+const url = URL.createObjectURL(blob);
+
+resultImg.src = url;
+
+status.innerText = "Done!";
+
+downloadBtn.style.display = "inline-block";
+
+downloadBtn.onclick = () => {
+const a = document.createElement("a");
+a.href = url;
+a.download = "no-bg.png";
+a.click();
+};
+
+}catch(err){
+
+status.innerText = "Something went wrong.";
+
+}
+
+});
 
 </script>
 
