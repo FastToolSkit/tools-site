@@ -11,6 +11,7 @@ display:flex;
 flex-direction:column;
 min-height:100vh;
 }
+
 .controls{
 display:flex;
 flex-direction:column;
@@ -19,6 +20,11 @@ background:#f4f6f9;
 padding:25px;
 border-radius:12px;
 }
+
+/* ===============================
+UPLOAD BUTTON
+================================*/
+
 .upload-btn{
 background:#2563eb;
 color:white;
@@ -38,12 +44,6 @@ margin-left:10px;
 font-size:14px;
 color:#64748b;
 }
-
-/* ===============================
-HEADER
-================================*/
-
-
 
 /* ===============================
 LOGO
@@ -108,6 +108,7 @@ text-decoration:underline;
 /* ===============================
 MAIN TOOL CARD
 ================================*/
+
 .tool-container{
 max-width:1200px;
 margin:40px auto;
@@ -117,10 +118,16 @@ border-radius:12px;
 box-shadow:0 10px 25px rgba(0,0,0,0.08);
 text-align:center;
 }
+
 #waveform{
 margin-top:30px;
 width:100%;
 }
+
+#timeline{
+width:100%;
+}
+
 #loader{
 width:100%;
 height:6px;
@@ -137,9 +144,7 @@ width:0%;
 background:#2563eb;
 transition:width 0.3s;
 }
-#timeline{
-width:100%;
-}
+
 /* ===============================
 TITLE
 ================================*/
@@ -170,14 +175,16 @@ background:#f8fafc;
 /* ===============================
 INPUTS
 ================================*/
+
 .editor{
 max-width:1100px;
 margin:40px auto;
 display:grid;
-grid-template-columns: 650px 1fr;
+grid-template-columns:650px 1fr;
 gap:40px;
 align-items:start;
 }
+
 input{
 width:100%;
 max-width:450px;
@@ -216,29 +223,6 @@ transition:0.2s;
 
 .main-button:hover{
 background:#1d4ed8;
-}
-
-/* ===============================
-UPLOAD BUTTON
-================================*/
-
-.upload-btn{
-background:#2a84ff;
-padding:10px 20px;
-border-radius:6px;
-cursor:pointer;
-font-weight:bold;
-display:inline-block;
-color:white;
-}
-
-.upload-btn input{
-display:none;
-}
-
-#file-name{
-margin-left:10px;
-color:#64748b;
 }
 
 /* ===============================
@@ -300,13 +284,6 @@ margin:0 0 10px 0;
 font-size:18px;
 }
 
-canvas{
-border-radius:10px;
-border:1px solid #cbd5e1;
-width:100%;
-height:auto;
-max-height:500px;
-}
 .tool-card p{
 font-size:14px;
 color:#64748b;
@@ -317,6 +294,14 @@ max-width:220px;
 .tool-card:hover{
 transform:translateY(-6px);
 box-shadow:0 14px 30px rgba(0,0,0,0.15);
+}
+
+canvas{
+border-radius:10px;
+border:1px solid #cbd5e1;
+width:100%;
+height:auto;
+max-height:500px;
 }
 
 /* ===============================
@@ -345,6 +330,7 @@ font-size:20px;
 margin-top:8px;
 color:#555;
 }
+
 /* ===============================
 BOTTOM SITE DESCRIPTION
 ================================*/
@@ -383,6 +369,9 @@ text-decoration:underline;
 margin:0 6px;
 }
 
+/* ===============================
+MORE TOOLS
+================================*/
 
 .more-tools{
 text-align:center;
@@ -412,6 +401,10 @@ font-size:14px;
 background:#1b2836;
 }
 
+/* ===============================
+SEARCH
+================================*/
+
 .tool-search{
 max-width:500px;
 margin:40px auto 10px auto;
@@ -430,6 +423,11 @@ outline:none;
 .tool-search input:focus{
 border-color:#2563eb;
 }
+
+/* ===============================
+CANVAS
+================================*/
+
 .canvas-container{
 width:100%;
 }
@@ -441,6 +439,11 @@ background:#000;
 border-radius:12px;
 display:block;
 }
+
+/* ===============================
+HEADER
+================================*/
+
 .site-header{
 display:flex;
 align-items:center;
@@ -466,6 +469,10 @@ text-decoration:none;
 font-weight:500;
 }
 
+/* ===============================
+SEARCH BOX
+================================*/
+
 .header-search{
 padding:8px 12px 8px 30px;
 border-radius:20px;
@@ -486,4 +493,3 @@ position:absolute;
 left:10px;
 font-size:14px;
 }
-
