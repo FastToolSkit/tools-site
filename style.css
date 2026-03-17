@@ -523,12 +523,15 @@ width:100%;
 }
 
 .editor-controls{
-background:#f8fafc;
-padding:25px;
-border-radius:10px;
 display:flex;
 flex-direction:column;
-gap:18px;
+align-items:center;
+gap:20px;
+}
+
+.editor-controls button{
+width:100%;
+max-width:220px;
 }
 
 .main-play{
