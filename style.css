@@ -43,14 +43,12 @@ color:#64748b;
 HEADER
 ================================*/
 
-.header-search{
-margin-left:auto;
-padding:8px 12px;
-border-radius:6px;
-border:none;
-outline:none;
-font-size:14px;
-width:180px;
+.site-header{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:15px 40px;
+background:#34495e;
 }
 
 /* ===============================
