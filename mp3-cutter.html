@@ -128,17 +128,21 @@ Zoom<br>
 <input type="range" id="zoom" min="10" max="200" value="50">
 </div>
 
-<div class="controls">
+<div class="control-bar">
 
-<button id="play">Play</button>
+  <button id="play">Play</button>
 
-Cut from
-<div class="timebox" id="start">0:00</div>
+  <div class="time-group">
+    <span id="start">0:00</span>
+    <span>→</span>
+    <span id="end">0:00</span>
+  </div>
 
-to
-<div class="timebox" id="end">0:00</div>
+  <div class="zoom-bar">
+    <input type="range" id="zoom" min="10" max="200" value="50">
+  </div>
 
-<button id="export">Export MP3</button>
+  <button id="export">Export MP3</button>
 
 </div>
 
