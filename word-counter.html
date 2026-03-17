@@ -3,10 +3,102 @@
 
 <head>
 
-<title>Word & Character Counter - FastTools</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Word & Character Counter Online | FastTools</title>
+
+<meta name="description" content="Count words and characters instantly online. Free word counter tool with real-time results.">
 
 <link rel="stylesheet" href="style.css">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+<style>
+
+body{
+background:#e6e7ea;
+font-family:'Segoe UI', Tahoma, sans-serif;
+margin:0;
+}
+
+/* TOOL */
+.tool-container{
+max-width:800px;
+margin:80px auto 40px;
+background:white;
+padding:35px;
+border-radius:14px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,0.05);
+}
+
+/* TEXTAREA */
+textarea{
+width:100%;
+height:220px;
+padding:15px;
+border-radius:10px;
+border:1px solid #cbd5e1;
+font-size:16px;
+resize:vertical;
+}
+
+/* BUTTONS */
+.button-group{
+margin-top:15px;
+display:flex;
+gap:10px;
+justify-content:center;
+}
+
+button{
+padding:10px 15px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+.reset-btn{
+background:#ef4444;
+color:white;
+}
+
+.reset-btn:hover{
+background:#dc2626;
+}
+
+/* RESULT */
+#result{
+margin-top:20px;
+font-size:20px;
+color:#1e293b;
+}
+
+/* SEO */
+.seo-content{
+max-width:800px;
+margin:40px auto;
+background:white;
+padding:30px;
+border-radius:14px;
+box-shadow:0 8px 25px rgba(0,0,0,0.05);
+}
+
+.seo-content p:last-child{
+direction:rtl;
+text-align:right;
+}
+
+/* FOOTER */
+.site-footer{
+background:#3f5368;
+color:white;
+text-align:center;
+padding:25px;
+margin-top:60px;
+}
+
+</style>
 
 </head>
 
@@ -25,35 +117,40 @@
 <a href="contact.html">Contact</a>
 </nav>
 
-</header>>
-
-<div class="back-bar">
-<a href="index.html" class="back-link">← Back to FastTools</a>
-</div>
+</header>
 
 <div class="tool-container">
 
 <h1>Word & Character Counter</h1>
 
-<textarea id="text" placeholder="Paste or type your text here..."></textarea>
+<textarea id="text" placeholder="Type or paste your text here..."></textarea>
 
 <div class="button-group">
-
-<button onclick="countWords()">Count Words & Characters</button>
-
-<button onclick="resetCounter()" class="reset-btn">
-Reset
-</button>
-
+<button onclick="resetCounter()" class="reset-btn">Reset</button>
 </div>
 
 <h3 id="result">Words: 0 | Characters: 0</h3>
 
 </div>
 
+<!-- SEO -->
+<div class="seo-content">
+
+<h2>Count words and characters instantly</h2>
+
+<p>
+This free online word counter helps you count words, characters, and spaces in real time. 
+Perfect for essays, social media posts, and content writing.
+</p>
+
+<p>
+يمكنك حساب عدد الكلمات والحروف مباشرة أثناء الكتابة بسهولة وسرعة.
+</p>
+
 </div>
 
 <footer class="site-footer">
+
 <p>
 © 2026 FastTools • Free Online Tools
 <br>
@@ -61,14 +158,18 @@ Reset
 <a href="terms.html">Terms</a> •
 <a href="contact.html">Contact</a>
 </p>
-</footer>
 
+</footer>
 
 <script>
 
+const textInput = document.getElementById("text");
+
+textInput.addEventListener("input", countWords);
+
 function countWords(){
 
-let text = document.getElementById("text").value;
+let text = textInput.value;
 
 let characters = text.length;
 
@@ -81,16 +182,15 @@ document.getElementById("result").innerHTML =
 
 function resetCounter(){
 
-document.getElementById("text").value = "";
+textInput.value = "";
 
 document.getElementById("result").innerHTML = "Words: 0 | Characters: 0";
 
-document.getElementById("text").focus();
+textInput.focus();
 
 }
 
 </script>
 
 </body>
-
 </html>
