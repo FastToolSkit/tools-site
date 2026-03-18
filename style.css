@@ -19,13 +19,13 @@ HEADER FINAL (FIXED SPACING + ALIGNMENT)
 
 .site-header{
 background:#020c1b;
-padding:15px 60px; /* 👈 MORE SIDE SPACE */
+padding:15px 60px;
 display:flex;
 align-items:center;
 justify-content:space-between;
 border-bottom:1px solid #0c2547;
+position:relative; /* 👈 IMPORTANT */
 }
-
 /* LOGO */
 .logo{
 flex:0 0 auto;
@@ -37,10 +37,11 @@ height:50px;
 
 /* NAV */
 .nav-menu{
+position:absolute;
+left:50%;
+transform:translateX(-50%);
 display:flex;
 gap:30px;
-flex:1;
-justify-content:center; /* 👈 TRUE CENTER */
 }
 
 .nav-menu a{
@@ -48,6 +49,8 @@ color:#cbd5e1;
 text-decoration:none;
 font-weight:500;
 white-space:nowrap;
+font-size:15px;
+
 }
 
 /* SEARCH */
