@@ -78,35 +78,35 @@ padding:18px;
 /* ===============================
 HEADER
 ================================*/
+/* ===============================
+HEADER (FIXED PROPER LAYOUT)
+================================*/
+
 .site-header{
 background:#020c1b;
 padding:15px 40px;
 display:flex;
 align-items:center;
-gap:20px;
+justify-content:space-between;
 border-bottom:1px solid #0c2547;
+gap:20px;
 }
 
-/* LOGO */
+/* LEFT: LOGO */
 .logo{
 display:flex;
 align-items:center;
-text-decoration:none;
 }
 
 .logo img{
 height:60px;
-width:auto;
 }
 
-/* NAV CENTERED */
+/* CENTER: NAV */
 .nav-menu{
-position:absolute;
-left:50%;
-transform:translateX(-50%);
 display:flex;
 gap:30px;
-margin:0 auto;
+margin:0 auto; /* 👈 CENTER */
 }
 
 .nav-menu a{
@@ -119,6 +119,34 @@ font-weight:500;
 color:#3a78ff;
 }
 
+/* RIGHT: SEARCH */
+.search-box{
+position:relative;
+max-width:250px;
+flex-shrink:0;
+}
+
+/* INPUT */
+.search-box input{
+width:100%;
+padding:12px 14px 12px 40px;
+border-radius:12px;
+border:none;
+background:#0c2547;
+color:white;
+font-size:15px;
+}
+
+/* ICON */
+.search-icon{
+position:absolute;
+left:12px;
+top:50%;
+transform:translateY(-50%);
+font-size:16px;
+color:#94a3b8;
+pointer-events:none;
+}
 /* ===============================
 TOOL CONTAINER (ONLY TOOLS)
 ================================*/
