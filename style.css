@@ -18,52 +18,38 @@ HEADER (PROFESSIONAL LAYOUT)
 /* ===============================
 HEADER (FINAL REAL FIX)
 ================================*/
+/* ===============================
+HEADER (FORCED CLEAN LAYOUT)
+================================*/
 
 .site-header{
-background:#020c1b;
-padding:15px 60px;
 display:flex;
 align-items:center;
-justify-content:space-between; /* 🔥 important */
+background:#020c1b;
+padding:15px 60px;
 border-bottom:1px solid #0c2547;
-position:relative;
 }
 
 /* LOGO */
 .logo{
-flex:0 0 auto;
+flex-shrink:0;
 }
 
-.logo img{
-height:50px;
-}
-
-/* NAV CENTER */
+/* NAV */
 .nav-menu{
-position:absolute;
-left:50%;
-top:50%;
-transform:translate(-50%, -50%);
 display:flex;
-gap:40px;
+gap:30px;
+margin-left:40px;
 }
 
-.nav-menu a{
-color:#cbd5e1;
-text-decoration:none;
-font-weight:500;
-letter-spacing:0.5px;
-font-size:16px;
-white-space:nowrap;
-}
-
-/* SEARCH RIGHT */
+/* 🔥 FORCE SEARCH TO RIGHT */
 .search-box{
-margin-left:auto; /* 🔥 THIS pushes it to the far right */
+margin-left:auto !important;
 width:260px;
 position:relative;
 }
 
+/* INPUT */
 .search-box input{
 width:100%;
 padding:12px 14px 12px 40px;
@@ -73,6 +59,7 @@ background:#0c2547;
 color:white;
 }
 
+/* ICON */
 .search-icon{
 position:absolute;
 left:12px;
