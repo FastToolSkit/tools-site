@@ -442,25 +442,49 @@ margin-bottom:10px;
 color:#cbd5e1;
 }
 
+/* ===============================
+INDEX SEO SECTION (FIXED CENTER)
+================================*/
+
 .site-description{
 max-width:800px;
-margin:60px auto 20px;
-padding:25px;
+margin:60px auto 30px;
+padding:30px;
 text-align:center;
 background:#071a33;
 color:#cbd5e1;
 border-radius:16px;
 line-height:1.7;
+box-shadow:0 15px 40px rgba(0,0,0,0.25);
 }
+
+/* 🔥 MAIN SECTION */
 .tool-descriptions{
 max-width:1000px;
-margin:40px auto;
-padding:0 20px;
+margin:40px auto 80px;
+padding:40px;
 text-align:center;
+background:#071a33;   /* 🔥 ADD THIS */
+border-radius:20px;
+box-shadow:0 20px 50px rgba(0,0,0,0.3);
 }
+
+/* 🔥 TEXT FIX */
 .tool-descriptions p{
 max-width:700px;
-margin:10px auto;
-color:#475569;
-line-height:1.7;
+margin:12px auto;
+color:#cbd5e1;   /* 🔥 FIX COLOR */
+line-height:1.8;
+}
+
+/* 🔥 TITLE */
+.tool-descriptions h2{
+color:white;
+margin-bottom:20px;
+}
+
+/* 🔥 SUB TITLES */
+.tool-descriptions h3{
+color:white;
+margin-top:25px;
 }
