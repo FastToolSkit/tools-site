@@ -441,3 +441,14 @@ padding-left:20px;
 margin-bottom:10px;
 color:#cbd5e1;
 }
+
+.site-description{
+max-width:800px;
+margin:60px auto 20px;
+padding:25px;
+text-align:center;
+background:#071a33;
+color:#cbd5e1;
+border-radius:16px;
+line-height:1.7;
+}
