@@ -262,10 +262,10 @@ color:#0f172a;
 
 .more-tools-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(180px,220px));
 gap:20px;
+justify-content:center;
 }
-
 .more-tool-card{
 display:block;
 background:#071a33;
