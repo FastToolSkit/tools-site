@@ -28,14 +28,24 @@ HEADER (FINAL FIXED VERSION)
 HEADER (FINAL FIXED VERSION)
 ================================*/
 
+/* ===============================
+HEADER (FINAL WORKING VERSION)
+================================*/
+
 .site-header{
 background:#020c1b;
 padding:15px 60px;
+display:grid;
+grid-template-columns: auto 1fr auto;
+align-items:center;
+border-bottom:1px solid #0c2547;
+}
+
+/* LEFT SIDE (logo + nav container) */
+.header-left{
 display:flex;
 align-items:center;
-justify-content:space-between;
-border-bottom:1px solid #0c2547;
-position:relative;
+gap:40px;
 }
 
 /* LOGO */
@@ -43,9 +53,9 @@ position:relative;
 height:50px;
 }
 
-/* NAV CENTER */
+/* NAV (CENTERED IN FULL HEADER) */
 .nav-menu{
-position:absolute;
+position:relative;
 left:50%;
 transform:translateX(-50%);
 display:flex;
@@ -60,7 +70,7 @@ font-size:15px;
 white-space:nowrap;
 }
 
-/* SEARCH RIGHT */
+/* SEARCH (RIGHT) */
 .search-box{
 width:260px;
 position:relative;
@@ -82,7 +92,6 @@ top:50%;
 transform:translateY(-50%);
 color:#94a3b8;
 }
-
 /* ===============================
 TOOLS GRID
 ================================*/
