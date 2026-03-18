@@ -82,6 +82,10 @@ HEADER
 HEADER (FIXED PROPER LAYOUT)
 ================================*/
 
+/* ===============================
+HEADER FINAL FIX
+================================*/
+
 .site-header{
 background:#020c1b;
 padding:15px 40px;
@@ -89,41 +93,36 @@ display:flex;
 align-items:center;
 justify-content:space-between;
 border-bottom:1px solid #0c2547;
-gap:20px;
 }
 
-/* LEFT: LOGO */
-.logo{
-display:flex;
-align-items:center;
-}
-
+/* LOGO */
 .logo img{
-height:60px;
+height:50px;
 }
 
-/* CENTER: NAV */
+/* NAV */
 .nav-menu{
 display:flex;
-gap:30px;
-margin:0 auto; /* 👈 CENTER */
+gap:25px;
+margin-left:40px;
+flex:1; /* 👈 THIS IS IMPORTANT */
 }
 
 .nav-menu a{
 color:#cbd5e1;
 text-decoration:none;
 font-weight:500;
+white-space:nowrap; /* 👈 prevents breaking */
 }
 
 .nav-menu a:hover{
 color:#3a78ff;
 }
 
-/* RIGHT: SEARCH */
+/* SEARCH */
 .search-box{
 position:relative;
-max-width:250px;
-flex-shrink:0;
+width:260px; /* fixed width = stable layout */
 }
 
 /* INPUT */
@@ -134,7 +133,7 @@ border-radius:12px;
 border:none;
 background:#0c2547;
 color:white;
-font-size:15px;
+font-size:14px;
 }
 
 /* ICON */
