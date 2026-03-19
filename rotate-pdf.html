@@ -55,9 +55,10 @@ background:#12305a;
 /* PREVIEW */
 .preview-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(140px,180px));
 gap:20px;
 margin-top:30px;
+justify-content:center;
 }
 
 .preview-item{
@@ -67,11 +68,11 @@ border-radius:10px;
 }
 
 .preview-item canvas{
-width:100%;
-border-radius:8px;
-transition:0.3s;
+max-width:100%;
+height:auto;
+display:block;
+margin:auto;
 }
-
 /* BUTTONS */
 .rotate-btn{
 margin-top:10px;
