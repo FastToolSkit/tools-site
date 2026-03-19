@@ -319,9 +319,24 @@ const rotateBtn = document.createElement("button");
 rotateBtn.className="rotate-btn";
 rotateBtn.innerText="Rotate";
 
-rotateBtn.onclick=()=>{
-rotations[i-1]+=90;
-canvas.style.transform="rotate("+rotations[i-1]+"deg)";
+rotateBtn.onclick = async () => {
+
+rotations[i-1] = (rotations[i-1] + 90) % 360;
+
+const page = await pdf.getPage(i);
+const viewport = page.getViewport({
+scale:0.6,
+rotation: rotations[i-1]
+});
+
+canvas.width = viewport.width;
+canvas.height = viewport.height;
+
+await page.render({
+canvasContext: ctx,
+viewport
+}).promise;
+
 };
 
 box.appendChild(rotateBtn);
