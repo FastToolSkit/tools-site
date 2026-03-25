@@ -29,7 +29,7 @@ HEADER
 display:flex;
 align-items:center;
 background:#020c1b;
-padding:15px 60px;
+padding:10px 40px;   /* 🔥 reduced */
 border-bottom:1px solid #0c2547;
 gap:30px;
 }
