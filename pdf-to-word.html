@@ -353,12 +353,6 @@ Object.entries(uploadTask.result.form).forEach(([k, v])=>{
 formData.append(k, v);
 });
 
-formData.append("file", file);
-
-await fetch(uploadTask.result.form.url, {
-method: "POST",
-body: formData
-});
 
 status.innerText = "Converting...";
 progressBar.style.width = "50%";
