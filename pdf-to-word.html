@@ -157,8 +157,7 @@ line-height:1.8;
 <div class="progress-bar" id="progress-bar"></div>
 </div>
 
-<button class="<button onclick="convert()">Convert</button>
-  
+<button class="main-button" onclick="convert()">Convert</button>  
 <div class="status" id="status"></div>
 <div id="downloads"></div>
 
@@ -258,8 +257,8 @@ FILE HANDLING
 
 let file = null;
 
-const fileInput = document.getElementById("fileInput");
-const status = document.getElementById("statusText");
+const fileInput = document.getElementById("upload");
+  const status = document.getElementById("statusText");
 const progressFill = document.getElementById("progressFill");
 const downloadArea = document.getElementById("downloadArea");
 
@@ -367,7 +366,18 @@ downloadArea.innerHTML = `
 };
 
 }
+const dropArea = document.getElementById("drop-area");
 
+dropArea.onclick = () => fileInput.click();
+
+dropArea.addEventListener("dragover", e => e.preventDefault());
+
+dropArea.addEventListener("drop", e => {
+e.preventDefault();
+fileInput.files = e.dataTransfer.files;
+file = fileInput.files[0];
+status.innerText = file.name;
+});
 </script>
 </body>
 </html>
