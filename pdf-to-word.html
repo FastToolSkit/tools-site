@@ -259,8 +259,7 @@ const status = document.getElementById("status");
 const progressBar = document.getElementById("progress-bar");
 const downloads = document.getElementById("downloads");
 
-// 🔴 PUT YOUR API KEY HERE
-const API_KEY = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiODM3NzhlMGZlNWI5ZmQ5ZjI0MTc3ODQyZDRjMGVjMTUxZjI2OTFkMWYyNTIwNjI1NzhmZTA4YTg2MGU1YTFkNDhkY2Q0NGFhZDkxYWYzNDUiLCJpYXQiOjE3NzQ0NzkwMTIuNjQ3MTM3LCJuYmYiOjE3NzQ0NzkwMTIuNjQ3MTM4LCJleHAiOjQ5MzAxNTI2MTIuNjM5MzMzLCJzdWIiOiI3NDYzODE2MSIsInNjb3BlcyI6WyJ0YXNrLnJlYWQiLCJ0YXNrLndyaXRlIl19.Uy6_AY5BZzdgNLSJDr1Nm-qrZhEgdSptO6lgphIYpGw9ntrSs4NmM1WW-YOMhZIf-gmF92i-6BhBgg6ZBcGKGII3BRy078Tx3PUDWearv5byyuHGngAJ_KHUFWZ9V0-hmz3yazZKfHFkKGJ1_t3fyEWPOzZng1PgW5tiycKSlC_WCuZdZqGiAqfMFyJOIv7oqmZN1xub51BkvkwSfclmLWrQhmFoE9pUvBCPKESxenRBCAKP5tUfk66Tm0Xybl1gWDILvEwD1uyEqNflgqcQNCL0SmuvLCNgYqn3OzapH5gtDliR6c28aOrDKwnVmAiMX5JZ0r5fW_perYMnY8CpPy8kBfMcPFIrShsRTw4UpP2V1lf3tInvyJ9f4FD3fDEe_kdxD86c9zsbzz28Ju5Zk5Fq6Z8Oxx6fJupHbPXOtVFeDWj7hsImwZ-bo7lUe9_0rQB_0uK_1JYSzu2XNe7pgfEnKxaa5q_nX3DRjX44R1UwpY-6x2yoC4SYOPBbmEBvISJckn0jSFGHgKu1H833d_beW0yX-MMt1pgnawghf3B_EIRhG_FQSSKONIfBWnCJ8yYy6urERZhWBuV_Fp-rYbDbgGkerzD_YAs_CJ3t_7hvAP0k5Bn7BaADDooA6XEYdGmvcThPiemUE3iR-w1KAraIpNzvr6YPtwZs7QC11z4";
+const API_KEY = "YOUR_API_KEY_HERE";
 
 // CLICK
 dropArea.onclick = () => fileInput.click();
@@ -302,7 +301,7 @@ downloads.innerHTML = "";
 
 try{
 
-// 1️⃣ CREATE JOB (IMPORTANT FIX)
+// 1️⃣ CREATE JOB
 const jobRes = await fetch("https://api.cloudconvert.com/v2/jobs", {
 method: "POST",
 headers: {
@@ -311,9 +310,7 @@ headers: {
 },
 body: JSON.stringify({
 tasks: {
-upload: {
-operation: "import/upload"
-},
+upload: { operation: "import/upload" },
 convert: {
 operation: "convert",
 input: "upload",
@@ -328,31 +325,37 @@ input: "convert"
 })
 });
 
+// 🔴 HANDLE NO CREDIT ERROR
+if(jobRes.status === 402){
+status.innerText = "No credits left ❌";
+return;
+}
+
 const job = await jobRes.json();
 
-// 🔥 GET UPLOAD TASK
+if(!job.data){
+status.innerText = "Error creating job ❌";
+return;
+}
+
+// 2️⃣ UPLOAD
 const uploadTask = job.data.tasks.find(t => t.name === "upload");
 
 const formData = new FormData();
 
-// 🔥 THIS PART IS CRITICAL
+// append fields ONCE
 for (const key in uploadTask.result.form) {
 formData.append(key, uploadTask.result.form[key]);
 }
 
-// 🔥 MUST BE LAST
+// file LAST
 formData.append("file", file);
 
-// 🔥 USE EXACT URL
+// upload
 await fetch(uploadTask.result.form.url, {
 method: "POST",
 body: formData
 });
-
-Object.entries(uploadTask.result.form).forEach(([k, v])=>{
-formData.append(k, v);
-});
-
 
 status.innerText = "Converting...";
 progressBar.style.width = "50%";
