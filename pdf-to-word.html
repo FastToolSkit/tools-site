@@ -333,8 +333,21 @@ const job = await jobRes.json();
 // 🔥 GET UPLOAD TASK
 const uploadTask = job.data.tasks.find(t => t.name === "upload");
 
-// 2️⃣ UPLOAD FILE (FIXED)
 const formData = new FormData();
+
+// 🔥 THIS PART IS CRITICAL
+for (const key in uploadTask.result.form) {
+formData.append(key, uploadTask.result.form[key]);
+}
+
+// 🔥 MUST BE LAST
+formData.append("file", file);
+
+// 🔥 USE EXACT URL
+await fetch(uploadTask.result.form.url, {
+method: "POST",
+body: formData
+});
 
 Object.entries(uploadTask.result.form).forEach(([k, v])=>{
 formData.append(k, v);
