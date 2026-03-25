@@ -238,7 +238,6 @@ Perfect for marketing campaigns, business cards, event sharing, menus, and digit
 </footer>
 
 <script>
-<script> function generateQR(){ const text=document.getElementById("text").value.trim(); if(!text){ alert("Enter text or URL"); return; } document.getElementById("qrcode").innerHTML=""; new QRCode(document.getElementById("qrcode"),{ text:text, width:256, height:256 }); document.getElementById("downloadBtn").style.display="inline-block"; } function downloadQR(){ const qrCanvas=document.querySelector("#qrcode canvas"); if(!qrCanvas) return; const link=document.createElement("a"); link.download="fasttools-qr.png"; link.href=qrCanvas.toDataURL(); link.click(); } </script></script>
-
+function generateQR(){ const text=document.getElementById("text").value.trim(); if(!text){ alert("Enter text or URL"); return; } document.getElementById("qrcode").innerHTML=""; new QRCode(document.getElementById("qrcode"),{ text:text, width:256, height:256 }); document.getElementById("downloadBtn").style.display="inline-block"; } function downloadQR(){ const qrCanvas=document.querySelector("#qrcode canvas"); if(!qrCanvas) return; const link=document.createElement("a"); link.download="fasttools-qr.png"; link.href=qrCanvas.toDataURL(); link.click(); } </script>
 </body>
 </html>
