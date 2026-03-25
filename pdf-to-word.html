@@ -355,7 +355,7 @@ Size: ${(file.size/1024/1024).toFixed(2)} MB
 }
 
 /* ===============================
-SMART CONVERT ROUTER
+MAIN CONVERT (LOCAL ONLY)
 ================================*/
 
 function convert(){
@@ -367,36 +367,40 @@ return;
 
 const ext = file.name.split(".").pop().toLowerCase();
 
-// ===== IMAGE → LOCAL =====
+// ONLY IMAGE SUPPORT
 if(["jpg","jpeg","png","webp"].includes(ext)){
 convertImageLocal();
 return;
 }
 
-// ===== PDF → REDIRECT =====
-if(ext === "pdf"){
-window.location.href = "pdf-to-word.html";
-return;
-}
-
-// ===== AUDIO → REDIRECT =====
-if(["mp3","wav"].includes(ext)){
-window.location.href = "audio-converter.html";
-return;
-}
-
-// ===== DEFAULT =====
-alert("This file type is not supported yet");
+alert("Only image conversion is supported here");
 
 }
+
 /* ===============================
-🖼 IMAGE CONVERT (LOCAL)
+🖼 IMAGE CONVERT (FIXED)
 ================================*/
 
 function convertImageLocal(){
 
 const bar = document.getElementById("progress-bar");
 const status = document.getElementById("status");
+const toFormat = document.getElementById("toFormat").value;
+
+if(!toFormat){
+alert("Select output format");
+return;
+}
+
+// SET MIME TYPE
+const mimeMap = {
+jpg: "image/jpeg",
+jpeg: "image/jpeg",
+png: "image/png",
+webp: "image/webp"
+};
+
+const mime = mimeMap[toFormat];
 
 bar.style.width = "20%";
 status.innerText = "Processing image...";
@@ -430,122 +434,14 @@ bar.style.width = "100%";
 status.innerText = "Done";
 
 document.getElementById("downloads").innerHTML = `
-<a href="${url}" download="converted.jpg" class="download-btn">
-Download Image
+<a href="${url}" download="converted.${toFormat}" class="download-btn">
+⬇ Download ${toFormat.toUpperCase()}
 </a>
 `;
 
-}, "image/jpeg", 0.95);
+}, mime, 0.95);
 
 };
-
-}
-
-/* ===============================
-📄 PDF → WORD (API)
-================================*/
-
-async function convertPDF(){
-
-const bar = document.getElementById("progress-bar");
-const status = document.getElementById("status");
-
-status.innerText = "Uploading...";
-bar.style.width = "20%";
-
-// ⚠️ IMPORTANT: USE REAL API KEY
-const apiKey = "PASTE_YOUR_LIVE_API_KEY";
-
-try{
-
-// 1️⃣ CREATE JOB
-const job = await fetch("eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZTUzZmJiNGFlNGRmNzFmNDY3MzY4YTU5YjE2ZTkxNDQyYWZiMjc5YTQwNzA3MDIyNjBmMWU0NGI1MGVkZTFiYjE3MTk3ZjgzYzhhYWNhOTYiLCJpYXQiOjE3NzM3MzA0MTAuMDcyOTM0LCJuYmYiOjE3NzM3MzA0MTAuMDcyOTM2LCJleHAiOjQ5Mjk0MDQwMTAuMDY2MjgsInN1YiI6Ijc0NjM4MTYxIiwic2NvcGVzIjpbInVzZXIucmVhZCIsInVzZXIud3JpdGUiXX0.pQ2Mz5C2n9XxlzrNJDySda2Cc2TxddO4dsiPmthWD1Xef1A1NFyPuoztXqv6h4awJ0TAdqNei5oRipFyKSNeADLx6vseOQYfn-uzFRbzByxlEwE5g-WEB3yDsP_X4KTbG8DXGD657HmGCGFyqsgfgmMY9AJXlIeFyLZvOaUBgMdubrAUZf6sm-0UG-TrIcMVFlbFhBMedRxPnnjoPoTlEYTBsZBDNy-PRWksY76GOxAiHAgeYifXFiWXi6-B1oY4zPzQ5hihXGhZeHpibLf2aDy9jyFSbZY0E0NFt_A64w7zlELPAfHl6x09bxf_4ci8jGPHgMm1Q_9t040atxLThQ1fvmCH0whF_pTPqwD_iQdGvaTYPL7y3rrn4GmqmmNT4HwmHhfPl5I4Z5HzoP_pnuczB8IetjUkyGcicgek5TFE3NIRKeOAMGan0p6DMJ41nIXpL85CeHxeCo5HNvN7CQbqEh7yw04EDEFFooUTGtel9sEQvbEb8u5bvO__j0-rPO67zCRIaWLsikQrMS_natooRoXmYZKp7t1IGNLQqoM6HdYFr7l8qr0apSt2KP57zwrIpKKjeN2RV3VfPRjmwwVcQ1jv33YryFabh4sZ2osvEixBgyuqPCgWSPuAj7mOEGxfHUTHtmIRC_39iPmOV8omgais4cwziNA1YKZlf9I", {
-method: "POST",
-headers: {
-"Authorization": "Bearer " + apiKey,
-"Content-Type": "application/json"
-},
-body: JSON.stringify({
-tasks: {
-"upload-file": { operation: "import/upload" },
-"convert-file": {
-operation: "convert",
-input: "upload-file",
-output_format: "docx"
-},
-"export-file": {
-operation: "export/url",
-input: "convert-file"
-}
-}
-})
-});
-
-const jobData = await job.json();
-
-if(!jobData.data){
-throw new Error("API failed");
-}
-
-bar.style.width = "40%";
-
-// 2️⃣ UPLOAD FILE
-const uploadTask = jobData.data.tasks.find(t => t.name === "upload-file");
-
-const formData = new FormData();
-
-Object.entries(uploadTask.result.form.parameters).forEach(([key,value])=>{
-formData.append(key,value);
-});
-
-formData.append("file", file);
-
-await fetch(uploadTask.result.form.url, {
-method: "POST",
-body: formData
-});
-
-bar.style.width = "60%";
-status.innerText = "Converting...";
-
-// 3️⃣ WAIT RESULT
-let resultUrl = null;
-
-while(!resultUrl){
-
-await new Promise(r => setTimeout(r,2000));
-
-const check = await fetch(`https://api.cloudconvert.com/v2/jobs/${jobData.data.id}`, {
-headers: { "Authorization": "Bearer " + apiKey }
-});
-
-const result = await check.json();
-
-const exportTask = result.data.tasks.find(t => t.name === "export-file");
-
-if(exportTask && exportTask.status === "finished"){
-resultUrl = exportTask.result.files[0].url;
-}
-
-bar.style.width = "85%";
-}
-
-// 4️⃣ DONE
-bar.style.width = "100%";
-status.innerText = "Done";
-
-document.getElementById("downloads").innerHTML = `
-<a href="${resultUrl}" target="_blank" class="download-btn">
-Download Word File
-</a>
-`;
-
-}catch(error){
-
-console.error(error);
-status.innerText = "Conversion failed";
-
-}
 
 }
 
