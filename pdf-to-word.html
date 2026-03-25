@@ -318,7 +318,7 @@ function convertPDF(){
 
 }
 
-  <script>
+<script>
 
 /* ===============================
 FILE HANDLING
@@ -355,15 +355,91 @@ Size: ${(file.size/1024/1024).toFixed(2)} MB
 }
 
 /* ===============================
-🚀 MAIN CONVERT FUNCTION
+SMART CONVERT ROUTER
+================================*/
+
+function convert(){
+
+if(!file){
+alert("Upload a file first");
+return;
+}
+
+const ext = file.name.split(".").pop().toLowerCase();
+
+// ✅ IMAGE = LOCAL (NO API)
+if(["jpg","jpeg","png","webp"].includes(ext)){
+convertImageLocal();
+return;
+}
+
+// ✅ PDF = API
+if(ext === "pdf"){
+convertPDF();
+return;
+}
+
+alert("This format is not supported yet");
+
+}
+
+/* ===============================
+🖼 IMAGE CONVERT (LOCAL)
+================================*/
+
+function convertImageLocal(){
+
+const bar = document.getElementById("progress-bar");
+const status = document.getElementById("status");
+
+bar.style.width = "20%";
+status.innerText = "Processing image...";
+
+const img = new Image();
+const reader = new FileReader();
+
+reader.onload = function(e){
+img.src = e.target.result;
+};
+
+reader.readAsDataURL(file);
+
+img.onload = function(){
+
+const canvas = document.createElement("canvas");
+const ctx = canvas.getContext("2d");
+
+canvas.width = img.width;
+canvas.height = img.height;
+
+ctx.drawImage(img, 0, 0);
+
+bar.style.width = "70%";
+
+canvas.toBlob(function(blob){
+
+const url = URL.createObjectURL(blob);
+
+bar.style.width = "100%";
+status.innerText = "Done";
+
+document.getElementById("downloads").innerHTML = `
+<a href="${url}" download="converted.jpg" class="download-btn">
+Download Image
+</a>
+`;
+
+}, "image/jpeg", 0.95);
+
+};
+
+}
+
+/* ===============================
+📄 PDF → WORD (API)
 ================================*/
 
 async function convertPDF(){
-
-if(!file){
-alert("Upload a PDF first");
-return;
-}
 
 const bar = document.getElementById("progress-bar");
 const status = document.getElementById("status");
@@ -371,28 +447,54 @@ const status = document.getElementById("status");
 status.innerText = "Uploading...";
 bar.style.width = "20%";
 
-/* =========================================
-🚀 👉 PLACE YOUR API HERE (IMPORTANT)
-
-Replace everything below with your API logic
-
-Example flow:
-1. Send file to API
-2. Wait for conversion
-3. Receive download link
-4. Show link to user
-
-========================================= */
+// ⚠️ IMPORTANT: USE REAL API KEY
+const apiKey = "PASTE_YOUR_LIVE_API_KEY";
 
 try{
 
-// 1️⃣ Prepare file
+// 1️⃣ CREATE JOB
+const job = await fetch("eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZTUzZmJiNGFlNGRmNzFmNDY3MzY4YTU5YjE2ZTkxNDQyYWZiMjc5YTQwNzA3MDIyNjBmMWU0NGI1MGVkZTFiYjE3MTk3ZjgzYzhhYWNhOTYiLCJpYXQiOjE3NzM3MzA0MTAuMDcyOTM0LCJuYmYiOjE3NzM3MzA0MTAuMDcyOTM2LCJleHAiOjQ5Mjk0MDQwMTAuMDY2MjgsInN1YiI6Ijc0NjM4MTYxIiwic2NvcGVzIjpbInVzZXIucmVhZCIsInVzZXIud3JpdGUiXX0.pQ2Mz5C2n9XxlzrNJDySda2Cc2TxddO4dsiPmthWD1Xef1A1NFyPuoztXqv6h4awJ0TAdqNei5oRipFyKSNeADLx6vseOQYfn-uzFRbzByxlEwE5g-WEB3yDsP_X4KTbG8DXGD657HmGCGFyqsgfgmMY9AJXlIeFyLZvOaUBgMdubrAUZf6sm-0UG-TrIcMVFlbFhBMedRxPnnjoPoTlEYTBsZBDNy-PRWksY76GOxAiHAgeYifXFiWXi6-B1oY4zPzQ5hihXGhZeHpibLf2aDy9jyFSbZY0E0NFt_A64w7zlELPAfHl6x09bxf_4ci8jGPHgMm1Q_9t040atxLThQ1fvmCH0whF_pTPqwD_iQdGvaTYPL7y3rrn4GmqmmNT4HwmHhfPl5I4Z5HzoP_pnuczB8IetjUkyGcicgek5TFE3NIRKeOAMGan0p6DMJ41nIXpL85CeHxeCo5HNvN7CQbqEh7yw04EDEFFooUTGtel9sEQvbEb8u5bvO__j0-rPO67zCRIaWLsikQrMS_natooRoXmYZKp7t1IGNLQqoM6HdYFr7l8qr0apSt2KP57zwrIpKKjeN2RV3VfPRjmwwVcQ1jv33YryFabh4sZ2osvEixBgyuqPCgWSPuAj7mOEGxfHUTHtmIRC_39iPmOV8omgais4cwziNA1YKZlf9I", {
+method: "POST",
+headers: {
+"Authorization": "Bearer " + apiKey,
+"Content-Type": "application/json"
+},
+body: JSON.stringify({
+tasks: {
+"upload-file": { operation: "import/upload" },
+"convert-file": {
+operation: "convert",
+input: "upload-file",
+output_format: "docx"
+},
+"export-file": {
+operation: "export/url",
+input: "convert-file"
+}
+}
+})
+});
+
+const jobData = await job.json();
+
+if(!jobData.data){
+throw new Error("API failed");
+}
+
+bar.style.width = "40%";
+
+// 2️⃣ UPLOAD FILE
+const uploadTask = jobData.data.tasks.find(t => t.name === "upload-file");
+
 const formData = new FormData();
+
+Object.entries(uploadTask.result.form.parameters).forEach(([key,value])=>{
+formData.append(key,value);
+});
+
 formData.append("file", file);
 
-// 2️⃣ SEND TO API
-// 🔴 REPLACE THIS URL WITH YOUR REAL API
-const response = await fetch("eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZTUzZmJiNGFlNGRmNzFmNDY3MzY4YTU5YjE2ZTkxNDQyYWZiMjc5YTQwNzA3MDIyNjBmMWU0NGI1MGVkZTFiYjE3MTk3ZjgzYzhhYWNhOTYiLCJpYXQiOjE3NzM3MzA0MTAuMDcyOTM0LCJuYmYiOjE3NzM3MzA0MTAuMDcyOTM2LCJleHAiOjQ5Mjk0MDQwMTAuMDY2MjgsInN1YiI6Ijc0NjM4MTYxIiwic2NvcGVzIjpbInVzZXIucmVhZCIsInVzZXIud3JpdGUiXX0.pQ2Mz5C2n9XxlzrNJDySda2Cc2TxddO4dsiPmthWD1Xef1A1NFyPuoztXqv6h4awJ0TAdqNei5oRipFyKSNeADLx6vseOQYfn-uzFRbzByxlEwE5g-WEB3yDsP_X4KTbG8DXGD657HmGCGFyqsgfgmMY9AJXlIeFyLZvOaUBgMdubrAUZf6sm-0UG-TrIcMVFlbFhBMedRxPnnjoPoTlEYTBsZBDNy-PRWksY76GOxAiHAgeYifXFiWXi6-B1oY4zPzQ5hihXGhZeHpibLf2aDy9jyFSbZY0E0NFt_A64w7zlELPAfHl6x09bxf_4ci8jGPHgMm1Q_9t040atxLThQ1fvmCH0whF_pTPqwD_iQdGvaTYPL7y3rrn4GmqmmNT4HwmHhfPl5I4Z5HzoP_pnuczB8IetjUkyGcicgek5TFE3NIRKeOAMGan0p6DMJ41nIXpL85CeHxeCo5HNvN7CQbqEh7yw04EDEFFooUTGtel9sEQvbEb8u5bvO__j0-rPO67zCRIaWLsikQrMS_natooRoXmYZKp7t1IGNLQqoM6HdYFr7l8qr0apSt2KP57zwrIpKKjeN2RV3VfPRjmwwVcQ1jv33YryFabh4sZ2osvEixBgyuqPCgWSPuAj7mOEGxfHUTHtmIRC_39iPmOV8omgais4cwziNA1YKZlf9I", {
+await fetch(uploadTask.result.form.url, {
 method: "POST",
 body: formData
 });
@@ -400,22 +502,34 @@ body: formData
 bar.style.width = "60%";
 status.innerText = "Converting...";
 
-// 3️⃣ GET RESULT
-const result = await response.json();
+// 3️⃣ WAIT RESULT
+let resultUrl = null;
 
-/*
-Expected response format:
-{
-  file_url: "https://yourfile.docx"
+while(!resultUrl){
+
+await new Promise(r => setTimeout(r,2000));
+
+const check = await fetch(`https://api.cloudconvert.com/v2/jobs/${jobData.data.id}`, {
+headers: { "Authorization": "Bearer " + apiKey }
+});
+
+const result = await check.json();
+
+const exportTask = result.data.tasks.find(t => t.name === "export-file");
+
+if(exportTask && exportTask.status === "finished"){
+resultUrl = exportTask.result.files[0].url;
 }
-*/
 
+bar.style.width = "85%";
+}
+
+// 4️⃣ DONE
 bar.style.width = "100%";
-status.innerText = "Done!";
+status.innerText = "Done";
 
-// 4️⃣ SHOW DOWNLOAD
 document.getElementById("downloads").innerHTML = `
-<a href="${result.file_url}" class="download-btn" target="_blank">
+<a href="${resultUrl}" target="_blank" class="download-btn">
 Download Word File
 </a>
 `;
@@ -430,7 +544,5 @@ status.innerText = "Conversion failed";
 }
 
 </script>
-
-
 </body>
 </html>
