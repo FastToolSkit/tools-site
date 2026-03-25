@@ -199,7 +199,10 @@ input:"convert-file"
 });
 
 const data = await job.json();
-setProgress(30);
+
+if(!data.data){
+throw new Error("CloudConvert failed: " + JSON.stringify(data));
+}setProgress(30);
 
 // UPLOAD
 const uploadTask = data.data.tasks.find(t=>t.name==="upload-file");
