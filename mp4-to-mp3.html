@@ -164,8 +164,14 @@ headers: {
 }
 });
 
-const statusData = await statusResponse.json();
+const jobData = await jobResponse.json();
 
+console.log("JOB RESPONSE:", jobData);
+
+if (!jobResponse.ok) {
+  downloadArea.innerHTML = "API Error: " + jobData.message;
+  return;
+}
 const exportTask = statusData.data.tasks.find(t => t.name === "export");
 
 if(exportTask.status === "finished"){
