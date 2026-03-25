@@ -51,6 +51,35 @@
 </div>
 </div>
 
+  <div class="quick-converter">
+
+<h3>⚡ Quick Convert</h3>
+
+<div class="converter-box">
+
+<select id="fromFormat">
+<option value="">From</option>
+<option value="pdf">PDF</option>
+<option value="jpg">JPG</option>
+<option value="png">PNG</option>
+<option value="mp3">MP3</option>
+</select>
+
+<span>→</span>
+
+<select id="toFormat">
+<option value="">To</option>
+<option value="word">Word</option>
+<option value="pdf">PDF</option>
+<option value="jpg">JPG</option>
+<option value="png">PNG</option>
+</select>
+
+<button onclick="goToTool()">Convert</button>
+
+</div>
+
+</div>
 <!-- POPULAR -->
 
 <h2 style="text-align:center;margin-top:30px;">🔥 Popular Tools</h2>
@@ -325,6 +354,33 @@ cards.forEach(card => {
 let text = card.innerText.toLowerCase();
 card.style.display = text.includes(input) ? "" : "none";
 });
+}
+  function goToTool(){
+
+const from = document.getElementById("fromFormat").value;
+const to = document.getElementById("toFormat").value;
+
+if(!from || !to){
+alert("Select formats");
+return;
+}
+
+const routes = {
+"pdf-word": "pdf-to-word.html",
+"jpg-pdf": "jpg-to-pdf.html",
+"pdf-jpg": "pdf-to-jpg.html",
+"png-jpg": "png-to-jpg.html",
+"jpg-png": "jpg-to-png.html"
+};
+
+const key = `${from}-${to}`;
+
+if(routes[key]){
+window.location.href = routes[key];
+}else{
+alert("This conversion is not available yet.");
+}
+
 }
 </script>
 
