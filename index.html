@@ -276,6 +276,35 @@ Convertios provides free tools for converting files, editing images, and process
 <footer class="site-footer">
 © 2026 Convertios
 </footer>
+<script>
 
+const formatMap = {
+pdf: ["word","jpg"],
+word: ["pdf"],
+jpg: ["pdf","png"],
+png: ["jpg"],
+mp3: ["wav"],
+wav: ["mp3"]
+};
+
+function updateToOptions(){
+
+const from = document.getElementById("fromFormat").value;
+const toSelect = document.getElementById("toFormat");
+
+toSelect.innerHTML = '<option value="">To</option>';
+
+if(!formatMap[from]) return;
+
+formatMap[from].forEach(format => {
+const option = document.createElement("option");
+option.value = format;
+option.textContent = format.toUpperCase();
+toSelect.appendChild(option);
+});
+
+}
+
+</script>
 </body>
 </html>
