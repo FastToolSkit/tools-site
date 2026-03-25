@@ -217,9 +217,162 @@ This audio converter lets you transform audio files between MP3 and WAV formats 
 </footer>
 
 <!-- JS (UNCHANGED) -->
-
 <script>
-// YOUR ORIGINAL JS HERE (UNCHANGED)
+
+// SAME JS (UNCHANGED)
+
+let audioContext
+let audioBuffer
+
+const fileInput = document.getElementById("audioFile")
+const preview = document.getElementById("preview")
+
+fileInput.addEventListener("change", async function(){
+
+const file = this.files[0]
+if(!file) return
+
+preview.src = URL.createObjectURL(file)
+
+audioContext = new AudioContext()
+
+const arrayBuffer = await file.arrayBuffer()
+
+audioBuffer = await audioContext.decodeAudioData(arrayBuffer)
+
+})
+
+async function convertAudio(){
+
+if(!audioBuffer) return
+
+const format = document.getElementById("format").value
+
+const offline = new OfflineAudioContext(
+audioBuffer.numberOfChannels,
+audioBuffer.length,
+audioBuffer.sampleRate
+)
+
+const source = offline.createBufferSource()
+
+source.buffer = audioBuffer
+source.connect(offline.destination)
+source.start()
+
+const rendered = await offline.startRendering()
+
+if(format === "wav"){
+
+const wav = bufferToWave(rendered, rendered.length)
+downloadFile(wav,"converted.wav","audio/wav")
+
+}
+
+if(format === "mp3"){
+
+const samples = rendered.getChannelData(0)
+
+const mp3encoder = new lamejs.Mp3Encoder(1, rendered.sampleRate, 192)
+
+const sampleBlockSize = 1152
+let mp3Data = []
+
+for(let i=0;i<samples.length;i+=sampleBlockSize){
+
+let chunk = samples.subarray(i,i+sampleBlockSize)
+let int16 = new Int16Array(chunk.length)
+
+for(let j=0;j<chunk.length;j++){
+int16[j] = chunk[j]*32767
+}
+
+let mp3buf = mp3encoder.encodeBuffer(int16)
+
+if(mp3buf.length>0){
+mp3Data.push(mp3buf)
+}
+
+}
+
+let mp3buf = mp3encoder.flush()
+
+if(mp3buf.length>0){
+mp3Data.push(mp3buf)
+}
+
+const blob = new Blob(mp3Data,{type:"audio/mp3"})
+downloadFile(blob,"converted.mp3","audio/mp3")
+
+}
+
+}
+
+function downloadFile(data,name,type){
+
+let blob = data instanceof Blob ? data : new Blob([data],{type:type})
+
+const url = URL.createObjectURL(blob)
+
+const a = document.createElement("a")
+a.href = url
+a.download = name
+a.click()
+
+}
+
+function bufferToWave(abuffer,len){
+
+let numOfChan = abuffer.numberOfChannels
+let length = len*numOfChan*2+44
+let buffer = new ArrayBuffer(length)
+let view = new DataView(buffer)
+
+let channels=[],i,sample
+let offset=0
+let pos=0
+
+function setUint16(data){view.setUint16(pos,data,true);pos+=2}
+function setUint32(data){view.setUint32(pos,data,true);pos+=4}
+
+setUint32(0x46464952)
+setUint32(length-8)
+setUint32(0x45564157)
+
+setUint32(0x20746d66)
+setUint32(16)
+setUint16(1)
+setUint16(numOfChan)
+setUint32(abuffer.sampleRate)
+setUint32(abuffer.sampleRate*2*numOfChan)
+setUint16(numOfChan*2)
+setUint16(16)
+
+setUint32(0x61746164)
+setUint32(length-pos-4)
+
+for(i=0;i<abuffer.numberOfChannels;i++)
+channels.push(abuffer.getChannelData(i))
+
+while(pos<length){
+
+for(i=0;i<numOfChan;i++){
+
+sample=Math.max(-1,Math.min(1,channels[i][offset]))
+sample=(sample<0?sample*32768:sample*32767)|0
+view.setInt16(pos,sample,true)
+pos+=2
+
+}
+
+offset++
+
+}
+
+return buffer
+
+}
+
 </script>
 
 </body>
