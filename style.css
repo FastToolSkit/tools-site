@@ -59,6 +59,7 @@ color:white;
 
 /* SEARCH */
 .search-box{
+position: absolute;
 margin-left:auto;
 width:275px;
 position:relative;
