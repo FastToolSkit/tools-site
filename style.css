@@ -313,7 +313,11 @@ MOBILE (FINAL CLEAN)
     background: #e5e7eb; /* your gray background */
     padding: 40px 0;
 }
-
+.hero-section > *{
+    max-width: 1000px;
+    width: 100%;
+    text-align: center;
+}
 .hero-container{
     max-width: 1000px;
     margin: 0 auto;
