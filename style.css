@@ -254,9 +254,6 @@ max-width:700px;
 margin:0 auto;
 }
 
-/* ===============================
-MORE TOOLS (FIXED 🔥)
-================================*/
 
 .more-tools{
 max-width:1000px;
@@ -272,11 +269,11 @@ color:#0f172a;
 }
 
 .more-tools-grid{
-    display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    max-width: 1000px;
-    margin: 0 auto;
+display: grid !important;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 20px;
+max-width: 1000px;
+margin: 0 auto;
 }
 .more-tool-card{
 display:block;
@@ -288,7 +285,7 @@ transition:0.2s;
 }
 
 .more-tool-card:hover{
-background:#0c2547;
+    background:#0c2547;
 }
 
 /* ===============================
@@ -438,9 +435,9 @@ main{
 PAGE CONTENT (Contact / About)
 ================================*/
 .page-container{
-    max-width: 800px;
-    margin: 60px auto;
-    padding: 40px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40 auto;
     text-align: center;
 }
 
