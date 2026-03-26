@@ -433,3 +433,33 @@ body{
 main{
     flex: 1;
 }
+
+/* ===============================
+PAGE CONTENT (Contact / About)
+================================*/
+.page-container{
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.page-container h1{
+    margin-bottom: 10px;
+}
+
+.subtitle{
+    color: #64748b;
+    margin-bottom: 20px;
+}
+
+.page-container p{
+    color: #475569;
+    line-height: 1.7;
+    margin: 10px 0;
+}
+
+.email{
+    font-size: 18px;
+    color: #0f172a;
+}
