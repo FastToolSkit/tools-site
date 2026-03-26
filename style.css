@@ -229,10 +229,11 @@ margin-bottom:30px;
 .tool-descriptions p{
 color:#475569;
 line-height:1.8;
-}
 .tool-descriptions ul{
     list-style: none;
-    padding-left: 0;
+    padding: 0;
+    margin: 25px 0;
+}
 }
 .tool-descriptions li{
     position: relative;
