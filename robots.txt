@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /sitemap.xml
 
 Sitemap: https://convertios.com/sitemap.xml
