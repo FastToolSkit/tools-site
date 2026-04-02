@@ -23,7 +23,6 @@ color:inherit;
 
 .site-header{
     .site-header{
-  min-height:140px;
     display:flex;
     align-items:center;
     background:#020c1b;
