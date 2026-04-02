@@ -59,8 +59,8 @@ color:inherit;
 
 /* SEARCH (RIGHT) */
 .search-box{
-    width:220px;
-    max-width:220px;
+    flex: 0 0 260px; /* 🔥 ثابت */
+    position:relative;
 }
 .search-box input{
     width:100%;
