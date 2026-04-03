@@ -35,10 +35,10 @@ color:inherit;
     flex: 0 0 auto;
 }
 .logo img{
-    height:90px;
+    height:45px;
+    width:auto;
     display:block;
 }
-
 /* NAV (CENTER) */
 .nav-menu{
     display:flex;
