@@ -1,46 +1,57 @@
 /* ===============================
 GLOBAL RESET
 ================================*/
-
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}logo
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:auto;
+}
 
 body{
+    background:#e6e7ea;
+    font-family:'Poppins', sans-serif;
+    color:#1e293b;
+    line-height:1.5;
+
     display:flex;
     flex-direction:column;
     min-height:100vh;
     overflow-y:scroll;
 }
 
-/* REMOVE DEFAULT LINK COLORS */
+/* LINKS */
 a{
-text-decoration:none;
-color:inherit;
+    text-decoration:none;
+    color:inherit;
 }
 
+/* ===============================
+HEADER
+================================*/
 .site-header{
     display:flex;
     align-items:center;
     justify-content:space-between;
     background:#020c1b;
     padding:10px 40px;
+
     height:65px;
-    min-height:65px; /* 🔥 مهم */
+    min-height:65px;
 }
+
 /* LOGO */
-.logo{
-    flex: 0 0 auto;
-}
 .logo img{
     width:200px;
     height:55px;
     object-fit:contain;
     display:block;
 }
-/* NAV (CENTER) */
+
+/* NAV */
 .nav-menu{
     display:flex;
     gap:30px;
@@ -51,14 +62,13 @@ color:inherit;
 .nav-menu a{
     color:#cbd5e1;
     font-weight:500;
-    text-decoration:none;
 }
 
 .nav-menu a:hover{
     color:white;
 }
 
-/* SEARCH (RIGHT) */
+/* SEARCH */
 .search-box{
     display:flex;
     align-items:center;
@@ -69,46 +79,58 @@ color:inherit;
     min-width:260px;
 }
 
+.search-icon{
+    margin-right:8px;
+}
+
 .search-box input{
     border:none;
     outline:none;
     background:transparent;
     color:white;
     width:100%;
-    height:100%;
     font-size:14px;
 }
 
+/* ===============================
+HERO (CLS SAFE)
+================================*/
+.hero-wrapper{
+    display:flex;
+    justify-content:center;
 }
 
-.search-icon{
-    position:absolute;
-    left:10px;
-    top:50%;
-    transform:translateY(-50%);
-    font-size:14px;
-    flex-shrink:0;
+.hero-section{
+    width:100%;
+    background:#e5e7eb;
+    padding:40px 20px;
+
+    min-height:140px; /* 🔥 CLS FIX */
+    text-align:center;
 }
+
+.hero-section h1{
+    font-size:32px;
+    line-height:1.2;
+    min-height:40px; /* 🔥 CLS FIX */
+}
+
+.hero-section p{
+    font-size:16px;
+    margin-top:10px;
+    min-height:20px; /* 🔥 CLS FIX */
+}
+
 /* ===============================
 TOOLS GRID
 ================================*/
-
 .tools-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:25px;
-max-width:1200px;
-margin:50px auto;
-padding:0 20px;
-}
-
-.tools-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:25px;
-max-width:1200px;
-margin:50px auto;
-padding:0 20px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+    max-width:1200px;
+    margin:50px auto;
+    padding:0 20px;
 }
 
 .tool-card{
@@ -121,369 +143,95 @@ padding:0 20px;
     border:1px solid #e2e8f0;
     box-shadow:0 4px 12px rgba(0,0,0,0.05);
 
-    transition: all 0.2s ease;
+    transition:0.2s;
 }
 
-/* Hover effect */
 .tool-card:hover{
-    transform: translateY(-4px);
+    transform:translateY(-4px);
     box-shadow:0 8px 20px rgba(0,0,0,0.12);
     border-color:#2563eb;
 }
-/* ===============================
-TOOL PAGE CONTAINER
-================================*/
-
-.tool-container{
-max-width:1000px;
-margin:80px auto 40px;
-background:#071a33;
-color:white;
-padding:40px;
-border-radius:20px;
-text-align:center;
-box-shadow:0 20px 50px rgba(0,0,0,0.3);
-}
 
 /* ===============================
-INPUTS
+CONTENT
 ================================*/
-
-input, textarea{
-width:100%;
-padding:12px;
-border-radius:8px;
-border:none;
-background:#0c2547;
-color:white;
-margin-top:10px;
-outline:none;
-}
-
-/* ===============================
-BUTTONS
-================================*/
-
-button{
-margin-top:20px;
-padding:12px 20px;
-background:#3a78ff;
-color:white;
-border:none;
-border-radius:8px;
-cursor:pointer;
-transition:0.2s;
-}
-
-button:hover{
-background:#2a66e6;
-}
-
-/* ===============================
-UPLOAD
-================================*/
-
-.upload-btn{
-background:#2563eb;
-color:white;
-padding:12px 22px;
-border-radius:8px;
-display:inline-block;
-cursor:pointer;
-}
-
-.upload-btn input{
-display:none;
-}
-
-/* ===============================
-SEO CONTENT
-================================*/
-
-.seo-content{
-max-width:1000px;
-margin:40px auto;
-background:#071a33;
-color:white;
-padding:35px;
-border-radius:20px;
-}
-
-.seo-content p{
-color:#cbd5e1;
-line-height:1.7;
-}
-
-/* ===============================
-HOMEPAGE DESCRIPTION
-================================*/
-
 .site-description{
-max-width:800px;
-margin:50px auto;
-padding:25px;
-background:#071a33;
-color:#cbd5e1;
-text-align:center;
-border-radius:16px;
+    max-width:800px;
+    margin:50px auto;
+    padding:25px;
+    background:#071a33;
+    color:#cbd5e1;
+    text-align:center;
+    border-radius:16px;
 }
-
-/* ===============================
-TOOL DESCRIPTIONS
-================================*/
 
 .tool-descriptions{
-max-width:900px;
-margin:80px auto;
-padding:40px;
-text-align:center;
-background:white;
-border-radius:20px;
-box-shadow:0 10px 40px rgba(0,0,0,0.05);
+    max-width:900px;
+    margin:80px auto;
+    padding:40px;
+    text-align:center;
+    background:white;
+    border-radius:20px;
+    box-shadow:0 10px 40px rgba(0,0,0,0.05);
 }
 
 .tool-descriptions h2{
-font-size:32px;
-margin-bottom:40px;
-font-weight:700;
-color:#0f172a;
-}
-
-.tool-descriptions h3{
-font-size:20px;
-margin-top:30px;
-margin-bottom:10px;
-font-weight:600;
+    font-size:32px;
+    margin-bottom:40px;
 }
 
 .tool-descriptions p{
-font-size:15px;
-line-height:1.8;
-color:#475569;
-max-width:700px;
-margin:0 auto;
-}
-
-
-.more-tools{
-max-width:1000px;
-margin:60px auto;
-padding:0 20px;
-text-align:center;
-}
-
-.more-tools h2{
-font-size:24px;
-margin-bottom:20px;
-color:#0f172a;
-}
-
-.more-tools-grid{
-display: grid !important;
-grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-gap: 20px;
-max-width: 1000px;
-margin: 0 auto;
-}
-.more-tool-card{
-display:block;
-background:#071a33;
-color:white;
-padding:20px;
-border-radius:14px;
-transition:0.2s;
-}
-
-.more-tool-card:hover{
-    background:#0c2547;
+    color:#475569;
 }
 
 /* ===============================
 FOOTER
 ================================*/
-
 .site-footer{
-background:#020c1b;
-color:#cbd5e1;
-text-align:center;
-padding:25px;
+    background:#020c1b;
+    color:#cbd5e1;
+    text-align:center;
+    padding:25px;
 }
 
 .site-footer a{
-color:#3a78ff;
+    color:#3a78ff;
 }
 
 /* ===============================
-MOBILE (FINAL CLEAN)
+LAYOUT FIX
 ================================*/
-.hero{
-    min-height:140px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
+main{
+    flex:1;
 }
 
-.hero h1{
-    font-size:32px;
-    line-height:1.2;
-    margin:0;
-}
-
-.hero p{
-    font-size:16px;
-    margin-top:10px;
-}
-}
-.hero-section{
-    width: 100%;
-    background: #e5e7eb; /* your gray background */
-    padding: 40px 0;
-}
-.hero-section > *{
-    max-width: 1000px;
-    width: 100%;
-    text-align: center;
-}
-.hero-container{
-    max-width: 1000px;
-    margin: 0 auto;
-    text-align: center;
-    padding: 0 20px;
-}
-
-.hero-container h1{
-    font-size: 36px;
-    margin-bottom: 10px;
-}
-
-.hero-container p{
-    font-size: 18px;
-    color: #64748b;
-}
+/* ===============================
+MOBILE
+================================*/
 @media (max-width:768px){
 
-/* HEADER */
 .site-header{
-    height:65px;
-    min-height:65px;
+    flex-direction:column;
+    height:auto;
 }
 
-/* LOGO */
 .logo img{
-max-width:120px;
-margin:auto;
+    max-width:120px;
 }
 
-/* NAV */
 .nav-menu{
-flex-wrap:wrap;
-justify-content:center;
-gap:12px;
-font-size:14px;
+    flex-wrap:wrap;
+    gap:10px;
 }
 
-/* SEARCH */
 .search-box{
-width:100%;
-max-width:320px;
-margin:10px auto;
+    width:100%;
+    max-width:320px;
+    margin-top:10px;
 }
 
-.search-box input{
-padding:12px 14px 12px 40px;
-}
-
-/* HERO */
-.hero{
-padding:20px 15px;
-}
-
-.hero img{
-max-width:110px;
-}
-.hero-section{
-    max-width: 900px;
-    margin: 40px auto;
-    text-align: center;
-    padding: 0 20px;
-}
-.hero h1{
-font-size:22px;
-}
-.hero-wrapper{
-    display: flex;
-    justify-content: center;
-}
-.hero p{
-font-size:14px;
-}
-
-/* GRID */
 .tools-grid{
-grid-template-columns:1fr;
-gap:15px;
+    grid-template-columns:1fr;
 }
 
-/* CARDS */
-.tool-card{
-    min-height:120px;
-}
-
-/* CONTAINER */
-.tool-container{
-width:90%;
-padding:20px;
-}
-
-/* BUTTONS */
-button, select{
-width:100%;
-}
-
-}
-    html, body{
-    height: 100%;
-    margin: 0;
-}
-
-body{
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    body{
-    overflow-y:scroll;
-}
-}
-main{
-    flex: 1;
-}
-
-/* ===============================
-PAGE CONTENT (Contact / About)
-================================*/
-.page-container{
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 40 auto;
-    text-align: center;
-}
-
-.page-container h1{
-    margin-bottom: 10px;
-}
-
-.subtitle{
-    color: #64748b;
-    margin-bottom: 20px;
-}
-
-.page-container p{
-    color: #475569;
-    line-height: 1.7;
-    margin: 10px 0;
-}
-
-.email{
-    font-size: 18px;
-    color: #0f172a;
 }
