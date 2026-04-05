@@ -444,3 +444,44 @@ RESPONSIVE
     border-top:1px solid #334155;
     margin-top:5px;
 }
+/* LANGUAGE SWITCHER */
+.language-switcher{
+    position:relative;
+    cursor:pointer;
+    color:#cbd5e1;
+    font-weight:500;
+}
+
+/* DROPDOWN */
+.lang-menu{
+    position:absolute;
+    top:35px;
+    right:0;
+
+    background:#1e293b;
+    border-radius:10px;
+    padding:10px 0;
+    min-width:160px;
+
+    display:none;
+    box-shadow:0 10px 30px rgba(0,0,0,0.3);
+    z-index:9999;
+}
+
+/* SHOW */
+.language-switcher:hover .lang-menu{
+    display:block;
+}
+
+/* ITEMS */
+.lang-menu a{
+    display:block;
+    padding:10px 15px;
+    color:#cbd5e1;
+    font-size:14px;
+}
+
+.lang-menu a:hover{
+    background:#334155;
+    color:white;
+}
