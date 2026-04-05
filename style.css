@@ -34,12 +34,12 @@ HEADER
 .nav-menu{
     display:flex;
     justify-content:center;
+    align-items:center;
     gap:25px;
-}
 
-.nav-menu a{
-    color:#cbd5e1;
-    font-weight:500;
+    width:100%;        /* 🔥 important */
+    max-width:800px;   /* keeps it tight */
+    margin:0 auto;     /* 🔥 centers the whole group */
 }
 
 .nav-menu a:hover{
