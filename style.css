@@ -445,10 +445,15 @@ RESPONSIVE
     margin-top:5px;
 }
 /* LANGUAGE SWITCHER */
+/* WRAPPER */
 .language-switcher{
     position:relative;
-    cursor:pointer;
+}
+
+/* TRIGGER */
+.lang-trigger{
     color:#cbd5e1;
+    cursor:pointer;
     font-weight:500;
 }
 
@@ -463,22 +468,23 @@ RESPONSIVE
     padding:10px 0;
     min-width:160px;
 
-    display:none;
+    display:none; /* 🔥 hidden by default */
     box-shadow:0 10px 30px rgba(0,0,0,0.3);
     z-index:9999;
 }
 
-/* SHOW */
+/* SHOW ON HOVER */
 .language-switcher:hover .lang-menu{
     display:block;
 }
 
-/* ITEMS */
+/* LINKS */
 .lang-menu a{
     display:block;
     padding:10px 15px;
     color:#cbd5e1;
     font-size:14px;
+    text-decoration:none;
 }
 
 .lang-menu a:hover{
