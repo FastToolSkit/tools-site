@@ -413,18 +413,33 @@ MORE TOOLS SECTION
     margin-top: 40px;
 }
 
-/* TRUST */
 .trust-section {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
-    margin: 40px 0;
+    max-width: 1100px;
+    margin: 60px auto;
+    padding: 0 20px;
 }
 
 .trust-box {
-    background: #e2e8f0;
-    padding: 20px;
+    background: #f1f5f9;
+    padding: 25px 20px;
     border-radius: 12px;
-    width: 200px;
     text-align: center;
+    transition: 0.2s;
+}
+
+.trust-box:hover {
+    transform: translateY(-5px);
+}
+
+.trust-box h4 {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.trust-box p {
+    font-size: 14px;
+    color: #64748b;
 }
