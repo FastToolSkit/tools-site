@@ -23,46 +23,62 @@ crossorigin="anonymous"></script>
 
 <header class="site-header">
 
-<a href="index.html" class="logo">
-<img src="convertios-logo.png" alt="Convertios Logo">
-</a>
+<div class="left">
+    <a href="index.html" class="logo">
+        <img src="convertios-logo.png" alt="Convertios Logo">
+    </a>
+</div>
 
 <nav class="nav-menu">
-<a href="index.html">Home</a>
-<a href="tools.html">Tools</a>
-<a href="about.html">About</a>
-<a href="contact.html">Contact</a>
+    <a href="index.html" class="active">Home</a>
+    <a href="tools.html">Tools</a>
+    <a href="#">Image</a>
+    <a href="#">PDF</a>
+    <a href="#">Audio</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
 </nav>
 
-<div class="search-box">
-<input type="text" id="toolSearchHeader" placeholder="Search tools..." onkeyup="searchTools()">
+<div class="right">
+    <div class="header-search">🔍</div>
+    <button class="bookmark-btn">Bookmark ★</button>
 </div>
 
 </header>
-
 <main>
 
 <!-- HERO -->
 <section class="hero">
 
-<div class="hero-badge">100% Free • Secure • No Signup</div>
+<div class="hero-content">
 
-<h1>Free Online Conversion <span>Tools & More</span></h1>
+<div class="hero-badge">100% Free • Secure • No Sign-Up</div>
+
+<h1>
+Free Online Conversion <span>Tools & More</span>
+</h1>
 
 <p class="hero-sub">
 Convert files, edit images, and transform documents instantly with fast and secure tools.
 </p>
 
 <div class="hero-search">
-  <div class="hero-icons">
-    <div class="icon pdf">PDF</div>
-    <div class="icon jpg">JPG</div>
-    <div class="icon png">PNG</div>
-    <div class="icon mp3">MP3</div>
-    <div class="icon docx">DOCX</div>
+<input type="text" placeholder="Search tools (e.g. PDF to Word)">
+<button>Search</button>
 </div>
-<input type="text" id="toolSearchHero" placeholder="Search tools (e.g. PDF to Word)">
-<button onclick="searchTools()">Search</button>
+
+</div>
+
+<!-- FLOATING ICONS -->
+<div class="floating-icons">
+
+<div class="icon pdf">PDF</div>
+<div class="icon jpg">JPG</div>
+<div class="icon mp3">MP3</div>
+
+<div class="icon png">PNG</div>
+<div class="icon docx">DOCX</div>
+
 </div>
 
 </section>
