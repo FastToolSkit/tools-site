@@ -359,6 +359,10 @@ RESPONSIVE
     transition:0.3s;
 }
 
+
+.nav-menu span:hover{
+    color:white;
+}
 .nav-menu a:hover::after{
     width:100%;
 }
@@ -371,7 +375,11 @@ RESPONSIVE
 .nav-menu a.active{
     color:#3b82f6;
 }
-
+.nav-menu span{
+    color:#cbd5e1;
+    font-weight:500;
+    cursor:pointer;
+}
 /* ================= DROPDOWN ================= */
 
 .nav-item{
