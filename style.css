@@ -349,3 +349,6 @@ iframe {
     max-width: 100% !important;
     border: none;
 }
+ins.adsbygoogle {
+    display: none !important;
+}
