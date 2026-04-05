@@ -1,7 +1,7 @@
 /* ===============================
 RESET
 =============================== */
-*{
+*{    
     margin:0;
     padding:0;
     box-sizing:border-box;
@@ -328,4 +328,85 @@ RESPONSIVE
     width:100%;
 }
 
+}
+
+/* ================= NAV IMPROVED ================= */
+
+.nav-menu{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    align-items:center;
+}
+
+/* LINKS */
+.nav-menu a{
+    color:#cbd5e1;
+    font-weight:500;
+    position:relative;
+    padding:5px 0;
+}
+
+/* HOVER UNDERLINE */
+.nav-menu a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-3px;
+    width:0%;
+    height:2px;
+    background:#3b82f6;
+    transition:0.3s;
+}
+
+.nav-menu a:hover::after{
+    width:100%;
+}
+
+.nav-menu a:hover{
+    color:white;
+}
+
+/* ACTIVE */
+.nav-menu a.active{
+    color:#3b82f6;
+}
+
+/* ================= DROPDOWN ================= */
+
+.nav-item{
+    position:relative;
+}
+
+.dropdown-menu{
+    position:absolute;
+    top:35px;
+    left:0;
+
+    background:#1e293b;
+    border-radius:10px;
+    padding:10px 0;
+
+    min-width:180px;
+    display:none;
+
+    box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* SHOW ON HOVER */
+.nav-item:hover .dropdown-menu{
+    display:block;
+}
+
+/* DROPDOWN LINKS */
+.dropdown-menu a{
+    display:block;
+    padding:10px 15px;
+    color:#cbd5e1;
+    font-size:14px;
+}
+
+.dropdown-menu a:hover{
+    background:#334155;
+    color:white;
 }
