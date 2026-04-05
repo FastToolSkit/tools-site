@@ -29,21 +29,25 @@ HEADER
 }
 
 .logo img{
-    height:40px;
-}
+  height:42px;   
+    width:auto;
+        transition:0.3s;
 
+}
+.logo img:hover{
+    transform:scale(1.05);
+}
 /* NAV CENTER */
 .nav-menu{
     display:flex;
     justify-content:center;
     align-items:center;
-    gap:25px;
-
-    width:100%;        /* 🔥 important */
-    max-width:800px;   /* keeps it tight */
-    margin:0 auto;     /* 🔥 centers the whole group */
+    gap:28px;
+    justify-self:center;
+    width:100%;       
+    max-width:800px;  
+    margin:0 auto;    
 }
-
 .nav-menu a::after{
     content:"";
     position:absolute;
@@ -64,6 +68,11 @@ HEADER
 .header-right{
     display:flex;
     justify-content:flex-end;
+        align-items:center;
+}
+    .header-left{
+    display:flex;
+    align-items:center;
 }
 
 .bookmark-btn{
