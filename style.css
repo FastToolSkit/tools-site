@@ -340,3 +340,12 @@ MOBILE
 }
 
 }
+ins.adsbygoogle {
+    max-width: 100% !important;
+    overflow: hidden !important;
+    display: block !important;
+}
+iframe {
+    max-width: 100% !important;
+    border: none;
+}
