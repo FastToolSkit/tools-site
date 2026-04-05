@@ -354,8 +354,14 @@ RESPONSIVE
     font-weight:500;
     position:relative;
     padding:5px 0;
-}
+    text-decoration:none;
 
+}
+.nav-menu a:hover,
+.nav-menu span:hover{
+    color:#3b82f6;
+    text-shadow:0 0 8px rgba(59,130,246,0.5);
+}
 /* HOVER UNDERLINE */
 .nav-menu a::after{
     content:"";
