@@ -273,94 +273,47 @@ Convert files, edit images, and transform documents instantly with fast and secu
 <p>© Convertios • Free Tools</p>
 </footer>
 <script>
-    
+// DROPDOWN (KEEP THIS)
 document.querySelectorAll(".dropdown span").forEach(item => {
     item.addEventListener("click", function(e){
         e.stopPropagation();
-        
-        // close others
+
         document.querySelectorAll(".dropdown-menu").forEach(menu => {
             if(menu !== this.nextElementSibling){
                 menu.style.display = "none";
             }
         });
 
-        // toggle current
         let menu = this.nextElementSibling;
         menu.style.display = (menu.style.display === "block") ? "none" : "block";
     });
 });
 
-// click outside closes all
 document.addEventListener("click", () => {
     document.querySelectorAll(".dropdown-menu").forEach(menu => {
         menu.style.display = "none";
     });
 });
-const searchInput = document.getElementById("toolSearch");
 
-searchInput.addEventListener("keypress", function(e) {
-    if (e.key === "Enter") {
-        let value = searchInput.value.toLowerCase().trim();
-
-        // PDF tools
-        if (value.includes("pdf to word")) {
-            window.location.href = "pdf-to-word.html";
-        } 
-        else if (value.includes("pdf to jpg")) {
-            window.location.href = "pdf-to-jpg.html";
-        }
-        else if (value.includes("jpg to pdf")) {
-            window.location.href = "jpg-to-pdf.html";
-        }
-        else if (value.includes("merge pdf")) {
-            window.location.href = "merge-pdf.html";
-        }
-        else if (value.includes("split pdf")) {
-            window.location.href = "split-pdf.html";
-        }
-
-        // Image tools
-        else if (value.includes("png to jpg")) {
-            window.location.href = "png-to-jpg.html";
-        }
-        else if (value.includes("jpg to png")) {
-            window.location.href = "jpg-to-png.html";
-        }
-        else if (value.includes("compress image")) {
-            window.location.href = "compress-image.html";
-        }
-
-        // Audio tools
-        else if (value.includes("mp3 cutter")) {
-            window.location.href = "mp3-cutter.html";
-        }
-        else if (value.includes("audio converter")) {
-            window.location.href = "audio-converter.html";
-        }
-
-        // fallback
-        else {
-            alert("Tool not found yet");
-        }
-    }
-});
+// ✅ CLEAN SEARCH SYSTEM (ONLY THIS ONE)
 const searchInput = document.getElementById("toolSearch");
 const tools = document.querySelectorAll(".tool-card");
 
-searchInput.addEventListener("input", function() {
-    const value = this.value.toLowerCase().trim();
+if (searchInput) {
+    searchInput.addEventListener("input", function() {
+        const value = this.value.toLowerCase().trim();
 
-    tools.forEach(tool => {
-        const keywords = tool.getAttribute("data-keywords");
+        tools.forEach(tool => {
+            const keywords = tool.getAttribute("data-keywords") || "";
 
-        if (keywords.includes(value)) {
-            tool.style.display = "";
-        } else {
-            tool.style.display = "none";
-        }
+            if (value === "" || keywords.includes(value)) {
+                tool.style.display = "";
+            } else {
+                tool.style.display = "none";
+            }
+        });
     });
-});
+}
 </script>
 </body>
 </html>
