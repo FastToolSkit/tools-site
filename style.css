@@ -270,7 +270,11 @@ ICONS
     font-size:11px;
     opacity:0.8;
 }
-
+.icon-grid{
+    display:grid;
+    grid-template-columns: repeat(5, 60px);
+    gap:12px;
+}
 .webp{ background:#10b981; top:35%; right:20%; }
 .gif{ background:#f59e0b; top:55%; left:30%; }
 .wav{ background:#6366f1; top:15%; right:30%; }
@@ -636,19 +640,24 @@ RESPONSIVE
 /* BADGE STYLE */
 
 .hero-right{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
 .icon{
-    position: static !important;
-    transform: none !important;
-    font-size: 12px;
-    padding: 6px 10px;
+    position: static;
+    width:60px;
+    height:140px;
+    border-radius:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:12px;
+    font-weight:600;
+    color:white;
 }
-
 
 
 /* ===== SEO SECTION ===== */
