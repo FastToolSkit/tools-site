@@ -225,7 +225,7 @@ Convert files, edit images, and transform documents instantly with fast and secu
 
     <a href="tools.html" class="view-all-btn">View All Tools →</a>
 </div>
-
+<h2 id="categoryTitle" style="margin:20px 0;"></h2>
 <div class="tools-grid" id="toolsGrid">
 
 <a href="pdf-to-word.html" class="tool-card" data-keywords="pdf to word convert document">
@@ -415,18 +415,28 @@ document.addEventListener("click", (e) => {
         resultsBox.style.display = "none";
     }
 });
-    const urlParams = new URLSearchParams(window.location.search);
+const urlParams = new URLSearchParams(window.location.search);
 const category = urlParams.get("category");
 
+const tools = document.querySelectorAll(".tool-card");
+const title = document.getElementById("categoryTitle");
+
 if (category) {
-    const tools = document.querySelectorAll(".tool-card");
+
+    // 🔥 Set dynamic title
+    title.innerText = category.charAt(0).toUpperCase() + category.slice(1) + " Tools";
 
     tools.forEach(tool => {
-        const toolCategory = tool.getAttribute("data-category");
+        const toolCat = tool.getAttribute("data-category");
 
-        if (toolCategory !== category) {
+        if (toolCat !== category) {
             tool.style.display = "none";
         }
+    });
+
+} else {
+    title.innerText = "All Tools";
+}
     });
 }
 </script>
