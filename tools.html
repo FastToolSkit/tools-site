@@ -9,27 +9,27 @@
 <title>All Tools - Convertios</title>
 <meta name="description" content="Browse all free online tools on Convertios. Image, PDF, audio tools and more.">
 
-<link rel="stylesheet" href="/style.css?v=2">
+<link rel="stylesheet" href="/style.css?v=3">
 <link rel="icon" href="/favicon.png">
-<link rel="icon" href="favicon.png"> 
-  <link rel="shortcut icon" href="favicon.png">
-</head>
-<!-- Google tag (gtag.js) -->
+
+<!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0CH8NE5WDH"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-0CH8NE5WDH');
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-0CH8NE5WDH');
 </script>
+
+</head>
+
 <body>
 
-<!-- ✅ HEADER (fixed) -->
+<!-- HEADER -->
 <header class="site-header">
 
 <a href="index.html" class="logo">
-  <img src="convertios-logo.png" alt="Convertios" style="height:120px;">
+  <img src="convertios-logo.png" alt="Convertios" style="height:80px;">
 </a>
 
 <nav class="nav-menu">
@@ -41,12 +41,12 @@
 
 <div class="search-box">
   <span class="search-icon">🔍</span>
-  <input type="text" id="toolSearch" placeholder="Search tools..." onkeyup="searchTools()">
+  <input type="text" id="toolSearch" placeholder="Search tools...">
 </div>
 
 </header>
 
-<!-- ✅ PAGE TITLE -->
+<!-- TITLE -->
 <div class="hero-wrapper">
   <div class="hero-section">
     <h1>All Tools</h1>
@@ -54,128 +54,86 @@
   </div>
 </div>
 
-<!-- ✅ TOOLS GRID -->
-<div class="tools-grid">
+<!-- TOOLS -->
+<div class="tools-grid" id="toolsGrid">
 
-<!-- (tools here — same structure we fixed earlier) -->
-
-<a href="pdf-to-word.html" class="tool-card">
-<div class="tool-title">
-<span class="tool-icon">📄</span>
+<!-- PDF -->
+<a href="pdf-to-word.html" class="tool-card" data-category="pdf">
 <h3>PDF to Word</h3>
-</div>
 <p>Convert PDF files to Word documents instantly.</p>
 </a>
 
-<a href="remove-bg.html" class="tool-card">
-<div class="tool-title">
-<span class="tool-icon">🪄</span>
-<h3>Remove Background</h3>
-</div>
-<p>Remove image backgrounds instantly.</p>
-</a>
-
-<a href="pdf-to-jpg.html" class="tool-card">
-<div class="tool-title">
-<span class="tool-icon">🖼️</span>
+<a href="pdf-to-jpg.html" class="tool-card" data-category="pdf">
 <h3>PDF to JPG</h3>
-</div>
 <p>Convert PDF pages into images.</p>
 </a>
 
-<a href="jpg-to-pdf.html" class="tool-card">
-<div class="tool-title">
-<span class="tool-icon">📄</span>
-<h3>JPG to PDF</h3>
-</div>
-<p>Convert JPG to PDF file.</p>
-</a>
-
-<a href="merge-pdf.html" class="tool-card">
-<div class="tool-title">
-<span class="tool-icon">📑</span>
+<a href="merge-pdf.html" class="tool-card" data-category="pdf">
 <h3>Merge PDF</h3>
-</div>
 <p>Combine multiple PDFs.</p>
 </a>
 
-<a href="split-pdf.html" class="tool-card">
-<div class="tool-title">
-<span class="tool-icon">✂️</span>
+<a href="split-pdf.html" class="tool-card" data-category="pdf">
 <h3>Split PDF</h3>
-</div>
 <p>Split PDF into pages.</p>
 </a>
 
-<a href="image-resizer.html" class="tool-card">
-<div class="tool-title">
-<span class="tool-icon">📐</span>
+<!-- IMAGE -->
+<a href="remove-bg.html" class="tool-card" data-category="image">
+<h3>Remove Background</h3>
+<p>Remove image backgrounds instantly.</p>
+</a>
+
+<a href="jpg-to-pdf.html" class="tool-card" data-category="image">
+<h3>JPG to PDF</h3>
+<p>Convert JPG to PDF file.</p>
+</a>
+
+<a href="image-resizer.html" class="tool-card" data-category="image">
 <h3>Image Resizer</h3>
-</div>
 <p>Resize images easily.</p>
 </a>
 
-<a href="image-converter.html" class="tool-card">
-<div class="tool-title">
-<span class="tool-icon">🖼️</span>
+<a href="image-converter.html" class="tool-card" data-category="image">
 <h3>Image Converter</h3>
-</div>
 <p>Convert image formats.</p>
 </a>
 
-<a href="compress-image.html" class="tool-card">
-<div class="tool-title">
-<span class="tool-icon">🗜️</span>
+<a href="compress-image.html" class="tool-card" data-category="image">
 <h3>Image Compressor</h3>
-</div>
 <p>Reduce image size.</p>
 </a>
 
-<a href="png-to-jpg.html" class="tool-card">
-<div class="tool-title">
-<span class="tool-icon">📸</span>
+<a href="png-to-jpg.html" class="tool-card" data-category="image">
 <h3>PNG to JPG</h3>
-</div>
 <p>Convert PNG to JPG.</p>
 </a>
 
-<a href="jpg-to-png.html" class="tool-card">
-<div class="tool-title">
-<span class="tool-icon">🖼️</span>
+<a href="jpg-to-png.html" class="tool-card" data-category="image">
 <h3>JPG to PNG</h3>
-</div>
 <p>Convert JPG to PNG.</p>
 </a>
 
-<a href="webp-to-png.html" class="tool-card">
-<div class="tool-title">
-<span class="tool-icon">🔄</span>
+<a href="webp-to-png.html" class="tool-card" data-category="image">
 <h3>WEBP to PNG</h3>
-</div>
 <p>Convert WEBP to PNG.</p>
 </a>
 
-<a href="mp3-cutter.html" class="tool-card">
-<div class="tool-title">
-<span class="tool-icon">🎵</span>
+<!-- AUDIO -->
+<a href="mp3-cutter.html" class="tool-card" data-category="audio">
 <h3>MP3 Cutter</h3>
-</div>
 <p>Trim audio files.</p>
 </a>
 
-<a href="audio-converter.html" class="tool-card">
-<div class="tool-title">
-<span class="tool-icon">🎧</span>
+<a href="audio-converter.html" class="tool-card" data-category="audio">
 <h3>Audio Converter</h3>
-</div>
 <p>Convert audio formats.</p>
 </a>
 
 </div>
 
-<!-- ✅ FOOTER -->
+<!-- FOOTER -->
 <footer class="site-footer">
-
 <p>
 © 2026 Convertios • Free Online Tools
 <br>
@@ -183,20 +141,38 @@
 <a href="terms.html">Terms</a> •
 <a href="contact.html">Contact</a>
 </p>
-
 </footer>
 
-<!-- ✅ SEARCH SCRIPT (important!) -->
+<!-- 🔥 SEARCH + CATEGORY FILTER -->
 <script>
-function searchTools(){
-let input = document.getElementById("toolSearch").value.toLowerCase();
-let cards = document.querySelectorAll(".tool-card");
 
-cards.forEach(card => {
-let text = card.innerText.toLowerCase();
-card.style.display = text.includes(input) ? "block" : "none";
+// SEARCH
+const searchInput = document.getElementById("toolSearch");
+const tools = document.querySelectorAll(".tool-card");
+
+searchInput.addEventListener("input", function() {
+    const value = this.value.toLowerCase();
+
+    tools.forEach(tool => {
+        const text = tool.innerText.toLowerCase();
+        tool.style.display = text.includes(value) ? "" : "none";
+    });
 });
+
+// CATEGORY FILTER (from URL)
+const params = new URLSearchParams(window.location.search);
+const category = params.get("category");
+
+if (category) {
+    tools.forEach(tool => {
+        const toolCat = tool.getAttribute("data-category");
+
+        if (toolCat !== category) {
+            tool.style.display = "none";
+        }
+    });
 }
+
 </script>
 
 </body>
