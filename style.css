@@ -63,7 +63,7 @@ HEADER
     display:flex;
     justify-content:center;
     align-items:center;
-    gap:28px;
+    gap:30px;
     justify-self:center;
     width:100%;       
     max-width:800px;  
