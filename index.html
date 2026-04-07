@@ -319,7 +319,10 @@ Convert files, edit images, and transform documents instantly with fast and secu
 
 </footer>
 <script>
-// DROPDOWN (KEEP THIS)
+
+// ==========================
+// DROPDOWN
+// ==========================
 document.querySelectorAll(".dropdown span").forEach(item => {
     item.addEventListener("click", function(e){
         e.stopPropagation();
@@ -330,7 +333,7 @@ document.querySelectorAll(".dropdown span").forEach(item => {
             }
         });
 
-        let menu = this.nextElementSibling;
+        const menu = this.nextElementSibling;
         menu.style.display = (menu.style.display === "block") ? "none" : "block";
     });
 });
@@ -341,11 +344,13 @@ document.addEventListener("click", () => {
     });
 });
 
-// ✅ CLEAN SEARCH SYSTEM (ONLY THIS ONE)
+
+// ==========================
+// SEARCH SYSTEM
+// ==========================
 const searchInput = document.getElementById("toolSearch");
 const resultsBox = document.getElementById("searchResults");
 
-// 🔥 ALL YOUR TOOLS (from your site)
 const toolsData = [
     { name: "PDF to Word", url: "pdf-to-word.html", keywords: "pdf word document" },
     { name: "PDF to JPG", url: "pdf-to-jpg.html", keywords: "pdf image jpg" },
@@ -374,71 +379,83 @@ const toolsData = [
     { name: "Unit Converter", url: "unit-converter.html", keywords: "convert units" },
     { name: "Meme Generator", url: "meme-generator.html", keywords: "meme generator create" }
 ];
-searchInput.addEventListener("input", function() {
-    const value = this.value.toLowerCase().trim();
 
-    resultsBox.innerHTML = "";
+// ✅ prevent errors on pages without search
+if (searchInput && resultsBox) {
 
-    if (value === "") {
-        resultsBox.style.display = "none";
-        return;
-    }
+    searchInput.addEventListener("input", function() {
+        const value = this.value.toLowerCase().trim();
 
-    const filtered = toolsData.filter(tool =>
-        tool.name.toLowerCase().includes(value) ||
-        tool.keywords.includes(value)
-    );
+        resultsBox.innerHTML = "";
 
-    if (filtered.length === 0) {
-        resultsBox.style.display = "none";
-        return;
-    }
+        if (value === "") {
+            resultsBox.style.display = "none";
+            return;
+        }
 
-    filtered.forEach(tool => {
-        const div = document.createElement("div");
-        div.classList.add("search-item");
-        div.textContent = tool.name;
+        const filtered = toolsData.filter(tool =>
+            tool.name.toLowerCase().includes(value) ||
+            tool.keywords.toLowerCase().includes(value)
+        );
 
-        div.addEventListener("click", () => {
-            window.location.href = tool.url;
+        if (filtered.length === 0) {
+            resultsBox.style.display = "none";
+            return;
+        }
+
+        filtered.forEach(tool => {
+            const div = document.createElement("div");
+            div.classList.add("search-item");
+            div.textContent = tool.name;
+
+            div.addEventListener("click", () => {
+                window.location.href = tool.url;
+            });
+
+            resultsBox.appendChild(div);
         });
 
-        resultsBox.appendChild(div);
+        resultsBox.style.display = "block";
     });
 
-    resultsBox.style.display = "block";
-});
+    // hide when clicking outside
+    document.addEventListener("click", (e) => {
+        if (!document.querySelector(".hero-search")?.contains(e.target)) {
+            resultsBox.style.display = "none";
+        }
+    });
+}
 
-// hide when clicking outside
-document.addEventListener("click", (e) => {
-    if (!document.querySelector(".hero-search").contains(e.target)) {
-        resultsBox.style.display = "none";
-    }
-});
+
+// ==========================
+// CATEGORY FILTER (tools.html)
+// ==========================
 const urlParams = new URLSearchParams(window.location.search);
 const category = urlParams.get("category");
 
 const tools = document.querySelectorAll(".tool-card");
 const title = document.getElementById("categoryTitle");
 
-if (category) {
+if (tools.length && title) {
 
-    // 🔥 Set dynamic title
-    title.innerText = category.charAt(0).toUpperCase() + category.slice(1) + " Tools";
+    if (category) {
 
-    tools.forEach(tool => {
-        const toolCat = tool.getAttribute("data-category");
+        title.innerText = category.charAt(0).toUpperCase() + category.slice(1) + " Tools";
 
-        if (toolCat !== category) {
-            tool.style.display = "none";
-        }
-    });
+        tools.forEach(tool => {
+            const toolCat = tool.getAttribute("data-category");
 
-} else {
-    title.innerText = "All Tools";
+            if (toolCat !== category) {
+                tool.style.display = "none";
+            }
+        });
+
+    } else {
+        title.innerText = "All Tools";
+    }
+
 }
-    });
-}
+
 </script>
 </body>
 </html>
