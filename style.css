@@ -539,7 +539,6 @@ RESPONSIVE
     flex-direction: column;
     text-align: center;
 }
-@media (max-width:768px){
 
 /* ===== HEADER ===== */
 .site-header{
@@ -573,10 +572,6 @@ RESPONSIVE
     display: none !important;
 }
 
-/* TEXT */
-.hero-left h1{
-    font-size: 24px;
-}
 
 /* SEARCH */
 .hero-search input{
@@ -589,9 +584,7 @@ RESPONSIVE
 }
 
 /* ===== TOOLS ===== */
-.tools-grid{
-    grid-template-columns: 1fr;
-}
+
 
 /* ===== TRUST ===== */
 .trust-section{
@@ -601,15 +594,6 @@ RESPONSIVE
 }
 .hero-left h1{
     font-size: 24px;
-}
-
-.hero-search input{
-    width: 100%;
-}
-
-/* ===== CATEGORIES ===== */
-.categories{
-    grid-template-columns: 1fr;
 }
 
 /* ===== TOOLS GRID ===== */
@@ -622,11 +606,8 @@ RESPONSIVE
 .tool-card{
     padding: 16px;
 }
-.trust-section{
-    grid-template-columns: 1fr;
-}
 
-}
+
 /* ===== POPULAR SECTION ===== */
 .popular-section h2{
     font-size: 22px;
