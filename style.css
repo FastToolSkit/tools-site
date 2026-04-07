@@ -22,18 +22,20 @@ HEADER
     justify-content:space-between;
     align-items:center;
 
-    padding:15px 40px;
+    padding:14px 50px;
 
-    /* ✅ UPGRADED BACKGROUND */
-    background: linear-gradient(90deg, #0f172a, #111827);
+    /* 🔥 STRONGER gradient */
+    background: linear-gradient(135deg, #0b1220, #0f172a 60%, #111827);
 
-    /* ✅ ADD THIS (clean separation) */
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    /* 🔥 better separation */
+    border-bottom: 1px solid rgba(255,255,255,0.06);
 
-    /* keep your shadow */
-    box-shadow:0 4px 20px rgba(0,0,0,0.2);
+    /* 🔥 stronger depth */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
 
-    position:relative;
+    position:sticky; /* 👈 IMPORTANT */
+    top:0;
+
     z-index:1000;
 }
 
@@ -61,6 +63,14 @@ HEADER
     position:absolute;
 
 }
+.nav-menu a{
+    color:#cbd5e1;
+    text-decoration:none;
+    font-weight:500;
+    padding:8px 12px;
+    border-radius:8px;
+    transition:0.25s;
+}
 .nav-menu a::after{
     content:"";
     position:absolute;
@@ -75,6 +85,10 @@ HEADER
 .nav-menu a.active{
     color:#3b82f6;
     font-weight:600;
+}
+.nav-menu a:hover{
+    background: rgba(255,255,255,0.08);
+    color:white;
 }
 
 /* RIGHT */
