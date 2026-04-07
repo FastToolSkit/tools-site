@@ -598,11 +598,10 @@ RESPONSIVE
 }
 
 /* BADGE STYLE */
-.hero-badge{
-    display: inline-flex;
-    padding: 6px 10px;
-    font-size: 12px;
-    border-radius: 10px;
+.hero-right{
+    display: none !important;
+}
+
 }
 
 
