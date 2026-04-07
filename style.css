@@ -776,3 +776,6 @@ RESPONSIVE
     transform: translateY(-8px);
     box-shadow: 0 20px 40px rgba(99, 102, 241, 0.25);
 }
+.popular-grid .tool-card:first-child {
+    transform: scale(1.05);
+}
