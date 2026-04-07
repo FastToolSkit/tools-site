@@ -578,16 +578,18 @@ RESPONSIVE
     flex-direction: column;
     align-items: center;
 }
-.hero-badges {
-    position: static !important;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
+.hero-badges{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:6px;
 }
-.hero-badge {
-    position: static !important;
-    transform: none !important;
+
+.hero-badge{
+    position:static !important;
+    transform:none !important;
+    font-size:12px;
+    padding:6px 10px;
 }
 
 }
