@@ -68,8 +68,7 @@ HEADER
     width:100%;       
     max-width:800px;  
     margin:0 auto;    
-    left:50%;
-    transform:translateX(-50%);
+
   position: relative;
     z-index: 999;
 }
@@ -112,13 +111,6 @@ HEADER
     align-items:center;
 }
 
-.bookmark-btn{
-    background:#2563eb;
-    color:white;
-    border:none;
-    padding:6px 14px;
-    border-radius:8px;
-}
 
 /* ===============================
 HERO
@@ -540,8 +532,13 @@ RESPONSIVE
 .nav-menu{
     display:flex;
     justify-content:center;
-    gap:25px;
     align-items:center;
+    gap:30px;
+    width:100%;
+    max-width:900px;
+    margin:0 auto;
+    position: relative;
+    z-index: 999;
 }
 
 /* LINKS */
@@ -591,11 +588,19 @@ RESPONSIVE
     font-weight:500;
     cursor:pointer;
 }
-/* ================= DROPDOWN ================= */
 
 .nav-item{
     position:relative;
 }
+.nav-all-tools{
+    color:#3b82f6;
+    font-weight:600;
+}
+
+.nav-all-tools:hover{
+    background: rgba(59,130,246,0.15);
+}
+/* ================= DROPDOWN ================= */
 
 .dropdown-menu{
     position:absolute;
