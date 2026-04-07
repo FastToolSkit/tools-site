@@ -7,7 +7,7 @@ RESET
     box-sizing:border-box;
 }
 html, body {
-    height: 100%;a
+    height: 100%;
 }
 body{
     font-family: system-ui, -apple-system, Arial, sans-serif;
@@ -133,8 +133,7 @@ HERO
 
 /* LEFT SIDE */
 .hero-left{
- width:100%;
-    flex:unset;
+    flex:1;
 }
 
 .hero-badge{
@@ -549,7 +548,7 @@ RESPONSIVE
     padding: 10px;
 }
 
-/* ===== NAV ===== */
+/* NAV */
 .nav-menu{
     flex-wrap: wrap;
     justify-content: center;
@@ -557,7 +556,7 @@ RESPONSIVE
     max-width: 100%;
 }
 
-/* ===== DROPDOWN ===== */
+/* DROPDOWN */
 .dropdown-menu{
     position: static;
     width: 100%;
@@ -566,7 +565,6 @@ RESPONSIVE
 /* ===== HERO ===== */
 .hero-container{
     flex-direction: column;
-    align-items: center;
     text-align: center;
 }
 
@@ -575,18 +573,36 @@ RESPONSIVE
     display: none !important;
 }
 
-/* FIX WIDTH ISSUE */
-.hero-left{
-    width: 100%;
-    flex: unset;
-}
-
 /* TEXT */
 .hero-left h1{
     font-size: 24px;
 }
 
 /* SEARCH */
+.hero-search input{
+    width: 100%;
+}
+
+/* ===== CATEGORIES ===== */
+.categories{
+    grid-template-columns: 1fr;
+}
+
+/* ===== TOOLS ===== */
+.tools-grid{
+    grid-template-columns: 1fr;
+}
+
+/* ===== TRUST ===== */
+.trust-section{
+    grid-template-columns: 1fr;
+}
+
+}
+.hero-left h1{
+    font-size: 24px;
+}
+
 .hero-search input{
     width: 100%;
 }
@@ -606,12 +622,11 @@ RESPONSIVE
 .tool-card{
     padding: 16px;
 }
-
-/* ===== TRUST ===== */
 .trust-section{
     grid-template-columns: 1fr;
 }
 
+}
 /* ===== POPULAR SECTION ===== */
 .popular-section h2{
     font-size: 22px;
@@ -625,6 +640,26 @@ RESPONSIVE
 .more-tools-grid{
     flex-direction: column;
     align-items: center;
+}
+
+
+
+/* BADGE STYLE */
+
+.hero-right{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+.icon{
+    position: static !important;
+    transform: none !important;
+    font-size: 12px;
+    padding: 6px 10px;
+}
+
 }
 
 /* ===== SEO SECTION ===== */
@@ -648,6 +683,7 @@ RESPONSIVE
 }
 
 }
+
 /* ================= NAV IMPROVED ================= */
 
 .nav-menu{
