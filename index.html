@@ -23,13 +23,25 @@ function loadAds(){
     document.head.appendChild(script);
 }
 
+let loaded = false;
+
+function triggerAds(){
+    if (!loaded){
+        loadAds();
+        loaded = true;
+    }
+}
+
 if (window.innerWidth > 768) {
-    loadAds(); 
-} else {
-    setTimeout(loadAds, 3000);
+    loadAds();
+}
+
+else {
+    window.addEventListener("scroll", triggerAds);
+    window.addEventListener("touchstart", triggerAds);
+    window.addEventListener("click", triggerAds);
 }
 </script>
-
 </head>
 
 <body>
