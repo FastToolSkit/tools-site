@@ -433,7 +433,23 @@ CATEGORIES
     background: linear-gradient(135deg, #64748b, #334155);
 }
 
+.categories-wrapper{
+    margin: 70px 0;
+}
 
+.categories-header{
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.categories-header h2{
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.categories-header p{
+    color:#6b7280;
+}
 /* ===============================
 TOOLS
 =============================== */
