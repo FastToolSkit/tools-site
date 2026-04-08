@@ -450,7 +450,9 @@ CATEGORIES
 .categories-header p{
     color:#6b7280;
 }
-
+.categories-section {
+    margin-top: 120px; /* زيدها أو نقصها حسب اللي يعجبك */
+}
 @media (max-width: 900px) {
     .categories-grid {
         grid-template-columns: 1fr 1fr;
