@@ -185,76 +185,118 @@ const downloadLink = document.getElementById("downloadLink");
 
 let imageFile = null;
 
-qualitySlider.oninput = () => qualityValue.innerText = qualitySlider.value;
-
-upload.onchange = function(e){
-imageFile = e.target.files[0];
-const reader = new FileReader();
-reader.onload = e => preview.src = e.target.result;
-reader.readAsDataURL(imageFile);
-};
-
-function compressImage(){
-if(!imageFile) return alert("Upload image first");
-
-const img = new Image();
-img.src = preview.src;
-
-img.onload = function(){
-const canvas = document.createElement("canvas");
-const ctx = canvas.getContext("2d");
-
-canvas.width = img.width;
-canvas.height = img.height;
-
-ctx.drawImage(img,0,0);
-
-canvas.toBlob(blob=>{
-const url = URL.createObjectURL(blob);
-downloadLink.href = url;
-downloadLink.download = "compressed.jpg";
-downloadLink.innerText = "Download Image";
-downloadLink.style.display = "block";
-},"image/jpeg", qualitySlider.value);
-};
+/* ===== SLIDER ===== */
+if (qualitySlider && qualityValue) {
+    qualitySlider.oninput = () => {
+        qualityValue.innerText = qualitySlider.value;
+    };
 }
 
-function compressToTarget(targetKB){
-if(!imageFile) return alert("Upload image first");
+/* ===== UPLOAD ===== */
+if (upload) {
+    upload.onchange = function(e){
+        imageFile = e.target.files[0];
 
-const img = new Image();
-img.src = preview.src;
+        if (!imageFile) return;
 
-img.onload = function(){
-const canvas = document.createElement("canvas");
-const ctx = canvas.getContext("2d");
-
-canvas.width = img.width;
-canvas.height = img.height;
-
-ctx.drawImage(img,0,0);
-
-let quality = 0.9;
-
-function tryCompress(){
-canvas.toBlob(blob=>{
-let sizeKB = blob.size / 1024;
-
-if(sizeKB > targetKB && quality > 0.1){
-quality -= 0.05;
-tryCompress();
-}else{
-const url = URL.createObjectURL(blob);
-downloadLink.href = url;
-downloadLink.download = "compressed-" + targetKB + "kb.jpg";
-downloadLink.innerText = "Download (" + Math.round(sizeKB) + " KB)";
-downloadLink.style.display = "block";
-}
-},"image/jpeg", quality);
+        const reader = new FileReader();
+        reader.onload = e => preview.src = e.target.result;
+        reader.readAsDataURL(imageFile);
+    };
 }
 
-tryCompress();
-};
+/* ===== MAIN ENTRY ===== */
+function runCompression(){
+
+    if(!imageFile){
+        alert("Upload image first");
+        return;
+    }
+
+    const targetInput = document.getElementById("targetKB");
+    const formatSelect = document.getElementById("format");
+
+    const targetKB = targetInput ? parseInt(targetInput.value) : null;
+    const format = formatSelect ? formatSelect.value : "image/jpeg";
+
+    if(targetKB && targetKB > 0){
+        compressToTarget(targetKB, format);
+    }else{
+        compressManual(format);
+    }
+}
+
+/* ===== MANUAL COMPRESS ===== */
+function compressManual(format){
+
+    const img = new Image();
+    img.src = preview.src;
+
+    img.onload = function(){
+
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+
+        canvas.width = img.width;
+        canvas.height = img.height;
+
+        ctx.drawImage(img,0,0);
+
+        canvas.toBlob(blob => {
+
+            const url = URL.createObjectURL(blob);
+
+            downloadLink.href = url;
+            downloadLink.download = "compressed";
+            downloadLink.innerText = "Download";
+            downloadLink.style.display = "block";
+
+        }, format, qualitySlider ? qualitySlider.value : 0.8);
+    };
+}
+
+/* ===== TARGET SIZE COMPRESS ===== */
+function compressToTarget(targetKB, format){
+
+    const img = new Image();
+    img.src = preview.src;
+
+    img.onload = function(){
+
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+
+        canvas.width = img.width;
+        canvas.height = img.height;
+
+        ctx.drawImage(img,0,0);
+
+        let quality = 0.9;
+
+        function tryCompress(){
+
+            canvas.toBlob(blob => {
+
+                let sizeKB = blob.size / 1024;
+
+                if(sizeKB > targetKB && quality > 0.1){
+                    quality -= 0.05;
+                    tryCompress();
+                }else{
+
+                    const url = URL.createObjectURL(blob);
+
+                    downloadLink.href = url;
+                    downloadLink.download = "compressed";
+                    downloadLink.innerText = "Download (" + Math.round(sizeKB) + " KB)";
+                    downloadLink.style.display = "block";
+                }
+
+            }, format, quality);
+        }
+
+        tryCompress();
+    };
 }
 
 </script>
