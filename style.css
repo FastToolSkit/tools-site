@@ -1628,3 +1628,61 @@ margin-bottom:6px;
 font-size:15px;
 line-height:1.6;
 }
+     .contact-container{
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:70vh;
+padding:40px 20px;
+}
+
+.contact-box{
+background:linear-gradient(135deg,#071a33,#0b2447);
+color:white;
+padding:50px;
+border-radius:20px;
+max-width:600px;
+width:100%;
+text-align:center;
+box-shadow:0 20px 50px rgba(0,0,0,0.3);
+}
+
+.contact-box h1{
+font-size:32px;
+margin-bottom:15px;
+}
+
+.contact-subtitle{
+color:#cbd5e1;
+margin-bottom:20px;
+font-size:16px;
+}
+
+.contact-text{
+margin-bottom:25px;
+line-height:1.6;
+}
+
+.contact-email-box{
+background:rgba(255,255,255,0.05);
+padding:20px;
+border-radius:12px;
+margin-bottom:25px;
+}
+
+.contact-email-box a{
+color:#4da3ff;
+font-weight:bold;
+text-decoration:none;
+font-size:16px;
+}
+
+.contact-email-box a:hover{
+text-decoration:underline;
+}
+
+.contact-note{
+color:#cbd5e1;
+font-size:14px;
+line-height:1.6;
+}
