@@ -1509,3 +1509,27 @@ background:#16a34a; /* green */
 .download-btn:hover{
 background:#15803d;
 }
+.main-button{
+display:block;
+width:100%;
+padding:12px;
+margin-top:15px;
+
+background:linear-gradient(135deg,#3a78ff,#2563eb);
+color:white;
+
+border:none;
+border-radius:10px;
+
+font-size:15px;
+font-weight:600;
+
+cursor:pointer;
+transition:0.2s;
+text-align:center;
+}
+
+.main-button:hover{
+transform:translateY(-1px);
+box-shadow:0 10px 20px rgba(0,0,0,0.3);
+}
