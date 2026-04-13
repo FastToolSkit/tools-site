@@ -1537,3 +1537,27 @@ text-align:center;
 transform:translateY(-1px);
 box-shadow:0 10px 20px rgba(0,0,0,0.3);
 }
+.tool-hero{
+max-width:900px;
+margin:60px auto 20px;
+padding:35px 30px;
+
+background:linear-gradient(135deg,#0b2447,#071a33);
+border-radius:20px;
+
+text-align:center;
+color:white;
+
+box-shadow:0 20px 40px rgba(0,0,0,0.3);
+}
+
+.tool-hero h1{
+font-size:32px;
+margin-bottom:10px;
+}
+
+.tool-hero p{
+color:#cbd5e1;
+font-size:15px;
+line-height:1.6;
+}
