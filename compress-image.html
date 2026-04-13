@@ -5,19 +5,127 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Compress images or try tools like 
-<a href="png-to-jpg.html">PNG to JPG</a>, 
-<a href="image-resizer.html">Image Resizer</a>, 
-or <a href="webp-to-png.html">WEBP to PNG</a>.</title>
+<title>Compress Image Online - Reduce Image Size to 100KB, 50KB | Convertios</title>
 
-<meta name="description" content="Compress images online for free. Reduce JPG, PNG, and WEBP file size instantly. No signup required. Fast and secure.">
+<meta name="description" content="Compress images online for free. Reduce JPG, PNG, and WEBP file size instantly to 100KB, 50KB or custom size. Fast, secure, no signup.">
 
 <link rel="canonical" href="https://convertios.com/compress-image.html">
 <meta name="robots" content="index, follow">
 
 <link rel="stylesheet" href="style.css">
 
-<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="icon" href="favicon.png">
+
+<style>
+
+/* ===== HERO (SAME AS PDF PAGE) ===== */
+.tool-container{
+max-width:1000px;
+margin:80px auto 30px;
+background:#071a33;
+color:white;
+padding:40px;
+border-radius:20px;
+text-align:center;
+}
+
+.tool-container p{
+color:#cbd5e1;
+}
+
+/* ===== LAYOUT ===== */
+.app-container{
+display:flex;
+gap:20px;
+max-width:1100px;
+margin:40px auto;
+}
+
+.sidebar{
+width:300px;
+background:#071a33;
+padding:25px;
+border-radius:15px;
+color:white;
+}
+
+.workspace{
+flex:1;
+background:#071a33;
+padding:25px;
+border-radius:15px;
+color:white;
+text-align:center;
+}
+
+/* ===== INPUTS ===== */
+.sidebar input,
+.sidebar select{
+width:100%;
+padding:10px;
+margin-top:8px;
+border-radius:8px;
+border:none;
+}
+
+/* ===== BUTTONS ===== */
+.main-button{
+width:100%;
+padding:12px;
+margin-top:15px;
+background:#3a78ff;
+color:white;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+
+.main-button:hover{
+background:#2a66e6;
+}
+
+.download-btn{
+background:#16a34a;
+}
+
+/* ===== UPLOAD ===== */
+.upload-area{
+border:2px dashed #3a78ff;
+padding:40px;
+border-radius:12px;
+cursor:pointer;
+}
+
+.upload-area:hover{
+background:#0c2547;
+}
+
+/* ===== PREVIEW ===== */
+#preview{
+max-width:100%;
+max-height:300px;
+margin-top:20px;
+border-radius:10px;
+}
+
+/* ===== PROGRESS ===== */
+#progressBox{
+margin-top:15px;
+color:#cbd5e1;
+}
+
+/* ===== SEO ===== */
+.tool-description{
+max-width:900px;
+margin:40px auto;
+background:white;
+padding:40px;
+border-radius:15px;
+color:#1e293b;
+line-height:1.8;
+}
+
+</style>
 
 </head>
 
@@ -25,336 +133,225 @@ or <a href="webp-to-png.html">WEBP to PNG</a>.</title>
 
 <!-- HEADER -->
 <header class="site-header">
-
 <div class="header-left">
 <a href="index.html" class="logo">
-<img src="convertios-logo.png" alt="Convertios Logo">
+<img src="convertios-logo.png">
 </a>
 </div>
-
-<nav class="nav-menu">
-<a href="index.html" class="active">Home</a>
-
-<div class="nav-item dropdown">
-<span>Image ▾</span>
-<div class="dropdown-menu">
-<a href="png-to-jpg.html">PNG to JPG</a>
-<a href="jpg-to-png.html">JPG to PNG</a>
-<a href="webp-to-png.html">WEBP to PNG</a>
-<a href="image-converter.html">Image Converter</a>
-<a href="image-resizer.html">Resize Image</a>
-<a href="compress-image.html">Compress Image</a>
-<a href="remove-bg.html">Remove Background</a>
-<a href="all-tools.html" class="view-all">View All →</a>
-</div>
-</div>
-
-<div class="nav-item dropdown">
-<span>PDF ▾</span>
-<div class="dropdown-menu">
-<a href="pdf-to-word.html">PDF to Word</a>
-<a href="pdf-to-jpg.html">PDF to JPG</a>
-<a href="jpg-to-pdf.html">JPG to PDF</a>
-<a href="merge-pdf.html">Merge PDF</a>
-<a href="split-pdf.html">Split PDF</a>
-<a href="rotate-pdf.html">Rotate PDF</a>
-<a href="all-tools.html" class="view-all">View All →</a>
-</div>
-</div>
-
-<div class="nav-item dropdown">
-<span>Audio ▾</span>
-<div class="dropdown-menu">
-<a href="mp3-cutter.html">MP3 Cutter</a>
-<a href="audio-converter.html">Audio Converter</a>
-<a href="audio-speed-changer.html">Speed Changer</a>
-<a href="all-tools.html" class="view-all">View All →</a>
-</div>
-</div>
-
-<div class="nav-item dropdown">
-<span>More Tools ▾</span>
-<div class="dropdown-menu">
-<a href="qr-generator.html">QR Generator</a>
-<a href="link-shortener.html">Link Shortener</a>
-<a href="password-generator.html">Password Generator</a>
-<a href="word-counter.html">Word Counter</a>
-<a href="text-formatter.html">Text Formatter</a>
-<a href="unit-converter.html">Unit Converter</a>
-<a href="meme-generator.html">Meme Generator</a>
-<a href="all-tools.html" class="view-all">View All →</a>
-</div>
-</div>
-
-<a href="all-tools.html" class="nav-all-tools">All Tools →</a>
-<a href="about.html">About</a>
-<a href="contact.html">Contact</a>
-</nav>
-
 </header>
-<section class="tool-hero">
 
-    <h1>Free Image Compressor</h1>
+<!-- HERO -->
+<div class="tool-container">
+<h1>Free Image Compressor</h1>
+<p>Compress images to 100KB, 50KB, or any custom size instantly. Fast, secure, and works directly in your browser.</p>
+</div>
 
-    <p>
-        Compress images instantly and reduce file size to 100KB, 50KB, or any custom size.
-        Fast, secure, and works directly in your browser.
-    </p>
-
-</section>
 <!-- TOOL -->
 <div class="app-container">
 
-    <!-- LEFT SIDEBAR -->
-    <div class="sidebar">
+<!-- LEFT -->
+<div class="sidebar">
 
-        <h2>Compression Settings</h2>
+<h2>Compression Settings</h2>
 
-        <label>Target File Size (KB)</label>
-        <input type="number" id="targetKB" placeholder="e.g. 100">
+<label>Target File Size (KB)</label>
+<input type="number" id="targetKB" placeholder="e.g. 100">
 
-        <label style="margin-top:15px;">Manual Quality</label>
-        <input type="range" id="quality" min="0.1" max="1" step="0.1" value="0.8">
-        <span id="qualityValue">0.8</span>
+<label>Manual Quality</label>
+<input type="range" id="quality" min="0.1" max="1" step="0.1" value="0.8">
+<span id="qualityValue">0.8</span>
 
-        <label style="margin-top:15px;">Format</label>
-        <select id="format">
-            <option value="image/jpeg">JPG</option>
-            <option value="image/png">PNG</option>
-            <option value="image/webp">WEBP</option>
-        </select>
+<label>Format</label>
+<select id="format">
+<option value="image/jpeg">JPG</option>
+<option value="image/png">PNG</option>
+<option value="image/webp">WEBP</option>
+</select>
 
-        <button class="main-button" onclick="runCompression()" style="margin-top:20px;">
-            Compress
-        </button>
-<a id="downloadLink" class="main-button download-btn" style="display:none;"></a>    
-</a>
-<div id="progressBox" style="margin-top:15px; display:none;">
-    <p>Processing: <span id="progressText">0%</span></p>
+<button class="main-button" onclick="runCompression()">Compress</button>
+
+<a id="downloadLink" class="main-button download-btn" style="display:none;"></a>
+
+<div id="progressBox" style="display:none;">
+<p>Processing: <span id="progressText">0%</span></p>
 </div>
-    </div>
-
-    <!-- RIGHT WORKSPACE -->
-    <div class="workspace">
-
-        <div class="upload-area" onclick="document.getElementById('upload').click()">
-            <p>Click or drag image here</p>
-            <input type="file" id="upload" accept="image/*" hidden>
-        </div>
-
-        <img id="preview">
-
-
-    </div>
 
 </div>
+
+<!-- RIGHT -->
+<div class="workspace">
+
+<div class="upload-area" onclick="upload.click()">
+<p>Click or drag image here</p>
+<input type="file" id="upload" hidden>
+</div>
+
+<img id="preview">
+
+</div>
+
+</div>
+
 <!-- SEO -->
-<div class="seo-content">
-<h2>Free Image Compressor Tool</h2>
-<p>Compress images online quickly without losing quality. Choose manual compression or fixed sizes like 100KB or 50KB.</p>
-</div>
+<div class="tool-description">
 
-<!-- DESCRIPTION -->
-<div class="seo-section">
+<h2>Compress Images Online (Reduce Image Size to 100KB, 50KB & More)</h2>
 
-    <h2>Compress Images Online (Reduce Image Size to 100KB, 50KB & More)</h2>
+<p>
+Compress images online quickly without losing quality. This tool allows you to reduce image size for web use, faster loading, and easy sharing.
+</p>
 
-    <h3>What this tool does</h3>
-    <p>
-        This image compressor reduces file size while maintaining good quality. You can compress images to specific sizes like 100KB or 50KB or adjust quality manually.
-    </p>
+<h2>What this tool does</h2>
+<p>
+This image compressor reduces file size while maintaining good quality. You can compress images to specific sizes like 100KB or 50KB or adjust quality manually.
+</p>
 
-    <h3>How to use</h3>
-    <ul>
-        <li>Upload your image</li>
-        <li>Set target size or adjust quality</li>
-        <li>Click compress</li>
-        <li>Download your optimized image</li>
-    </ul>
+<h2>How to use</h2>
+<ul>
+<li>Upload your image</li>
+<li>Set target size or adjust quality</li>
+<li>Click compress</li>
+<li>Download your optimized image</li>
+</ul>
 
-    <h3>Benefits</h3>
-    <ul>
-        <li>Fast image compression</li>
-        <li>No upload required (works locally)</li>
-        <li>Free and easy to use</li>
-        <li>Supports JPG, PNG, WEBP</li>
-    </ul>
+<h2>Benefits</h2>
+<ul>
+<li>Fast image compression</li>
+<li>No upload required (works locally)</li>
+<li>Free and easy to use</li>
+<li>Supports JPG, PNG, WEBP</li>
+</ul>
 
-    <h3>FAQ</h3>
-
-    <p><strong>Is this tool free?</strong><br>Yes, completely free.</p>
-
-    <p><strong>Is it safe?</strong><br>Your files stay on your device.</p>
-
-    <p><strong>Can I compress to a specific size?</strong><br>Yes, you can set a target file size like 100KB.</p>
+<h2>FAQ</h2>
+<p><strong>Is it free?</strong> Yes.</p>
+<p><strong>Is it safe?</strong> Files stay on your device.</p>
 
 </div>
 
 <!-- FOOTER -->
 <footer class="site-footer">
-<div class="footer-container">
-<div class="footer-brand">
-<h3>Convertios</h3>
-<p>Free online tools for converting files, images, and more.</p>
-</div>
-
-<div class="footer-links">
-<a href="tools.html">Tools</a>
-<a href="about.html">About</a>
-<a href="contact.html">Contact</a>
-<a href="security.html">Security</a>
-<a href="privacy.html">Privacy</a>
-<a href="terms.html">Terms</a>
-</div>
-</div>
-
-<p class="footer-bottom">© 2026 Convertios • All rights reserved</p>
+<p style="text-align:center;">© 2026 Convertios</p>
 </footer>
 
 <script>
-
-const progressBox = document.getElementById("progressBox");
-const progressText = document.getElementById("progressText");
 
 const upload = document.getElementById("upload");
 const preview = document.getElementById("preview");
 const qualitySlider = document.getElementById("quality");
 const qualityValue = document.getElementById("qualityValue");
 const downloadLink = document.getElementById("downloadLink");
+const progressBox = document.getElementById("progressBox");
+const progressText = document.getElementById("progressText");
 
 let imageFile = null;
 
-/* ===== SLIDER ===== */
-if (qualitySlider && qualityValue) {
-    qualitySlider.oninput = () => {
-        qualityValue.innerText = qualitySlider.value;
-    };
-}
+qualitySlider.oninput = () => qualityValue.innerText = qualitySlider.value;
 
-/* ===== UPLOAD ===== */
-if (upload) {
-    upload.onchange = function(e){
-        imageFile = e.target.files[0];
-        if (!imageFile) return;
+upload.onchange = function(e){
+imageFile = e.target.files[0];
+const reader = new FileReader();
+reader.onload = e => preview.src = e.target.result;
+reader.readAsDataURL(imageFile);
+};
 
-        const reader = new FileReader();
-        reader.onload = e => preview.src = e.target.result;
-        reader.readAsDataURL(imageFile);
-    };
-}
-
-/* ===== MAIN ENTRY ===== */
 function runCompression(){
 
-    if(!imageFile){
-        alert("Upload image first");
-        return;
-    }
-
-    // RESET UI
-    if(progressBox){
-        progressBox.style.display = "block";
-        progressText.innerText = "0%";
-    }
-
-    downloadLink.style.display = "none";
-
-    const targetInput = document.getElementById("targetKB");
-    const formatSelect = document.getElementById("format");
-
-    const targetKB = targetInput ? parseInt(targetInput.value) : null;
-    const format = formatSelect ? formatSelect.value : "image/jpeg";
-
-    if(targetKB && targetKB > 0){
-        compressToTarget(targetKB, format);
-    }else{
-        compressManual(format);
-    }
+if(!imageFile){
+alert("Upload image first");
+return;
 }
 
-/* ===== MANUAL COMPRESS ===== */
+progressBox.style.display = "block";
+progressText.innerText = "0%";
+downloadLink.style.display = "none";
+
+const targetKB = parseInt(document.getElementById("targetKB").value);
+const format = document.getElementById("format").value;
+
+if(targetKB){
+compressToTarget(targetKB, format);
+}else{
+compressManual(format);
+}
+}
+
 function compressManual(format){
 
-    const img = new Image();
-    img.src = preview.src;
+const img = new Image();
+img.src = preview.src;
 
-    img.onload = function(){
+img.onload = function(){
 
-        const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d");
+const canvas = document.createElement("canvas");
+const ctx = canvas.getContext("2d");
 
-        canvas.width = img.width;
-        canvas.height = img.height;
+canvas.width = img.width;
+canvas.height = img.height;
 
-        ctx.drawImage(img,0,0);
+ctx.drawImage(img,0,0);
 
-        canvas.toBlob(blob => {
+canvas.toBlob(blob => {
 
-            const url = URL.createObjectURL(blob);
+const url = URL.createObjectURL(blob);
 
-            downloadLink.href = url;
-            downloadLink.download = "compressed";
-            downloadLink.innerText = "Download";
-            downloadLink.style.display = "block";
+downloadLink.href = url;
+downloadLink.download = "compressed";
+downloadLink.innerText = "Download";
+downloadLink.style.display = "block";
 
-            if(progressText) progressText.innerText = "Done ✅";
+progressText.innerText = "Done ✅";
 
-        }, format, qualitySlider ? qualitySlider.value : 0.8);
-    };
+}, format, qualitySlider.value);
+};
 }
 
-/* ===== TARGET SIZE COMPRESS ===== */
 function compressToTarget(targetKB, format){
 
-    const img = new Image();
-    img.src = preview.src;
+const img = new Image();
+img.src = preview.src;
 
-    img.onload = function(){
+img.onload = function(){
 
-        const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d");
+const canvas = document.createElement("canvas");
+const ctx = canvas.getContext("2d");
 
-        canvas.width = img.width;
-        canvas.height = img.height;
+canvas.width = img.width;
+canvas.height = img.height;
 
-        ctx.drawImage(img,0,0);
+ctx.drawImage(img,0,0);
 
-        let quality = 0.9;
-        let attempts = 0;
+let quality = 0.9;
+let attempts = 0;
 
-        function tryCompress(){
+function loop(){
 
-            canvas.toBlob(blob => {
+canvas.toBlob(blob => {
 
-                let sizeKB = blob.size / 1024;
+let sizeKB = blob.size / 1024;
+attempts++;
 
-                // 🔥 UPDATE PROGRESS
-                attempts++;
-                if(progressText){
-                    let progress = Math.min(95, attempts * 10);
-                    progressText.innerText = progress + "%";
-                }
+progressText.innerText = Math.min(95, attempts*10) + "%";
 
-                if(sizeKB > targetKB && quality > 0.1){
-                    quality -= 0.05;
-                    tryCompress();
-                }else{
+if(sizeKB > targetKB && quality > 0.1){
+quality -= 0.05;
+loop();
+}else{
 
-                    const url = URL.createObjectURL(blob);
+const url = URL.createObjectURL(blob);
 
-                    downloadLink.href = url;
-                    downloadLink.download = "compressed";
-                    downloadLink.innerText = "Download (" + Math.round(sizeKB) + " KB)";
-                    downloadLink.style.display = "block";
+downloadLink.href = url;
+downloadLink.download = "compressed";
+downloadLink.innerText = "Download (" + Math.round(sizeKB) + " KB)";
+downloadLink.style.display = "block";
 
-                    if(progressText) progressText.innerText = "Done ✅";
-                }
+progressText.innerText = "Done ✅";
+}
 
-            }, format, quality);
-        }
+}, format, quality);
+}
 
-        tryCompress();
-    };
+loop();
+};
 }
 
 </script>
