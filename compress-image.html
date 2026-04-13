@@ -91,45 +91,48 @@
 </header>
 
 <!-- TOOL -->
-<div class="tool-container">
+<div class="app-container">
 
-<h1>Image Compressor</h1>
-<p>Compress images instantly using manual quality or fixed file size targets.</p>
+    <!-- LEFT SIDEBAR -->
+    <div class="sidebar">
 
-<!-- UPLOAD BOX -->
-<div class="upload-box" onclick="document.getElementById('upload').click()">
-<p>Click or drag image here</p>
-<input type="file" id="upload" accept="image/*" hidden>
+        <h2>Compression Settings</h2>
+
+        <label>Target File Size (KB)</label>
+        <input type="number" id="targetKB" placeholder="e.g. 100">
+
+        <label style="margin-top:15px;">Manual Quality</label>
+        <input type="range" id="quality" min="0.1" max="1" step="0.1" value="0.8">
+        <span id="qualityValue">0.8</span>
+
+        <label style="margin-top:15px;">Format</label>
+        <select id="format">
+            <option value="image/jpeg">JPG</option>
+            <option value="image/png">PNG</option>
+            <option value="image/webp">WEBP</option>
+        </select>
+
+        <button class="main-button" onclick="runCompression()" style="margin-top:20px;">
+            Compress
+        </button>
+
+    </div>
+
+    <!-- RIGHT WORKSPACE -->
+    <div class="workspace">
+
+        <div class="upload-area" onclick="document.getElementById('upload').click()">
+            <p>Click or drag image here</p>
+            <input type="file" id="upload" accept="image/*" hidden>
+        </div>
+
+        <img id="preview">
+
+        <a id="downloadLink" class="main-button" style="display:none"></a>
+
+    </div>
+
 </div>
-
-<!-- QUICK BUTTONS -->
-<div class="quick-tools">
-<button onclick="compressToTarget(100)">Compress to 100KB</button>
-<button onclick="compressToTarget(50)">Compress to 50KB</button>
-<button onclick="compressToTarget(20)">Compress to 20KB</button>
-<button onclick="compressToTarget(200)">Compress to 200KB</button>
-</div>
-
-<!-- SLIDER -->
-<div class="slider-box">
-<label>Compression Quality</label>
-<input type="range" id="quality" min="0.1" max="1" step="0.1" value="0.8">
-<span id="qualityValue">0.8</span>
-</div>
-
-<!-- ACTION -->
-<button class="main-button" onclick="compressImage()">
-Manual Compress
-</button>
-
-<!-- PREVIEW -->
-<img id="preview">
-
-<!-- DOWNLOAD -->
-<a id="downloadLink" class="main-button" style="display:none"></a>
-
-</div>
-
 <!-- SEO -->
 <div class="seo-content">
 <h2>Free Image Compressor Tool</h2>
