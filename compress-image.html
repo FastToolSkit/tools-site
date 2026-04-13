@@ -1,104 +1,27 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Image Compressor Online - Reduce JPG, PNG Size | Convertios</title>
+<title>Compress Image Online Free (Reduce JPG, PNG Size Fast)</title>
 
-<meta name="description" content="Compress images online for free. Reduce JPG, PNG, and WEBP file size instantly without losing quality using Convertios. Fast and secure.">
+<meta name="description" content="Compress images online for free. Reduce JPG, PNG, and WEBP file size instantly. No signup required. Fast and secure.">
+
 <link rel="canonical" href="https://convertios.com/compress-image.html">
-
-<meta name="keywords" content="image compressor, compress jpg, reduce image size, compress png, optimize images online">
-
 <meta name="robots" content="index, follow">
 
 <link rel="stylesheet" href="style.css">
-<link rel="icon" type="image/png" href="favicon.png">
-<link rel="icon" href="favicon.png">
-<link rel="shortcut icon" href="favicon.png">
-<style>
 
-/* (UNCHANGED STYLES) */
-
-.tool-container{
-max-width:900px;
-margin:80px auto 30px;
-background:#071a33;
-color:white;
-padding:40px;
-border-radius:20px;
-text-align:center;
-box-shadow:0 20px 50px rgba(0,0,0,0.3);
-}
-
-.tool-container p{
-color:#cbd5e1;
-}
-
-input[type="file"]{
-margin-top:20px;
-background:#0c2547;
-padding:10px;
-border-radius:8px;
-color:white;
-}
-
-input[type="range"]{
-width:220px;
-margin:10px 0;
-}
-
-.main-button{
-margin-top:20px;
-padding:12px 20px;
-background:#3a78ff;
-color:white;
-border:none;
-border-radius:8px;
-cursor:pointer;
-}
-
-.main-button:hover{
-background:#2a66e6;
-}
-
-#preview{
-max-width:100%;
-margin-top:20px;
-border-radius:12px;
-}
-
-.seo-content{
-max-width:900px;
-margin:20px auto;
-background:#071a33;
-color:white;
-padding:35px;
-border-radius:20px;
-box-shadow:0 20px 50px rgba(0,0,0,0.3);
-}
-
-.tool-description{
-max-width:900px;
-margin:30px auto 80px;
-background:white;
-padding:40px;
-border-radius:16px;
-box-shadow:0 10px 30px rgba(0,0,0,0.08);
-color:#1e293b;
-line-height:1.8;
-}
-
-</style>
+<!-- FIXED FAVICON -->
+<link rel="icon" type="image/png" href="/favicon.png">
 
 </head>
 
 <body>
 
+<!-- HEADER (UNCHANGED) -->
 <header class="site-header">
 
 <div class="header-left">
@@ -193,24 +116,33 @@ line-height:1.8;
         </div>
 
         <!-- TEXT -->
-        <span class="faq-text">FAQ</span></a>
+        <span class="faq-text">FAQ</span> </a>
 </header>
 
 <!-- TOOL -->
-
 <div class="tool-container">
 
-<h1>Image Compressor Online</h1>
+<h1>Image Compressor</h1>
 
-<p>
-Compress JPG, PNG, and WEBP images instantly while maintaining high quality.
-</p>
+<p>Compress images instantly using manual quality or fixed file size targets.</p>
 
 <input type="file" id="upload" accept="image/*">
 
+<!-- 🔥 QUICK TARGET BUTTONS -->
+<div style="margin-top:20px;">
+<h3>Quick Compress</h3>
+
+<button class="main-button" onclick="compressToTarget(100)">100KB</button>
+<button class="main-button" onclick="compressToTarget(50)">50KB</button>
+<button class="main-button" onclick="compressToTarget(20)">20KB</button>
+<button class="main-button" onclick="compressToTarget(200)">200KB</button>
+
+</div>
+
+<!-- 🔵 MANUAL SLIDER -->
 <div style="margin-top:25px">
 
-<label>Compression Quality</label><br>
+<label>Manual Quality</label><br>
 
 <input type="range" id="quality" min="0.1" max="1" step="0.1" value="0.8">
 <br>
@@ -219,7 +151,7 @@ Compress JPG, PNG, and WEBP images instantly while maintaining high quality.
 </div>
 
 <button class="main-button" onclick="compressImage()">
-Compress Image
+Manual Compress
 </button>
 
 <img id="preview">
@@ -229,83 +161,37 @@ Compress Image
 </div>
 
 <!-- SEO CONTENT -->
-
 <div class="seo-content">
 
 <h2>Free Image Compressor Tool</h2>
 
 <p>
-Convertios provides a fast and free image compressor that reduces file size without losing quality. All processing happens directly in your browser.
+Compress images online quickly without losing quality. Choose manual compression or fixed sizes like 100KB or 50KB.
 </p>
 
 <p>
-This makes it ideal for websites, social media, and faster page loading.
+Perfect for websites, forms, and faster uploads.
 </p>
 
 </div>
 
-<!-- SEO BOOST -->
-
+<!-- DESCRIPTION -->
 <div class="tool-description">
-
-<h2>What this tool does</h2>
-<p>
-This image compressor helps reduce image file size while maintaining visual quality, making it perfect for web use and optimization.
-</p>
 
 <h2>How to use</h2>
 <ul>
 <li>Upload your image</li>
-<li>Adjust compression level</li>
+<li>Select target size or adjust quality</li>
 <li>Click compress</li>
-<li>Download optimized image</li>
-</ul>
-
-<h2>Benefits</h2>
-<ul>
-<li>Faster website loading</li>
-<li>Reduced file size</li>
-<li>No uploads required</li>
-<li>Free and easy to use</li>
+<li>Download your image</li>
 </ul>
 
 <h2>FAQ</h2>
-<p><strong>Is it free?</strong> Yes, completely free.</p>
+<p><strong>Is it free?</strong> Yes.</p>
 <p><strong>Is it safe?</strong> Files stay on your device.</p>
 
 </div>
 
-<!-- MORE TOOLS -->
-
-<div class="more-tools">
-
-<h3>Explore More Tools</h3>
-
-<div class="more-tools-grid">
-
-<a href="audio-speed-changer.html" class="more-tool-card">
-<span>⚡</span>
-<p>Audio Speed Changer</p>
-</a>
-
-<a href="audio-converter.html" class="more-tool-card">
-<span>🎧</span>
-<p>Audio Converter</p>
-</a>
-
-<a href="mp3-cutter.html" class="more-tool-card">
-<span>✂️</span>
-<p>MP3 Cutter</p>
-</a>
-
-<a href="compress-image.html" class="more-tool-card">
-<span>🖼️</span>
-<p>Image Compressor</p>
-</a>
-
-</div>
-
-</div>
 <footer class="site-footer">
 
 <div class="footer-container">
@@ -346,23 +232,19 @@ qualityValue.innerText = qualitySlider.value;
 };
 
 upload.onchange = function(e){
-
 imageFile = e.target.files[0];
 
 const reader = new FileReader();
-
 reader.onload = function(event){
 preview.src = event.target.result;
 };
-
 reader.readAsDataURL(imageFile);
-
 };
 
 function compressImage(){
 
 if(!imageFile){
-alert("Please upload an image first");
+alert("Upload image first");
 return;
 }
 
@@ -374,31 +256,72 @@ img.onload = function(){
 const canvas = document.createElement("canvas");
 const ctx = canvas.getContext("2d");
 
-const maxWidth = 1200;
-
-if(img.width > maxWidth){
-canvas.width = maxWidth;
-canvas.height = img.height * (maxWidth / img.width);
-}else{
 canvas.width = img.width;
 canvas.height = img.height;
-}
 
-ctx.drawImage(img,0,0,canvas.width,canvas.height);
+ctx.drawImage(img,0,0);
 
 canvas.toBlob(function(blob){
 
 const url = URL.createObjectURL(blob);
 
 downloadLink.href = url;
-downloadLink.download = "compressed-" + imageFile.name;
+downloadLink.download = "compressed.jpg";
 downloadLink.innerText = "Download Image";
 downloadLink.style.display = "block";
 
 },"image/jpeg", qualitySlider.value);
 
 };
+}
 
+function compressToTarget(targetKB){
+
+if(!imageFile){
+alert("Upload image first");
+return;
+}
+
+const img = new Image();
+img.src = preview.src;
+
+img.onload = function(){
+
+const canvas = document.createElement("canvas");
+const ctx = canvas.getContext("2d");
+
+canvas.width = img.width;
+canvas.height = img.height;
+
+ctx.drawImage(img,0,0);
+
+let quality = 0.9;
+
+function tryCompress(){
+
+canvas.toBlob(function(blob){
+
+let sizeKB = blob.size / 1024;
+
+if(sizeKB > targetKB && quality > 0.1){
+quality -= 0.05;
+tryCompress();
+}else{
+
+const url = URL.createObjectURL(blob);
+
+downloadLink.href = url;
+downloadLink.download = "compressed-" + targetKB + "kb.jpg";
+downloadLink.innerText = "Download (" + Math.round(sizeKB) + " KB)";
+downloadLink.style.display = "block";
+
+}
+
+},"image/jpeg",quality);
+}
+
+tryCompress();
+};
 }
 
 </script>
